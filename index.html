@@ -69,6 +69,11 @@
     
     .alertHead{background:var(--alert);color:#fff;text-align:center;font-size:15px;font-weight:800;padding:8px 10px}
     .footer{padding:8px 16px 16px;text-align:left;color:#3d4b5f;font-size:13px}
+    
+    .toolbar{position:fixed;bottom:20px;right:20px;display:flex;gap:10px;z-index:100}
+    .toolbar button{background:#173c63;color:#fff;border:none;padding:10px 16px;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,.3);transition:background 0.2s}
+    .toolbar button:hover{background:#27b9ee;color:#000}
+    [contenteditable="true"]{outline:2px dashed #27b9ee;background:rgba(39,185,238,0.05);min-height:1em}
   </style>
 </head>
 <body>
@@ -124,5 +129,62 @@
       <div class="footer">Cisco Confidential</div>
     </div>
   </div>
+  
+  <div class="toolbar">
+    <button id="editBtn" onclick="toggleEdit()">Edit Text</button>
+    <button id="saveBtn" onclick="saveChanges()" style="display:none;background:#1fb39f;color:#000">Save HTML</button>
+  </div>
+
+  <script>
+    let isEditing = false;
+    
+    function toggleEdit() {
+      isEditing = !isEditing;
+      const btn = document.getElementById('editBtn');
+      const saveBtn = document.getElementById('saveBtn');
+      
+      // Select all text-bearing elements
+      const elements = document.querySelectorAll('.t, .s, .knum, .klbl, .ksub, .rib, li, .alertHead, .head-right div:last-child');
+      
+      if (isEditing) {
+        btn.innerText = "Stop Editing";
+        btn.style.background = "#e53614";
+        saveBtn.style.display = "block";
+        elements.forEach(el => el.setAttribute("contenteditable", "true"));
+      } else {
+        btn.innerText = "Edit Text";
+        btn.style.background = "#173c63";
+        saveBtn.style.display = "none";
+        elements.forEach(el => el.removeAttribute("contenteditable"));
+      }
+    }
+
+    function saveChanges() {
+      // Force exit edit mode to clean up the outline/styles before saving
+      if (isEditing) toggleEdit();
+      
+      const clone = document.documentElement.cloneNode(true);
+      
+      // Remove the toolbar from the saved file so it doesn't show up in the downloaded HTML
+      const toolbar = clone.querySelector('.toolbar');
+      if (toolbar) toolbar.remove();
+      
+      // Also remove any stray contenteditable attributes just in case
+      const editables = clone.querySelectorAll('[contenteditable]');
+      editables.forEach(el => el.removeAttribute('contenteditable'));
+
+      const htmlContent = "<!doctype html>\n" + clone.outerHTML;
+      const blob = new Blob([htmlContent], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "HCL_SSE_Weekly_Updates_Dashboard_Edited.html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  </script>
 </body>
 </html>
