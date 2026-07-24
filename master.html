@@ -251,6 +251,15 @@
     .m-step .tt { visibility: hidden; opacity: 0; position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%); background: #000; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 11px; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 20; border: 1px solid rgba(255,255,255,0.1); transition: 0.2s; pointer-events: none;}
     .m-step:hover .tt { visibility: visible; opacity: 1; bottom: 140%; }
 
+  
+    /* Testing Tracker Styles */
+    .test-table-wrap { margin-top: 16px; border: 2px solid #d4d4d4; border-radius: 6px; overflow: hidden; background: #e0e0e0; }
+    .test-table-title { background: #0b1421; color: #fff200; text-align: center; font-size: 11px; font-weight: 800; padding: 6px 0; border-bottom: 2px solid #d4d4d4; letter-spacing: 0.5px; }
+    .test-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 7px; color: #111; }
+    .test-table th { background: #a6a6a6; font-weight: 800; padding: 4px 1px; border: 1px solid #fff; }
+    .test-table td { background: #e0e0e0; padding: 5px 1px; border: 1px solid #fff; font-weight: 700; }
+    .grn-sq { display: inline-block; width: 7px; height: 7px; background: #4caf50; margin-right: 2px; vertical-align: middle; }
+
   </style>
 </head>
 <body>
@@ -366,6 +375,14 @@
             <li>Finalize WAF design and accelerate testing.</li>
           </ul>
         </div>
+      
+        <div class="test-table-wrap">
+          <div class="test-table-title">Use cases Testing Updates</div>
+          <table class="test-table">
+            <tr><th>Total</th><th>Available</th><th>Roadmap</th><th>Passed</th><th>Partial</th><th>Failed</th><th>WIP</th><th>P1s</th></tr>
+            <tr><td>88</td><td>69</td><td>19</td><td><span class="grn-sq"></span> 38</td><td>7</td><td>10</td><td>14</td><td>3</td></tr>
+          </table>
+        </div>
       </article>
 
       <article class="col">
@@ -394,6 +411,14 @@
             <li>Complete on-prem proxy policy configuration.</li>
           </ul>
         </div>
+      
+        <div class="test-table-wrap">
+          <div class="test-table-title">Use cases Testing Updates</div>
+          <table class="test-table">
+            <tr><th>Total</th><th>Available</th><th>Roadmap</th><th>Passed</th><th>Partial</th><th>Failed</th><th>WIP</th><th>Duplicate</th><th>FR-Gap</th><th>New FR</th><th>P1s</th></tr>
+            <tr><td>263</td><td>233</td><td>26</td><td><span class="grn-sq"></span> 98</td><td>56</td><td>58</td><td>15</td><td>3</td><td>6</td><td>1</td><td>145</td></tr>
+          </table>
+        </div>
       </article>
 
       <article class="col">
@@ -418,6 +443,14 @@
             <li>Initiate joint alignment and finalise MVP.</li>
             <li>Maximize successful completion of pending test cases.</li>
           </ul>
+        </div>
+      
+        <div class="test-table-wrap">
+          <div class="test-table-title">Use cases Testing Updates</div>
+          <table class="test-table">
+            <tr><th>Total</th><th>Available</th><th>Roadmap</th><th>Passed</th><th>Partial</th><th>Failed</th><th>WIP</th><th>P1s</th></tr>
+            <tr><td>107</td><td>102</td><td>5</td><td>0</td><td>41</td><td>59</td><td>2</td><td></td></tr>
+          </table>
         </div>
       </article>
     </section>
