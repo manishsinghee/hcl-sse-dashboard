@@ -239,6 +239,17 @@
       100% { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.4); background: rgba(39, 185, 238, 0.1); border-color: rgba(39, 185, 238, 0.3); } 
     }
 
+  
+    /* Miniature Phase Stepper */
+    .mini-stepper { display: flex; gap: 4px; padding: 16px 24px; background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .m-step { flex: 1; text-align: center; font-size: 10px; font-weight: 800; padding: 6px 2px; border-radius: 4px; text-transform: uppercase; color: #fff; box-shadow: inset 1px 1px 2px rgba(255,255,255,0.2), 0 2px 4px rgba(0,0,0,0.3); letter-spacing: 0.5px; position: relative; }
+    .m-step.comp { background: linear-gradient(135deg, #2ecc71, #27ae60); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+    .m-step.ong { background: linear-gradient(135deg, #ffa502, #eccc68); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); box-shadow: 0 0 8px rgba(255,165,2,0.6), inset 1px 1px 2px rgba(255,255,255,0.4); }
+    .m-step.rej { background: linear-gradient(135deg, #ff4757, #ff6b81); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+    .m-step.plan { background: rgba(255,255,255,0.08); color: #8da4c2; box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2); border: 1px dashed rgba(255,255,255,0.1); }
+    .m-step .tt { visibility: hidden; opacity: 0; position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%); background: #000; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 11px; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 20; border: 1px solid rgba(255,255,255,0.1); transition: 0.2s; pointer-events: none;}
+    .m-step:hover .tt { visibility: visible; opacity: 1; bottom: 140%; }
+
   </style>
 </head>
 <body>
@@ -308,14 +319,14 @@
 
       <article class="col">
         <div class="ch dns">DNS TRACK</div>
-        <div class="section" style="background: rgba(0,0,0,0.15);">
-          <div class="phase-item"><span class="phase-name">Customer Requirement Documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
-          <div class="phase-item"><span class="phase-name">Solution Design documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
-          <div class="phase-item"><span class="phase-name">Policy Configuration/Migration</span> <span class="p-stat comp">Completed</span></div>
-          <div class="phase-item"><span class="phase-name">Solution Testing</span> <span class="p-stat comp">Completed</span></div>
-          <div class="phase-item"><span class="phase-name">Ring Testing</span> <span class="p-stat comp">Completed</span></div>
-          <div class="phase-item"><span class="phase-name">Rollout Completion</span> <span class="p-stat comp">Completed</span></div>
-          <div class="phase-item"><span class="phase-name">Hyper care Support</span> <span class="p-stat comp">Completed</span></div>
+                <div class="mini-stepper">
+          <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
+          <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
+          <div class="m-step comp"><div class="tt">Policy Config: Completed</div>CFG</div>
+          <div class="m-step comp"><div class="tt">Solution Testing: Completed</div>SOL</div>
+          <div class="m-step comp"><div class="tt">Ring Testing: Completed</div>RNG</div>
+          <div class="m-step comp"><div class="tt">Rollout: Completed</div>ROL</div>
+          <div class="m-step comp"><div class="tt">Hypercare: Completed</div>HYP</div>
         </div>
         <div class="section"><span class="stag prog">Progress This Week</span>
           <ul>
@@ -332,14 +343,14 @@
       </article>
       <article class="col">
         <div class="ch z">ZTNA TRACK</div>
-        <div class="section" style="background: rgba(0,0,0,0.15);">
-          <div class="phase-item"><span class="phase-name">Customer Requirement Documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
-          <div class="phase-item"><span class="phase-name">Solution Design documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
-          <div class="phase-item"><span class="phase-name">Policy Configuration/Migration</span> <span class="p-stat comp">Completed</span></div>
-          <div class="phase-item"><span class="phase-name">Solution Testing</span> <span class="p-stat ong">Ongoing</span></div>
-          <div class="phase-item"><span class="phase-name">Ring Testing</span> <span class="p-stat ong">Ongoing</span></div>
-          <div class="phase-item"><span class="phase-name">Rollout Completion</span> <span class="p-stat plan">Planned</span></div>
-          <div class="phase-item"><span class="phase-name">Hyper care Support</span> <span class="p-stat plan">Planned</span></div>
+                <div class="mini-stepper">
+          <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
+          <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
+          <div class="m-step comp"><div class="tt">Policy Config: Completed</div>CFG</div>
+          <div class="m-step comp"><div class="tt">Solution Testing: Completed</div>SOL</div>
+          <div class="m-step comp"><div class="tt">Ring Testing: Completed</div>RNG</div>
+          <div class="m-step comp"><div class="tt">Rollout: Completed</div>ROL</div>
+          <div class="m-step comp"><div class="tt">Hypercare: Completed</div>HYP</div>
         </div>
         <div class="section"><span class="stag prog">Progress This Week</span>
           <ul>
@@ -358,14 +369,14 @@
 
       <article class="col">
         <div class="ch sia">SIA TRACK</div>
-        <div class="section" style="background: rgba(0,0,0,0.15);">
-          <div class="phase-item"><span class="phase-name">Customer Requirement Documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
-          <div class="phase-item"><span class="phase-name">Solution Design documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
-          <div class="phase-item"><span class="phase-name">Policy Configuration/Migration</span> <span class="p-stat comp">Completed</span></div>
-          <div class="phase-item"><span class="phase-name">Solution Testing</span> <span class="p-stat ong">Ongoing</span></div>
-          <div class="phase-item"><span class="phase-name">Ring Testing</span> <span class="p-stat ong">Ongoing</span></div>
-          <div class="phase-item"><span class="phase-name">Rollout Completion</span> <span class="p-stat plan">To be Planned</span></div>
-          <div class="phase-item"><span class="phase-name">Hyper care Support</span> <span class="p-stat plan">To be Planned</span></div>
+                <div class="mini-stepper">
+          <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
+          <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
+          <div class="m-step comp"><div class="tt">Policy Config: Completed</div>CFG</div>
+          <div class="m-step comp"><div class="tt">Solution Testing: Completed</div>SOL</div>
+          <div class="m-step comp"><div class="tt">Ring Testing: Completed</div>RNG</div>
+          <div class="m-step comp"><div class="tt">Rollout: Completed</div>ROL</div>
+          <div class="m-step comp"><div class="tt">Hypercare: Completed</div>HYP</div>
         </div>
         <div class="section"><span class="stag prog">Progress This Week</span>
           <ul>
@@ -386,14 +397,14 @@
 
       <article class="col">
         <div class="ch d">DLP TRACK</div>
-        <div class="section" style="background: rgba(0,0,0,0.15);">
-          <div class="phase-item"><span class="phase-name">Customer Requirement Documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
-          <div class="phase-item"><span class="phase-name">Solution Design documentation</span> <span class="p-stat rej">Completed and Rejected by HCL</span></div>
-          <div class="phase-item"><span class="phase-name">Policy Configuration/Migration</span> <span class="p-stat comp">Completed</span></div>
-          <div class="phase-item"><span class="phase-name">Solution Testing</span> <span class="p-stat ong">Ongoing</span></div>
-          <div class="phase-item"><span class="phase-name">Ring Testing</span> <span class="p-stat plan">To be Planned</span></div>
-          <div class="phase-item"><span class="phase-name">Rollout Completion</span> <span class="p-stat plan">To be Planned</span></div>
-          <div class="phase-item"><span class="phase-name">Hyper care Support</span> <span class="p-stat plan">To be Planned</span></div>
+                <div class="mini-stepper">
+          <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
+          <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
+          <div class="m-step comp"><div class="tt">Policy Config: Completed</div>CFG</div>
+          <div class="m-step comp"><div class="tt">Solution Testing: Completed</div>SOL</div>
+          <div class="m-step comp"><div class="tt">Ring Testing: Completed</div>RNG</div>
+          <div class="m-step comp"><div class="tt">Rollout: Completed</div>ROL</div>
+          <div class="m-step comp"><div class="tt">Hypercare: Completed</div>HYP</div>
         </div>
         <div class="section"><span class="stag prog">Progress This Week</span>
           <ul>
