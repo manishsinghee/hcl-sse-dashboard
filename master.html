@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HCL SSE Master Program Dashboard</title>
+  <style>
+    :root {
+      --bg: #060b13;
+      --panel: #0d1726;
+      --border: #1e2e45;
+      --text: #c0d1e6;
+      --white: #ffffff;
+      --navy: #173c63;
+      --cyan: #27b9ee;
+      --c-dns: #27b9ee;
+      --c-ztna: #f09b4d;
+      --c-dlp: #a55eea;
+      --c-sia: #1fb39f;
+      --alert: #ff4757;
+      --warning: #ffa502;
+      --success: #2ecc71;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); padding: 30px; }
+    .dashboard-container { max-width: 1600px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+
+    /* Header */
+    .head { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+    .head .t { font-size: 36px; font-weight: 800; color: var(--white); line-height: 1.1; }
+    .head .s { font-size: 18px; color: var(--cyan); margin-top: 8px; font-weight: 600; }
+    .head-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; text-align: right; font-size: 14px; font-weight: 600; }
+    .logos { display: flex; gap: 20px; align-items: center; }
+    .logos img.cisco { height: 32px; filter: brightness(0) invert(1); }
+    .logos img.hcl { height: 22px; filter: brightness(0) invert(1); }
+
+    /* RAG Health Indicators */
+    .health-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .health-card { background: var(--panel); border: 1px solid var(--border); padding: 16px; border-radius: 8px; display: flex; align-items: center; gap: 16px; }
+    .dot { width: 24px; height: 24px; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    .dot.green { background: var(--success); box-shadow: 0 0 15px var(--success); }
+    .dot.amber { background: var(--warning); box-shadow: 0 0 15px var(--warning); }
+    .dot.red { background: var(--alert); box-shadow: 0 0 15px var(--alert); }
+    .health-info h4 { margin: 0 0 4px 0; color: var(--white); font-size: 16px; }
+    .health-info p { margin: 0; font-size: 12px; color: #7b93b2; }
+
+    /* KPIs */
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .kpi { background: var(--panel); border: 1px solid var(--border); border-top: 4px solid var(--border); padding: 20px; border-radius: 8px; }
+    .kpi.c1 { border-top-color: var(--c-sia); } .kpi.c2 { border-top-color: #a2a03e; } .kpi.c3 { border-top-color: #2847f0; } .kpi.c4 { border-top-color: var(--c-dns); }
+    .knum { font-size: 42px; font-weight: 800; line-height: 1; margin: 0 0 12px 0; }
+    .knum.c1 { color: var(--c-sia); } .knum.c2 { color: #eccc68; } .knum.c3 { color: #70a1ff; } .knum.c4 { color: var(--c-dns); }
+    .klbl { font-size: 15px; font-weight: 800; color: var(--white); margin-bottom: 8px; text-transform: uppercase;}
+    .ksub { font-size: 13px; color: #7b93b2; white-space: pre-line; }
+
+    /* Ribbons */
+    .ribbons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .rib { background: linear-gradient(90deg, #112338 0%, var(--panel) 100%); border-left: 4px solid var(--cyan); padding: 16px 20px; border-radius: 4px; font-size: 15px; line-height: 1.5; border-right: 1px solid var(--border); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);}
+    .rib b { color: #eccc68; font-size: 16px; display: block; margin-bottom: 6px; }
+
+    /* Section Headers */
+    .section-title { font-size: 22px; font-weight: 800; color: var(--white); margin: 10px 0 0 0; display: flex; align-items: center; gap: 10px; }
+    .section-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+    /* Gantt Box (Embedded) */
+    .gantt-box { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .phase-header { background: #122036; color: var(--white); font-weight: 700; padding: 6px 16px; text-transform: uppercase; letter-spacing: 1px; font-size: 11px; border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); }
+    .timeline-header { display: flex; background: #09101a; border-bottom: 1px solid var(--border); }
+    .spacer { width: 180px; min-width: 180px; border-right: 1px solid var(--border); }
+    .months-container { display: flex; flex: 1; }
+    .month { flex: 1; text-align: center; padding: 10px 0; color: #7b93b2; font-size: 11px; font-weight: 800; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.05); }
+    .task-row { display: flex; border-bottom: 1px solid var(--border); height: 40px; position: relative; }
+    .task-label { width: 180px; min-width: 180px; padding: 0 16px; display: flex; align-items: center; font-weight: bold; font-size: 13px; background: rgba(0,0,0,0.3); border-right: 1px solid var(--border); border-left: 4px solid transparent; color: var(--white); }
+    .task-label.dns { border-left-color: var(--c-dns); } .task-label.ztna { border-left-color: var(--c-ztna); } .task-label.dlp { border-left-color: var(--c-dlp); } .task-label.sia { border-left-color: var(--c-sia); }
+    .task-timeline { flex: 1; position: relative; }
+    .grid-bg { display: flex; position: absolute; inset: 0; pointer-events: none; }
+    .grid-col { flex: 1; border-right: 1px solid rgba(255,255,255,0.03); }
+    .bar { position: absolute; height: 24px; top: 8px; border-radius: 4px; display: flex; align-items: center; padding: 0 10px; font-size: 11px; font-weight: 700; color: #fff; white-space: nowrap; }
+    .bar.dns { background-color: var(--c-dns); } .bar.ztna { background-color: var(--c-ztna); } .bar.dlp { background-color: var(--c-dlp); } .bar.sia { background-color: var(--c-sia); }
+    @keyframes barberpole { 0% { background-position: 0 0; } 100% { background-position: 28px 0; } }
+    .bar.ongoing { background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent); background-size: 28px 28px; animation: barberpole 1.5s linear infinite; }
+    .bar.pending { background: transparent; border: 1px dashed rgba(255,255,255,0.3); }
+
+    /* Top Risks Matrix (New) */
+    .risk-matrix { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .risk-matrix table { width: 100%; border-collapse: collapse; text-align: left; }
+    .risk-matrix th { background: #122036; padding: 12px 16px; color: var(--white); font-size: 13px; border-bottom: 1px solid var(--border); }
+    .risk-matrix td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: top;}
+    .risk-tag { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 800; text-transform: uppercase; background: rgba(255,71,87,0.15); color: var(--alert); border: 1px solid var(--alert); }
+
+    /* Track Columns */
+    .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .col { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+    .ch { padding: 14px 20px; color: #fff; font-weight: 800; font-size: 16px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+    .ch.z { background: rgba(240,155,77,0.15); color: var(--c-ztna); border-bottom-color: var(--c-ztna); }
+    .ch.sia { background: rgba(31,179,159,0.15); color: var(--c-sia); border-bottom-color: var(--c-sia); }
+    .ch.d { background: rgba(165,94,234,0.15); color: var(--c-dlp); border-bottom-color: var(--c-dlp); }
+    .section { padding: 16px 20px; border-bottom: 1px solid var(--border); flex: 1; }
+    .section:last-child { border-bottom: none; }
+    .stag { display: inline-block; color: var(--white); font-weight: 800; font-size: 12px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+    .stag.prog { color: var(--success); }
+    .stag.focus { color: var(--cyan); }
+    ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: #b0c4de; }
+    ul ul { margin-top: 4px; padding-left: 16px; font-size: 12px; }
+    li { margin-bottom: 6px; }
+
+    .toolbar{position:fixed;bottom:20px;right:20px;display:flex;gap:10px;z-index:100}
+    .toolbar button{background:#173c63;color:#fff;border:none;padding:10px 16px;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,.3);transition:background 0.2s}
+    .toolbar button:hover{background:#27b9ee;color:#000}
+    [contenteditable="true"]{outline:1px dashed #27b9ee;background:rgba(39,185,238,0.05);min-height:1em}
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    
+    <!-- 1. HEADER -->
+    <section class="head">
+      <div class="head-left">
+        <div class="t">HCL SSE Master Program Dashboard</div>
+        <div class="s">Executive Briefing & Unified Status Report</div>
+      </div>
+      <div class="head-right">
+        <div class="logos">
+          <img class="hcl" src="https://upload.wikimedia.org/wikipedia/commons/e/e5/HCLTech-new-logo.svg" alt="HCLTech" />
+          <img class="cisco" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco" />
+        </div>
+        <div>Status Date: 24 Jul 2026</div>
+      </div>
+    </section>
+
+    <!-- 2. PROGRAM HEALTH (NEW) -->
+    <div class="health-bar">
+      <div class="health-card">
+        <div class="dot amber"></div>
+        <div class="health-info"><h4>Schedule</h4><p>Targeting MVP Alignment & SDD completion.</p></div>
+      </div>
+      <div class="health-card">
+        <div class="dot amber"></div>
+        <div class="health-info"><h4>Scope</h4><p>CR Pending for 1,021 App Expansion.</p></div>
+      </div>
+      <div class="health-card">
+        <div class="dot green"></div>
+        <div class="health-info"><h4>Budget</h4><p>Tracking to approved baseline financial limits.</p></div>
+      </div>
+      <div class="health-card">
+        <div class="dot green"></div>
+        <div class="health-info"><h4>Resources</h4><p>HCL & Cisco joint teams fully deployed.</p></div>
+      </div>
+    </div>
+
+    <!-- 3. METRICS & EXECUTIVE RIBBONS -->
+    <div style="display:flex; flex-direction: column; gap:16px;">
+      <section class="kpis">
+        <div class="kpi c1"><div class="knum c1">170K+</div><div class="klbl">DNS USERS DEPLOYED</div><div class="ksub">Production stable; migration completed.<br>27,091 inactive users excluded.</div></div>
+        <div class="kpi c2"><div class="knum c2">150K+</div><div class="klbl">THOUSANDEYES ACTIVE</div><div class="ksub">Observability rollout completed.</div></div>
+        <div class="kpi c3"><div class="knum c3">900+</div><div class="klbl">CLIENT V5.1.18 ADOPTION</div><div class="ksub">Active user endpoints migrating.</div></div>
+        <div class="kpi c4"><div class="knum c4">2200+</div><div class="klbl">CLIENT V5.1.17 ADOPTION</div><div class="ksub">Active user endpoints migrating.</div></div>
+      </section>
+      <section class="ribbons">
+        <div class="rib"><b>Key Progress</b>HCL and Cisco leadership aligned on 16 Jul to redefine the Minimum Viable Product (MVP), expanding SIA and DLP capabilities to better support enterprise rollout.</div>
+        <div class="rib"><b>Key Next Steps</b>Continue SIA alignment under the designated owners and initiate DLP alignment to maintain rollout momentum.</div>
+      </section>
+    </div>
+
+    <!-- 4. PROJECT TIMELINE -->
+    <div class="section-title">Program Timeline</div>
+    <div class="gantt-box">
+      <div class="timeline-header">
+        <div class="spacer"></div>
+        <div class="months-container">
+          <div class="month">Aug</div><div class="month">Sep</div><div class="month">Oct</div><div class="month">Nov</div><div class="month">Dec</div><div class="month">Jan</div><div class="month">Feb</div><div class="month">Mar</div><div class="month">Apr</div><div class="month">May</div><div class="month">Jun</div><div class="month">Jul</div>
+        </div>
+      </div>
+      
+      <!-- CRD -->
+      <div class="phase-header" style="border-top:none;">CRD Phase</div>
+      <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns" style="left: 3.3%; width: 22.5%;">13 Aug - 03 Nov</div></div></div>
+      <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna" style="left: 14.1%; width: 11.6%;">23 Sep - 04 Nov</div></div></div>
+      <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp" style="left: 14.1%; width: 13.3%;">23 Sep - 11 Nov</div></div></div>
+      <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia" style="left: 14.1%; width: 14.1%;">23 Sep - 12 Nov</div></div></div>
+
+      <!-- SDD -->
+      <div class="phase-header">SDD Phase</div>
+      <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns" style="left: 15%; width: 20%;">24 Sep - 08 Dec (Closed)</div></div></div>
+      <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna" style="left: 25.8%; width: 20%;">05 Nov - 16 Jan</div></div></div>
+      <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia" style="left: 28.3%; width: 7.5%;">12 Nov - 10 Dec (Closed)</div></div></div>
+      <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp" style="left: 25%; width: 31.6%;">Nov - 26 Feb</div></div></div>
+
+      <!-- Solution Testing -->
+      <div class="phase-header">Solution Testing Phase</div>
+      <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns ongoing" style="left: 33.3%; width: 33%;">Dec '25 — Ongoing</div></div></div>
+      <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna ongoing" style="left: 41.6%; width: 25%;">Jan '26 — Ongoing</div></div></div>
+      <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia pending" style="left: 50%; width: 16%; color:var(--c-sia);">Pending MVP Start</div></div></div>
+      <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp pending" style="left: 60%; width: 12%; color:var(--c-dlp);">Awaiting Go/No-Go</div></div></div>
+
+      <!-- Ring Testing -->
+      <div class="phase-header">Ring Testing Phase</div>
+      <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns ongoing" style="left: 46.6%; width: 8.3%;">20 Jan - 20 Feb</div></div></div>
+      <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna ongoing" style="left: 41.6%; width: 25%;">Jan '26 — Ongoing</div></div></div>
+      <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia pending" style="left: 50%; width: 16%; color:var(--c-sia);">Pending MVP Start</div></div></div>
+      <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp pending" style="left: 60%; width: 12%; color:var(--c-dlp);">Awaiting Go/No-Go</div></div></div>
+
+      <!-- Rollout -->
+      <div class="phase-header">Rollout Phase</div>
+      <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns pending" style="left: 65%; width: 15%; color:var(--c-dns);">40 Days Planned</div></div></div>
+      <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna pending" style="left: 65%; width: 25%; color:var(--c-ztna);">92 Days Planned</div></div></div>
+      <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia pending" style="left: 65%; width: 25%; color:var(--c-sia);">92 Days Planned</div></div></div>
+      <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp pending" style="left: 65%; width: 24%; color:var(--c-dlp);">89 Days Planned</div></div></div>
+    </div>
+
+    <!-- 5. CRITICAL RISKS (NEW) -->
+    <div class="section-title">Critical Risks & Escalations</div>
+    <div class="risk-matrix">
+      <table>
+        <thead><tr><th>Track</th><th>Risk / Escalation Description</th><th>Mitigation / Action Required</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="risk-tag" style="color:var(--c-ztna);border-color:var(--c-ztna)">ZTNA</span></td>
+            <td>Network, Firewall & PAC dependencies remain open for 31 Oct rollout. Change Request required to expand application scope.</td>
+            <td>Expedite cross-functional dependency closures. Raise and secure approval for the CR.</td>
+          </tr>
+          <tr>
+            <td><span class="risk-tag" style="color:var(--c-sia);border-color:var(--c-sia)">SIA</span></td>
+            <td>Rollout blocked pending agreement on Minimum Viable Product (MVP). 8,027 non-reporting endpoints unresolved.</td>
+            <td>Finalize the SIA rollout decision following MVP agreement. Finalise auto-purge policy.</td>
+          </tr>
+          <tr>
+            <td><span class="risk-tag" style="color:var(--c-dlp);border-color:var(--c-dlp)">DLP</span></td>
+            <td>Email and Endpoint DLP solution design remains open.</td>
+            <td>Finalize the MVP and close solution design. Prioritize critical feature delivery.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 6. TRACK UPDATES -->
+    <div class="section-title">Detailed Track Summaries</div>
+    <section class="cols">
+      <article class="col">
+        <div class="ch z">ZTNA TRACK</div>
+        <div class="section"><span class="stag prog">Progress This Week</span>
+          <ul>
+            <li>Testing Progress:<ul><li>EDS 44 out of 57 applications tested (77%)</li><li>GTM 43 out of 100 Security Groups tested (43%)</li></ul></li>
+            <li>HCL Cross-Functional Governance initiated for 31 Oct rollout.</li>
+            <li>Reachability Validation: 71% of subnets (1,751) validated across 35K devices.</li>
+          </ul>
+        </div>
+        <div class="section"><span class="stag focus">Key Focus</span>
+          <ul>
+            <li>Complete Secure Client v5.1.17 adoption (GTM users).</li>
+            <li>Finalize WAF design and accelerate testing.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="col">
+        <div class="ch sia">SIA TRACK</div>
+        <div class="section"><span class="stag prog">Progress This Week</span>
+          <ul>
+            <li>Joint MVP assessment initiated on 22nd Jul'26.</li>
+            <li>On-Prem Proxy Readiness: 70% policy config completed.</li>
+            <li>Solution Testing: Passed test cases increased to 98/263 (37%).</li>
+            <li>Process-Based Bypass Readiness: 50% complete.</li>
+          </ul>
+        </div>
+        <div class="section"><span class="stag focus">Key Focus</span>
+          <ul>
+            <li>Continue MVP alignment.</li>
+            <li>Expand Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li>
+            <li>Complete on-prem proxy policy configuration.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="col">
+        <div class="ch d">DLP TRACK</div>
+        <div class="section"><span class="stag prog">Progress This Week</span>
+          <ul>
+            <li>Product Alignment: Conducted a joint workshop with Cisco DLP/CASB BU and CX teams.</li>
+            <li>Solution Testing: Partially passed test cases increased to 41/107 (38%).</li>
+          </ul>
+        </div>
+        <div class="section"><span class="stag focus">Key Focus</span>
+          <ul>
+            <li>Initiate joint alignment and finalise MVP.</li>
+            <li>Maximize successful completion of pending test cases.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+  </div>
+
+  <!-- Edit Controls -->
+  <div class="toolbar">
+    <button id="editBtn" onclick="toggleEdit()">Edit Dashboard</button>
+    <button id="saveBtn" onclick="saveChanges()" style="display:none;background:#1fb39f;color:#000">Save HTML</button>
+  </div>
+
+  <script>
+    let isEditing = false;
+    function toggleEdit() {
+      isEditing = !isEditing;
+      const btn = document.getElementById('editBtn');
+      const saveBtn = document.getElementById('saveBtn');
+      const elements = document.querySelectorAll('.t, .s, .knum, .klbl, .ksub, .rib, li, td, th, p, h4');
+      if (isEditing) {
+        btn.innerText = "Stop Editing"; btn.style.background = "#e53614"; saveBtn.style.display = "block";
+        elements.forEach(el => el.setAttribute("contenteditable", "true"));
+      } else {
+        btn.innerText = "Edit Dashboard"; btn.style.background = "#173c63"; saveBtn.style.display = "none";
+        elements.forEach(el => el.removeAttribute("contenteditable"));
+      }
+    }
+    function saveChanges() {
+      if (isEditing) toggleEdit();
+      const clone = document.documentElement.cloneNode(true);
+      const toolbar = clone.querySelector('.toolbar'); if (toolbar) toolbar.remove();
+      clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+      const blob = new Blob(["<!doctype html>\n" + clone.outerHTML], { type: "text/html" });
+      const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "HCL_SSE_Master_Dashboard.html";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
+  </script>
+</body>
+</html>
