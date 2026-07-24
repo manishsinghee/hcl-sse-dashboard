@@ -88,6 +88,17 @@
     .risk-matrix td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: top;}
     .risk-tag { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 800; text-transform: uppercase; background: rgba(255,71,87,0.15); color: var(--alert); border: 1px solid var(--alert); }
 
+    /* Financial Cards */
+    .fin-card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+    .fin-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.08); font-size: 14px; }
+    .fin-row:last-child { border-bottom: none; }
+    .fin-row span { color: #7b93b2; }
+    .fin-row strong { color: var(--white); font-size: 15px; }
+    .fin-val-red { color: var(--alert) !important; }
+    .fin-val-green { color: var(--success) !important; }
+    .fin-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .fin-header h4 { margin: 0; color: var(--white); font-size: 15px; text-transform: uppercase; letter-spacing: 1px; }
+
     /* Track Columns */
     .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .col { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
@@ -139,8 +150,8 @@
         <div class="health-info"><h4>Scope</h4><p>CR Pending for 1,021 App Expansion.</p></div>
       </div>
       <div class="health-card">
-        <div class="dot green"></div>
-        <div class="health-info"><h4>Budget</h4><p>Tracking to approved baseline financial limits.</p></div>
+        <div class="dot red"></div>
+        <div class="health-info"><h4>Budget</h4><p>Severe margin gap (-204.21%). Costs exceed actual revenue.</p></div>
       </div>
       <div class="health-card">
         <div class="dot green"></div>
@@ -208,29 +219,49 @@
       <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp pending" style="left: 65%; width: 24%; color:var(--c-dlp);">89 Days Planned</div></div></div>
     </div>
 
-    <!-- 5. CRITICAL RISKS (NEW) -->
-    <div class="section-title">Critical Risks & Escalations</div>
-    <div class="risk-matrix">
-      <table>
-        <thead><tr><th>Track</th><th>Risk / Escalation Description</th><th>Mitigation / Action Required</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><span class="risk-tag" style="color:var(--c-ztna);border-color:var(--c-ztna)">ZTNA</span></td>
-            <td>Network, Firewall & PAC dependencies remain open for 31 Oct rollout. Change Request required to expand application scope.</td>
-            <td>Expedite cross-functional dependency closures. Raise and secure approval for the CR.</td>
-          </tr>
-          <tr>
-            <td><span class="risk-tag" style="color:var(--c-sia);border-color:var(--c-sia)">SIA</span></td>
-            <td>Rollout blocked pending agreement on Minimum Viable Product (MVP). 8,027 non-reporting endpoints unresolved.</td>
-            <td>Finalize the SIA rollout decision following MVP agreement. Finalise auto-purge policy.</td>
-          </tr>
-          <tr>
-            <td><span class="risk-tag" style="color:var(--c-dlp);border-color:var(--c-dlp)">DLP</span></td>
-            <td>Email and Endpoint DLP solution design remains open.</td>
-            <td>Finalize the MVP and close solution design. Prioritize critical feature delivery.</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- 5. CRITICAL RISKS & FINANCIALS -->
+    <div style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px;">
+      <div>
+        <div class="section-title" style="margin-top:0">Critical Risks & Escalations</div>
+        <div class="risk-matrix">
+          <table>
+            <thead><tr><th>Track</th><th>Risk / Escalation Description</th><th>Mitigation / Action Required</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--c-ztna);border-color:var(--c-ztna)">ZTNA</span></td>
+                <td>Network, Firewall & PAC dependencies remain open for 31 Oct rollout. Change Request required to expand application scope.</td>
+                <td>Expedite cross-functional dependency closures. Raise and secure approval for the CR.</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--c-sia);border-color:var(--c-sia)">SIA</span></td>
+                <td>Rollout blocked pending agreement on Minimum Viable Product (MVP). 8,027 non-reporting endpoints unresolved.</td>
+                <td>Finalize the SIA rollout decision following MVP agreement. Finalise auto-purge policy.</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--c-dlp);border-color:var(--c-dlp)">DLP</span></td>
+                <td>Email and Endpoint DLP solution design remains open.</td>
+                <td>Finalize the MVP and close solution design. Prioritize critical feature delivery.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div>
+        <div class="section-title" style="margin-top:0">Financial Summary</div>
+        <div class="fin-card">
+          <div class="fin-header"><h4>Revenue vs Costs (INR)</h4></div>
+          <div class="fin-row"><span>Revenue Budget</span><strong>108.92M</strong></div>
+          <div class="fin-row"><span>Revenue Actuals</span><strong>18.76M</strong></div>
+          <hr style="border: 0; border-top: 1px solid var(--border); margin: 4px 0; width: 100%;">
+          <div class="fin-row"><span>Total Budgeted Costs</span><strong>95.48M</strong></div>
+          <div class="fin-row"><span>Total Actual Costs</span><strong class="fin-val-red">57.09M</strong></div>
+          <hr style="border: 0; border-top: 1px solid var(--border); margin: 4px 0; width: 100%;">
+          <div class="fin-row"><span>As Sold Margin</span><strong class="fin-val-green">12.34% (13.43M)</strong></div>
+          <div class="fin-row"><span>Actual Margin</span><strong class="fin-val-red">-204.21% (-38.32M)</strong></div>
+          <div style="font-size: 10px; color: #7b93b2; text-align: right; margin-top: 8px;">Last Updated: 7/23/2026 10:30 PM</div>
+        </div>
+      </div>
     </div>
 
     <!-- 6. TRACK UPDATES -->
