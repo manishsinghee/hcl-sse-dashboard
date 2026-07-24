@@ -275,33 +275,8 @@
 <!-- 6. TRACK UPDATES -->
     <div class="section-title">Detailed Track Summaries</div>
     <section class="cols">
-
       <article class="col">
-        <div class="ch dns">DNS TRACK</div>
-                <div class="mini-stepper">
-          <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
-          <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
-          <div class="m-step comp"><div class="tt">Policy Config: Completed</div>Policy<br>Config.</div>
-          <div class="m-step comp"><div class="tt">Solution Testing: Completed</div>Sol.<br>Test</div>
-          <div class="m-step comp"><div class="tt">Ring Testing: Completed</div>Ring<br>Test</div>
-          <div class="m-step comp"><div class="tt">Rollout: Completed</div>Rollout</div>
-          <div class="m-step comp"><div class="tt">Hypercare: Completed</div>Hyper<br>Care</div>
-        </div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
-          <ul>
-            <li>Production stable; migration completed.</li>
-            <li>27,091 inactive users excluded.</li>
-          </ul>
-        </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
-          <ul>
-            <li>Maintain operational stability.</li>
-            <li>Monitor Hyper care support.</li>
-          </ul>
-        </div>
-      </article>
-      <article class="col">
-        <div class="ch z">ZTNA TRACK</div>
+        <div class="ch z" style="display: flex; justify-content: space-between; align-items: center;">ZTNA TRACK <div style="width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ffd060, #f39c12); box-shadow: 0 0 10px rgba(243,156,18,0.5), inset -2px -2px 4px rgba(0,0,0,0.3);" title="Amber"></div></div>
                 <div class="mini-stepper">
           <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
           <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
@@ -311,118 +286,262 @@
           <div class="m-step plan"><div class="tt">Rollout: Planned</div>Rollout</div>
           <div class="m-step plan"><div class="tt">Hypercare: Planned</div>Hyper<br>Care</div>
         </div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
+        <div class="section" style="height: 360px; display: flex; flex-direction: column;"><span class="stag prog">Progress This Week</span>
           <ul>
-            <li>Testing Progress:<ul><li>EDS 44 out of 57 applications tested (77%)</li><li>GTM 43 out of 100 Security Groups tested (43%)</li></ul></li>
-            <li>HCL Cross-Functional Governance initiated for 31 Oct rollout.</li>
-            <li>Reachability Validation: 71% of subnets (1,751) validated across 35K devices.</li>
+            <li>Testing Progress:
+              <ul>
+                <li>EDS 44 out of 57 applications tested (77%)</li>
+                <li>GTM 43 out of 100 Security Groups tested (43%, +3 this week)</li>
+              </ul>
+            </li>
+            <li>HCL Cross-Functional Governance: Internal stakeholder alignment and dependency closure initiated for the 31 Oct'26 ZTNA rollout.</li>
+            <li>Rollout Prerequisites: Network, Firewall & PAC changes; Resource Connector onboarding in progress.</li>
+            <li>Reachability Validation: 2,019 of 2,781 matched subnets (73%) validated across 43K devices; 762 subnets under remediation.</li>
           </ul>
         </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
+        <div class="section" style="height: 280px; display: flex; flex-direction: column;"><span class="stag focus">Key Focus</span>
           <ul>
-            <li>Complete Secure Client v5.1.17 adoption (GTM users).</li>
+            <li>Complete Cisco Secure Client v5.1.17 adoption (GTM users).</li>
+            <li>Close ZTNA rollout dependencies (Network, Firewall & PAC).</li>
             <li>Finalize WAF design and accelerate testing.</li>
+            <li>Continue EDS application & GTM Security Group validation.</li>
+            <li>Raise and secure approval for the Change Request to expand the application scope for ZTNA rollout.</li>
           </ul>
         </div>
-      
-        <div class="section-title" style="font-size: 11px; margin: 24px 0 12px 0; color: #8da4c2; text-transform: uppercase; letter-spacing: 1px;">Solution Testing Updates</div>
-        <div class="test-gantt-wrap">
-          <div style="display: flex; justify-content: space-between; font-size: 9px; color: #8da4c2; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px;">
-            <span>Total: <span style="color:#fff;">88</span></span>
-            <span>P1s: <span style="color:#e74c3c;">3</span></span>
-          </div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Passed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 43.2%; background: #2ecc71;">38</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Partial</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 8.0%; background: #f39c12;">7</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Failed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 11.4%; background: #e74c3c;">10</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">WIP</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 15.9%; background: #3498db;">14</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Roadmap</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 21.6%; background: #95a5a6;">19</div></div></div>
+        <div class="section" style="flex-grow: 1;"><span class="stag attn">Executive Attention Required</span>
+          <ul>
+            <li>Expedite cross-functional dependency closures for remaining ZTNA rollout.</li>
+          </ul>
         </div>
       </article>
 
       <article class="col">
-        <div class="ch sia">SIA TRACK</div>
+        <div class="ch sia" style="display: flex; justify-content: space-between; align-items: center;">SIA TRACK <div style="width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff6b6b, #e74c3c); box-shadow: 0 0 10px rgba(231,76,60,0.5), inset -2px -2px 4px rgba(0,0,0,0.3);" title="Red"></div></div>
                 <div class="mini-stepper">
           <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
           <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
           <div class="m-step comp"><div class="tt">Policy Config: Completed</div>Policy<br>Config.</div>
           <div class="m-step ong"><div class="tt">Solution Testing: Ongoing</div>Sol.<br>Test</div>
           <div class="m-step ong"><div class="tt">Ring Testing: Ongoing</div>Ring<br>Test</div>
-          <div class="m-step pend"><div class="tt">Rollout: Decision Pending</div>Rollout</div>
-          <div class="m-step pend"><div class="tt">Hypercare: Decision Pending</div>Hyper<br>Care</div>
+          <div class="m-step red-pend"><div class="tt">Rollout: Decision Pending</div>Rollout</div>
+          <div class="m-step red-pend"><div class="tt">Hypercare: Decision Pending</div>Hyper<br>Care</div>
         </div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
+        <div class="section" style="height: 360px; display: flex; flex-direction: column;"><span class="stag prog">Progress This Week</span>
           <ul>
-            <li>Joint MVP assessment initiated on 22nd Jul'26.</li>
-            <li>On-Prem Proxy Readiness: 70% policy config completed.</li>
+            <li>Rollout Readiness: Joint Minimum Viable Product (MVP) assessment initiated on 22nd Jul'26.</li>
+            <li>On-Prem Proxy Readiness: 70% policy configuration completed.</li>
             <li>Solution Testing: Passed test cases increased to 98/263 (37%).</li>
-            <li>Process-Based Bypass Readiness: 50% complete.</li>
+            <li>Process-Based Bypass Readiness: Data collection and analysis progressing (50% complete).</li>
           </ul>
         </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
+        <div class="section" style="height: 280px; display: flex; flex-direction: column;"><span class="stag focus">Key Focus</span>
           <ul>
-            <li>Continue MVP alignment.</li>
-            <li>Expand Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li>
+            <li>Continue joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.</li>
+            <li>Expand Cisco Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li>
+            <li>Validate 8,027 non-reporting endpoints; finalise auto-purge policy.</li>
             <li>Complete on-prem proxy policy configuration.</li>
+            <li>Maximize successful completion of pending test cases.</li>
           </ul>
         </div>
-      
-        <div class="section-title" style="font-size: 11px; margin: 24px 0 12px 0; color: #8da4c2; text-transform: uppercase; letter-spacing: 1px;">Solution Testing Updates</div>
-        <div class="test-gantt-wrap">
-          <div style="display: flex; justify-content: space-between; font-size: 9px; color: #8da4c2; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px;">
-            <span>Total: <span style="color:#fff;">263</span></span>
-            <span>P1s: <span style="color:#e74c3c;">145</span></span>
-          </div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Passed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 37.3%; background: #2ecc71;">98</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Partial</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 21.3%; background: #f39c12;">56</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Failed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 22.1%; background: #e74c3c;">58</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">WIP</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 5.7%; background: #3498db;">15</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Roadmap</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 9.9%; background: #95a5a6;">26</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Other</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 3.8%; background: #7f8c8d; font-size:8px;">10</div></div></div>
+        <div class="section" style="flex-grow: 1;"><span class="stag attn">Executive Attention Required</span>
+          <ul>
+            <li>Expedite cross-functional dependency closure to maintain rollout readiness.</li>
+            <li>Finalize the SIA rollout decision following MVP agreement.</li>
+            <li>Prioritize rollout-critical feature delivery to enable MVP readiness.</li>
+          </ul>
         </div>
       </article>
 
       <article class="col">
-        <div class="ch d">DLP TRACK</div>
+        <div class="ch d" style="display: flex; justify-content: space-between; align-items: center;">DLP TRACK <div style="width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff6b6b, #e74c3c); box-shadow: 0 0 10px rgba(231,76,60,0.5), inset -2px -2px 4px rgba(0,0,0,0.3);" title="Red"></div></div>
                 <div class="mini-stepper">
           <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
           <div class="m-step rej"><div class="tt">SDD: Discarded</div>SDD</div>
           <div class="m-step comp"><div class="tt">Policy Config: Completed</div>Policy<br>Config.</div>
           <div class="m-step ong"><div class="tt">Solution Testing: Ongoing</div>Sol.<br>Test</div>
           <div class="m-step ong"><div class="tt">Ring Testing: Ongoing</div>Ring<br>Test</div>
-          <div class="m-step pend"><div class="tt">Rollout: Decision Pending</div>Rollout</div>
-          <div class="m-step pend"><div class="tt">Hypercare: Decision Pending</div>Hyper<br>Care</div>
+          <div class="m-step red-pend"><div class="tt">Rollout: Decision Pending</div>Rollout</div>
+          <div class="m-step red-pend"><div class="tt">Hypercare: Decision Pending</div>Hyper<br>Care</div>
         </div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
+        <div class="section" style="height: 360px; display: flex; flex-direction: column;"><span class="stag prog">Progress This Week</span>
           <ul>
             <li>Product Alignment: Conducted a joint workshop with Cisco DLP/CASB BU and CX teams.</li>
             <li>Solution Testing: Partially passed test cases increased to 41/107 (38%).</li>
           </ul>
         </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
+        <div class="section" style="height: 280px; display: flex; flex-direction: column;"><span class="stag focus">Key Focus</span>
           <ul>
             <li>Initiate joint alignment and finalise MVP.</li>
             <li>Maximize successful completion of pending test cases.</li>
           </ul>
         </div>
-      
-        <div class="section-title" style="font-size: 11px; margin: 24px 0 12px 0; color: #8da4c2; text-transform: uppercase; letter-spacing: 1px;">Solution Testing Updates</div>
-        <div class="test-gantt-wrap">
-          <div style="display: flex; justify-content: space-between; font-size: 9px; color: #8da4c2; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px;">
-            <span>Total: <span style="color:#fff;">107</span></span>
+        <div class="section" style="flex-grow: 1;"><span class="stag attn">Executive Attention Required</span>
+          <ul>
+            <li>Finalize the Minimum Viable Product (MVP) and close Email and Endpoint DLP solution design.</li>
+            <li>Support for Prioritize rollout-critical feature delivery to achieve MVP readiness.</li>
+          </ul>
+        </div>
+      </article>
+    
+
+      <article class="col">
+        <div class="ch dns" style="display: flex; justify-content: space-between; align-items: center;"><div>DNS TRACK <span style="font-size: 11px; color: #2ecc71; letter-spacing: 1px; text-shadow: none;">(Completed)</span></div> <div style="width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #6ce29b, #2ecc71); box-shadow: 0 0 10px rgba(46,204,113,0.5), inset -2px -2px 4px rgba(0,0,0,0.3);" title="Green"></div></div>
+                <div class="mini-stepper">
+          <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
+          <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
+          <div class="m-step comp"><div class="tt">Policy Config: Completed</div>Policy<br>Config.</div>
+          <div class="m-step comp"><div class="tt">Solution Testing: Completed</div>Sol.<br>Test</div>
+          <div class="m-step comp"><div class="tt">Ring Testing: Completed</div>Ring<br>Test</div>
+          <div class="m-step comp"><div class="tt">Rollout: Completed</div>Rollout</div>
+          <div class="m-step comp"><div class="tt">Hypercare: Completed</div>Hyper<br>Care</div>
+        </div>
+
+      </article>
+    </section>
+
+    <!-- SOLUTION TESTING UPDATES -->
+    <div class="section-title">Solution Testing Updates</div>
+    <section class="cols">
+      <article class="col">
+        <div class="test-gantt-wrap" style="display:flex; flex-direction: column; gap:16px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #8da4c2; font-weight: 800; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px;">
+            <span>Total Tests: <span style="color:#fff;">88</span></span>
+            <span>P1s: <span style="color:#e74c3c;">3</span></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:24px;">
+            <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#2ecc71 0% 43.2%, #f39c12 43.2% 51.2%, #e74c3c 51.2% 62.6%, #3498db 62.6% 78.5%, #95a5a6 78.5% 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: var(--panel); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
+                <span style="color:#fff; font-size: 16px; font-weight: 800;">88</span>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 11px; color: #c0d1e6; font-weight: 600; width: 100%;">
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#2ecc71; border-radius:2px;"></div>Passed</div> <span style="color:#fff">38 <span style="color:#8da4c2; font-size:9px;">(43%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#f39c12; border-radius:2px;"></div>Partial</div> <span style="color:#fff">7 <span style="color:#8da4c2; font-size:9px;">(8%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#e74c3c; border-radius:2px;"></div>Failed</div> <span style="color:#fff">10 <span style="color:#8da4c2; font-size:9px;">(11%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#3498db; border-radius:2px;"></div>WIP</div> <span style="color:#fff">14 <span style="color:#8da4c2; font-size:9px;">(16%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#95a5a6; border-radius:2px;"></div>Roadmap</div> <span style="color:#fff">19 <span style="color:#8da4c2; font-size:9px;">(22%)</span></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="col">
+        <div class="test-gantt-wrap" style="display:flex; flex-direction: column; gap:16px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #8da4c2; font-weight: 800; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px;">
+            <span>Total Tests: <span style="color:#fff;">263</span></span>
+            <span>P1s: <span style="color:#e74c3c;">145</span></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:24px;">
+            <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#2ecc71 0% 37.3%, #f39c12 37.3% 58.6%, #e74c3c 58.6% 80.7%, #3498db 80.7% 86.4%, #95a5a6 86.4% 96.3%, #7f8c8d 96.3% 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: var(--panel); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
+                <span style="color:#fff; font-size: 16px; font-weight: 800;">263</span>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px; color: #c0d1e6; font-weight: 600; width: 100%;">
+               <div style="display:flex; align-items:center; justify-content: space-between; padding-right:4px;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#2ecc71; border-radius:2px;"></div>Passed</div> <span style="color:#fff">98 <span style="color:#8da4c2; font-size:9px;">(37%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between; padding-left:4px;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#f39c12; border-radius:2px;"></div>Partial</div> <span style="color:#fff">56 <span style="color:#8da4c2; font-size:9px;">(21%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between; padding-right:4px;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#e74c3c; border-radius:2px;"></div>Failed</div> <span style="color:#fff">58 <span style="color:#8da4c2; font-size:9px;">(22%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between; padding-left:4px;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#3498db; border-radius:2px;"></div>WIP</div> <span style="color:#fff">15 <span style="color:#8da4c2; font-size:9px;">(6%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between; padding-right:4px;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#95a5a6; border-radius:2px;"></div>Roadmap</div> <span style="color:#fff">26 <span style="color:#8da4c2; font-size:9px;">(10%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between; padding-left:4px;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#7f8c8d; border-radius:2px;"></div>Other</div> <span style="color:#fff">10 <span style="color:#8da4c2; font-size:9px;">(4%)</span></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="col">
+        <div class="test-gantt-wrap" style="display:flex; flex-direction: column; gap:16px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #8da4c2; font-weight: 800; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px;">
+            <span>Total Tests: <span style="color:#fff;">107</span></span>
             <span>P1s: <span style="color:#e74c3c;">0</span></span>
           </div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Passed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 0%; background: #2ecc71;">0</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Partial</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 38.3%; background: #f39c12;">41</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Failed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 55.1%; background: #e74c3c;">59</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">WIP</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 1.9%; background: #3498db; padding:0; min-width:12px;">2</div></div></div>
-          <div class="test-gantt-row"><div class="test-gantt-label">Roadmap</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 4.7%; background: #95a5a6; padding:0; min-width:12px;">5</div></div></div>
+          <div style="display:flex; align-items:center; gap:24px;">
+            <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#f39c12 0% 38.3%, #e74c3c 38.3% 93.4%, #3498db 93.4% 95.3%, #95a5a6 95.3% 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: var(--panel); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
+                <span style="color:#fff; font-size: 16px; font-weight: 800;">107</span>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 11px; color: #c0d1e6; font-weight: 600; width: 100%;">
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#2ecc71; border-radius:2px;"></div>Passed</div> <span style="color:#fff">0 <span style="color:#8da4c2; font-size:9px;">(0%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#f39c12; border-radius:2px;"></div>Partial</div> <span style="color:#fff">41 <span style="color:#8da4c2; font-size:9px;">(38%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#e74c3c; border-radius:2px;"></div>Failed</div> <span style="color:#fff">59 <span style="color:#8da4c2; font-size:9px;">(55%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#3498db; border-radius:2px;"></div>WIP</div> <span style="color:#fff">2 <span style="color:#8da4c2; font-size:9px;">(2%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#95a5a6; border-radius:2px;"></div>Roadmap</div> <span style="color:#fff">5 <span style="color:#8da4c2; font-size:9px;">(5%)</span></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+      <article class="col">
+        <div class="test-gantt-wrap" style="display:flex; flex-direction: column; gap:16px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #8da4c2; font-weight: 800; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px;">
+            <span>Total Tests: <span style="color:#fff;">23</span></span>
+            <span>P1s: <span style="color:#e74c3c;">0</span></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:24px;">
+            <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#2ecc71 0% 91.3%, #3498db 91.3% 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: var(--panel); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
+                <span style="color:#fff; font-size: 16px; font-weight: 800;">23</span>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 11px; color: #c0d1e6; font-weight: 600; width: 100%;">
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#2ecc71; border-radius:2px;"></div>Passed</div> <span style="color:#fff">21 <span style="color:#8da4c2; font-size:9px;">(91%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#f39c12; border-radius:2px;"></div>Partial</div> <span style="color:#fff">0 <span style="color:#8da4c2; font-size:9px;">(0%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#e74c3c; border-radius:2px;"></div>Failed</div> <span style="color:#fff">0 <span style="color:#8da4c2; font-size:9px;">(0%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#3498db; border-radius:2px;"></div>WIP</div> <span style="color:#fff">2 <span style="color:#8da4c2; font-size:9px;">(9%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#95a5a6; border-radius:2px;"></div>Roadmap</div> <span style="color:#fff">0 <span style="color:#8da4c2; font-size:9px;">(0%)</span></span></div>
+            </div>
+          </div>
         </div>
       </article>
     </section>
 
+    
+    <!-- FEATURE REQUESTS UPDATES -->
+    <div class="section-title">Feature Requests Updates</div>
+    <div style="display: flex; gap: 32px; margin-bottom: 32px; align-items: center; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 24px; box-shadow: var(--clay-inner);">
+      
+      <!-- Chart Area -->
+      <div style="display: flex; align-items: center; gap: 24px;">
+        <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#5a9e43 0% 58.3%, #b0f2a4 58.3% 79.1%, #fcd49c 79.1% 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+          <!-- Donut hole -->
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: var(--panel); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
+            <span style="color:#fff; font-size: 16px; font-weight: 800;">120</span>
+            <span style="color:#8da4c2; font-size: 9px; text-transform: uppercase;">Total</span>
+          </div>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 10px; color: #c0d1e6; font-size: 12px; font-weight: 600;">
+           <div style="display: flex; align-items: center; gap: 8px;"><div style="width: 12px; height: 12px; background: #5a9e43; border-radius: 2px;"></div> 58% Delivered</div>
+           <div style="display: flex; align-items: center; gap: 8px;"><div style="width: 12px; height: 12px; background: #b0f2a4; border-radius: 2px;"></div> 21% In Progress</div>
+           <div style="display: flex; align-items: center; gap: 8px;"><div style="width: 12px; height: 12px; background: #fcd49c; border-radius: 2px;"></div> 21% Pending</div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div style="width: 1px; height: 100px; background: rgba(255,255,255,0.1);"></div>
+
+      <!-- Table Area -->
+      <div style="flex: 1; border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; text-align: center;">
+          <div style="background: rgba(255,255,255,0.05); padding: 12px; font-weight: 700; color: #c0d1e6; border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">Delivered</div>
+          <div style="background: rgba(255,255,255,0.05); padding: 12px; font-weight: 700; color: #c0d1e6; border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">In Progress</div>
+          <div style="background: rgba(255,255,255,0.05); padding: 12px; font-weight: 700; color: #c0d1e6; border-bottom: 1px solid rgba(255,255,255,0.05);">Pending</div>
+          
+          <div style="padding: 16px; border-right: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; gap: 12px; color: #fff; font-size: 14px; font-weight: 600;">
+            <div style="width: 24px; height: 12px; background: #5a9e43; border-radius: 2px;"></div> 70 FRs
+          </div>
+          <div style="padding: 16px; border-right: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; gap: 12px; color: #fff; font-size: 14px; font-weight: 600;">
+            <div style="width: 24px; height: 12px; background: #b0f2a4; border-radius: 2px;"></div> 25 FRs
+          </div>
+          <div style="padding: 16px; display: flex; align-items: center; justify-content: center; gap: 12px; color: #fff; font-size: 14px; font-weight: 600;">
+            <div style="width: 24px; height: 12px; background: #fcd49c; border-radius: 2px;"></div> 25 FRs
+          </div>
+        </div>
+      </div>
+      
+    </div>
     <!-- 4. PROJECT TIMELINE -->
     <div class="section-title">Program Timeline</div>
-    <div class="gantt-box">
+    <div class="gantt-box" style="margin-bottom: 32px;">
       <div class="timeline-header">
         <div class="spacer"></div>
         <div class="months-container">
@@ -471,71 +590,161 @@
     <!-- 5. RAID TRACKER, FINANCIALS & RESOURCES -->
     <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 24px;">
       <div>
-        <div class="section-title" style="margin-top:0">RAID Log (Risks & Issues)</div>
-        <div class="risk-matrix">
+        <div class="section-title" style="margin-top:0">Risks & Issues Log</div>
+        <div class="risk-matrix" style="max-height: 380px; overflow-y: auto;">
           <table>
             <thead>
               <tr>
                 <th style="width: 80px;">Type</th>
-                <th style="width: 100px;">Ref ID</th>
+                <th style="width: 80px;">Ref ID</th>
                 <th>Name / Description</th>
+                <th style="width: 100px;">Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">R-19906</a></td>
+                <td><span style="color:var(--cyan);">R-19906</span></td>
                 <td>Requirement Misalignment During Feature Request (FR) Definition</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
               </tr>
               <tr>
                 <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">R-3834</a></td>
+                <td><span style="color:var(--cyan);">R-3834</span></td>
                 <td>Usecases Availability Against Customer-Committed Timelines</td>
-              </tr>
-              <tr>
-                <td><span class="risk-tag">Issue</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">I-9572</a></td>
-                <td>Misalignment in Use Case Understanding and Documentation between HCL and Cisco Presales during FR Creation</td>
-              </tr>
-              <tr>
-                <td><span class="risk-tag">Issue</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">I-2788</a></td>
-                <td>Feature Availability Gap in Cisco SSE Against HCL-Requested Timelines</td>
-              </tr>
-              <tr>
-                <td><span class="risk-tag">Issue</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">I-8035</a></td>
-                <td>Partial Availability of HCL-Identified Critical (P1) Use Cases Across ZTNA, SIA, and DLP</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
               </tr>
               <tr>
                 <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">R-15612</a></td>
+                <td><span style="color:var(--cyan);">R-15612</span></td>
                 <td>Partial Availability of Certain Security Use Cases</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
               </tr>
               <tr>
                 <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">R-15611</a></td>
+                <td><span style="color:var(--cyan);">R-15611</span></td>
                 <td>DLP Solution Design Acceptance Risk</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-9170</span></td>
+                <td>Infrastructure Readiness Risk Impacting SSE Rollout</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-3837</span></td>
+                <td>Potential Increase in Support Tickets Impacting User Experience</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-3835</span></td>
+                <td>Business Disruption Risk Due to Accelerated Migration of ZTNA, SIA DLP</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
               </tr>
               <tr>
                 <td><span class="risk-tag">Issue</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">I-8034</a></td>
+                <td><span style="color:var(--cyan);">I-9572</span></td>
+                <td>Misalignment in Use Case Understanding and Documentation between HCL and Cisco Presales during FR Creation</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-2788</span></td>
+                <td>Feature Availability Gap in Cisco SSE Against HCL-Requested Timelines</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8035</span></td>
+                <td>Partial Availability of HCL-Identified Critical (P1) Use Cases Across ZTNA, SIA, and DLP</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8034</span></td>
                 <td>DLP Solution Design Does Not Meet Enterprise Security & Compliance Requirements</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8033</span></td>
+                <td>Open Infrastructure Dependencies Impacting Rollout Readiness</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-2791</span></td>
+                <td>Elevated Support Ticket Volume Impacting User Experience</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-2789</span></td>
+                <td>Potential Service Disruption During Accelerated Migration of ZTNA, SIA, and DLP</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
               </tr>
               <tr>
                 <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">R-9170</a></td>
-                <td>Infrastructure Readiness Risk Impacting SSE Rollout</td>
-              </tr>
-              <tr>
-                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">R-15610</a></td>
+                <td><span style="color:var(--cyan);">R-15610</span></td>
                 <td>Delay in HCL SIA Design Sign-off Despite Multiple Solution Options</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed - Resolved</td>
               </tr>
               <tr>
                 <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
-                <td><a href="#" style="color:var(--cyan);text-decoration:none;">R-3837</a></td>
-                <td>Potential Increase in Support Tickets Impacting User Experience</td>
+                <td><span style="color:var(--cyan);">R-15613</span></td>
+                <td>UZTNA Design: A New Requirement - Rollout Blocker</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed - Resolved</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-7035</span></td>
+                <td>Resource Capacity Risk Despite Maximum Optimization</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed - Resolved</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-14338</span></td>
+                <td>Timely Confirmation of Onsite Resource Requirements</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed - Resolved</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-3836</span></td>
+                <td>Lack of Local HCL Project Management Ownership in Noida</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed - Resolved</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8036</span></td>
+                <td>Universal ZTNA (UZTNA) Design Requirement as Rollout Blocker</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8032</span></td>
+                <td>Specialist Resource Shortfall for VPNaaS Delivery Support</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8030</span></td>
+                <td>Pending HCL Sign-off on Final SIA Design Approach</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-2790</span></td>
+                <td>Delay in Onsite Resource Confirmation for Rollout Support</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8031</span></td>
+                <td>Absence of Local HCL PM Ownership for Day-to-Day Execution</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed</td>
               </tr>
             </tbody>
           </table>
@@ -553,69 +762,71 @@
           <div class="fin-row"><span>Total Actual Costs</span><strong class="fin-val-green">$0.69M</strong></div>
           <hr style="border: 0; border-top: 1px solid var(--border); margin: 4px 0; width: 100%;">
           <div class="fin-row"><span>As Sold Margin</span><strong class="fin-val-green">12.34% ($0.16M)</strong></div>
-          <div class="fin-row"><span>Actual Margin</span><strong class="fin-val-red">-204.21% (-$0.46M)</strong></div>
+          <div class="fin-row"><span>Actual Margin</span><strong class="fin-val-green">~20%</strong></div>
           <div style="font-size: 10px; color: #7b93b2; text-align: right; margin-top: 8px;">Converted at 83 INR/USD (Jul 2025) <br>Last Updated: 7/23/2026 10:30 PM</div>
         </div>
       </div>
       
       <div>
         <div class="section-title" style="margin-top:0">Resource Allocation</div>
-                <div class="res-card" style="padding: 16px 20px; overflow-y: auto; max-height: 480px;">
+                <div class="res-card" style="padding: 16px 20px; max-height: 380px; overflow-y: auto;">
           <div class="res-header" style="margin-bottom: 12px; padding-bottom: 8px;"><h4>Assigned Project Team</h4></div>
           
+
+          <!-- Program Management -->
+          <div style="font-size: 10px; font-weight: 800; color: #8da4c2; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 12px;">Program Management</div>
           <div class="res-stat" style="margin-bottom: 12px;">
             <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Nikhil Jairath</b> | Customer Exp. Manager</span><span class="val" style="color:#7b93b2;">—</span></div>
             <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 10%; background: #3f587a;"></div></div>
           </div>
-          
           <div class="res-stat" style="margin-bottom: 12px;">
             <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Manish Kumar Singh</b> | Customer PM (ZTNA, SIA)</span><span class="val">75%</span></div>
             <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 75%;"></div></div>
           </div>
-          
-          <div class="res-stat" style="margin-bottom: 12px;">
-            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Himanshu Singh</b> | Customer PM (DLP)</span><span class="val" style="color:var(--c-dlp);">100%</span></div>
-            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 100%; background: var(--c-dlp);"></div></div>
-          </div>
-          
+
+          <!-- ZTNA Track -->
+          <div style="font-size: 10px; font-weight: 800; color: var(--c-ztna); text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 12px; margin-top: 20px;">ZTNA Track</div>
           <div class="res-stat" style="margin-bottom: 12px;">
             <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Nirav Raval</b> | Solution Architect (ZTNA)</span><span class="val" style="color:var(--c-ztna);">70%</span></div>
             <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 70%; background: var(--c-ztna);"></div></div>
           </div>
-
           <div class="res-stat" style="margin-bottom: 12px;">
             <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Raynor Pereira</b> | Technical Engineer (ZTNA)</span><span class="val" style="color:var(--c-ztna);">50%</span></div>
             <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 50%; background: var(--c-ztna);"></div></div>
           </div>
 
+          <!-- SIA Track -->
+          <div style="font-size: 10px; font-weight: 800; color: var(--c-sia); text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 12px; margin-top: 20px;">SIA Track</div>
           <div class="res-stat" style="margin-bottom: 12px;">
             <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Manu Saxena</b> | Solution Architect (SIA)</span><span class="val" style="color:var(--c-sia);">70%</span></div>
             <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 70%; background: var(--c-sia);"></div></div>
           </div>
-
           <div class="res-stat" style="margin-bottom: 12px;">
             <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Mrityunjaya Hatagundi</b> | Technical Engineer (SIA)</span><span class="val" style="color:var(--c-sia);">50%</span></div>
             <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 50%; background: var(--c-sia);"></div></div>
           </div>
-
           <div class="res-stat" style="margin-bottom: 12px;">
             <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Sadashiv Palde</b> | Technical Engineer (SIA)</span><span class="val" style="color:var(--c-sia);">50%</span></div>
             <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 50%; background: var(--c-sia);"></div></div>
           </div>
 
+          <!-- DLP Track -->
+          <div style="font-size: 10px; font-weight: 800; color: var(--c-dlp); text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 12px; margin-top: 20px;">DLP Track</div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Himanshu Singh</b> | Customer PM (DLP)</span><span class="val" style="color:var(--c-dlp);">100%</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 100%; background: var(--c-dlp);"></div></div>
+          </div>
           <div class="res-stat" style="margin-bottom: 12px;">
             <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Mnason Pattan</b> | Solution Architect (DLP)</span><span class="val" style="color:var(--c-dlp);">70%</span></div>
             <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 70%; background: var(--c-dlp);"></div></div>
           </div>
-
           <div class="res-stat" style="margin-bottom: 12px;">
             <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Arihant Mehtha</b> | Technical Engineer (DLP)</span><span class="val" style="color:var(--c-dlp);">70%</span></div>
             <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 70%; background: var(--c-dlp);"></div></div>
           </div>
-          
+
         </div>
       </div>
-    </div>
     </div>
 
   </div>
@@ -642,7 +853,7 @@
       isEditing = !isEditing;
       const btn = document.getElementById('editBtn');
       const saveBtn = document.getElementById('saveBtn');
-      const elements = document.querySelectorAll('.t, .s, .knum, .klbl, .ksub, .rib, li, td, th, p, h4');
+      const elements = document.querySelectorAll('.t, .s, .knum, .klbl, .ksub, .rib, li, td, th, p, h4, span, .val, strong, .ch, .section-title, .month');
       if (isEditing) {
         btn.innerText = "Stop Editing"; btn.style.background = "#e53614"; saveBtn.style.display = "block";
         elements.forEach(el => el.setAttribute("contenteditable", "true"));
@@ -708,3 +919,4 @@
 </body>
 
 </html>
+
