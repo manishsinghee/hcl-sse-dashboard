@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HCL SSE Weekly Updates Dashboard</title>
+  <style>
+    :root {
+      --navy:#173c63;
+      --cyan:#27b9ee;
+      --bg:#e9edf3;
+      --card:#fff;
+      --line:#b8c2d1;
+      --text:#10233d;
+      --muted:#3f587a;
+      --green:#1fb39f;
+      --olive:#a2a03e;
+      --blue:#2847f0;
+      --sky:#3ca2f4;
+      --tealHeader:#4ea5c2;
+      --siaHeader:#1f5a95;
+      --dlpHeader:#59239b;
+      --alert:#a61900;
+      --orange:#f09b4d;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .previewWrap{padding:20px;overflow:auto}
+    #preview{width:100%;max-width:1400px;margin:0 auto;background:var(--bg);border:1px solid #d0d7e2;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+    
+    .head{background:var(--navy);padding:14px 20px;color:#fff}
+    .head .t{font-size:26px;font-weight:800;line-height:1.05}
+    .head .s{font-size:16px;color:var(--cyan);font-weight:700;margin-top:6px;background:none}
+    
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:16px}
+    .kpi{background:#fff;border:1px solid var(--line);min-height:120px;box-shadow:0 2px 6px rgba(0,0,0,.12);position:relative;padding:16px}
+    .kpi:before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:#ddd}
+    .kpi.c1:before{background:var(--green)} .kpi.c2:before{background:var(--olive)} .kpi.c3:before{background:var(--blue)} .kpi.c4:before{background:var(--sky)}
+    
+    .knum{font-size:36px;font-weight:800;line-height:1;margin:0}
+    .knum.c1{color:#0c7b6f}.knum.c2{color:#7f7b2a}.knum.c3{color:#2444ef}.knum.c4{color:#2a8fe5}
+    
+    .klbl{font-size:16px;font-weight:800;line-height:1.15;color:#183459;margin-top:4px}
+    .space-above { margin-top: 24px; } /* 1 line space scaled down */
+    .ksub{font-size:14px;line-height:1.25;color:#425d80;margin-top:8px;white-space:pre-line}
+
+    .ribbons{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 16px 12px}
+    .rib{background:#173f86;color:#fff;border-radius:8px;padding:12px 16px;font-size:16px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+    .rib b{color:#ffef43}
+
+    .cols{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows: auto auto auto auto auto;gap:16px;padding:0 16px 16px}
+    .col{display:grid;grid-row: span 5;grid-template-rows: subgrid;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.12)}
+    
+    .ch{padding:10px 14px 10px 24px;color:#fff;font-weight:800;font-size:16px;position:relative}
+    .ch .dot{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:50%;background:#e53614}
+    .ch.z{background:var(--tealHeader)} .ch.sia{background:var(--siaHeader)} .ch.d{background:var(--dlpHeader)}
+    
+    .section{padding:12px 14px 8px}
+    .stag{display:inline-block;background:#1eb39d;color:#fff;font-weight:800;font-size:13px;padding:4px 10px;margin-bottom:8px}
+    .stag.orange{background:var(--orange)}
+    
+    ul{margin:6px 0 0 20px;padding:0;font-size:14px;line-height:1.4}
+    ul ul{margin:4px 0 4px 20px;font-size:13px;list-style-type:circle}
+    li{margin:6px 0}
+    
+    .alertHead{background:var(--alert);color:#fff;text-align:center;font-size:15px;font-weight:800;padding:8px 10px}
+    .footer{padding:8px 16px 16px;text-align:left;color:#3d4b5f;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="previewWrap">
+    <div id="preview">
+      <section class="head"><div class="t">HCL SSE Deployment - Executive Weekly Update</div><div class="s">Progress Report: 16 Jul - 23 Jul 2026</div></section>
+      <section class="kpis">
+        <div class="kpi c1"><div class="knum c1">170K+</div><div class="klbl space-above">DNS USERS DEPLOYED</div><div class="ksub">Production stable; migration completed
+27,091 inactive users (30 days) excluded</div></div>
+        <div class="kpi c2"><div class="knum c2">150K+</div><div class="klbl space-above">THOUSANDEYES ACTIVE USERS</div><div class="ksub">Observability completed</div></div>
+        <div class="kpi c3"><div class="knum c3">900+</div><div class="klbl space-above">Adoption of Cisco Secure Client v5.1.18</div><div class="ksub">(Active Users)</div></div>
+        <div class="kpi c4"><div class="knum c4">2200+</div><div class="klbl space-above">Adoption of Cisco Secure Client v5.1.17</div><div class="ksub">(Active Users)</div></div>
+      </section>
+      <section class="ribbons">
+        <div class="rib"><b>Key Progress:</b> HCL and Cisco leadership aligned on 16 Jul to redefine the Minimum Viable Product (MVP), expanding SIA and DLP capabilities to better support enterprise rollout.</div>
+        <div class="rib"><b>Key Next Step:</b> Continue SIA alignment under the designated owners and initiate DLP alignment to maintain rollout momentum.</div>
+      </section>
+      <section class="cols">
+        <article class="col">
+          <div class="ch z"><span class="dot" style="background:#f7a24f"></span>ZTNA TRACK PROGRESS SUMMARY</div>
+          <div class="section"><span class="stag">Progress This Week</span><ul><li>Testing Progress:<ul><li>EDS 44 out of 57 applications tested (77%)</li><li>GTM 43 out of 100 Security Groups tested (43%, +3 this week)</li></ul></li><li>HCL Cross-Functional Governance: Internal stakeholder alignment and dependency closure initiated for the 31 Oct'26 ZTNA rollout.</li><li>Rollout Prerequisites: Network, Firewall & PAC changes; Resource Connector onboarding in progress.</li><li>Reachability Validation: 71% of subnets (1,751) validated across 35K devices; remediation underway for 707 subnets.</li></ul></div>
+          <div class="section"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Complete Cisco Secure Client v5.1.17 adoption (GTM users).</li><li>Close ZTNA rollout dependencies (Network, Firewall & PAC).</li><li>Finalize WAF design and accelerate testing.</li><li>Continue EDS application & GTM Security Group validation.</li><li>Raise and secure approval for the Change Request to expand the application scope for ZTNA rollout.</li></ul></div>
+          <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
+          <div class="section"><ul><li>Expedite cross-functional dependency closures for remaining ZTNA rollout.</li></ul></div>
+        </article>
+        <article class="col">
+          <div class="ch sia"><span class="dot"></span>SIA TRACK PROGRESS SUMMARY</div>
+          <div class="section"><span class="stag">Progress This Week</span><ul><li>Rollout Readiness: Joint Minimum Viable Product (MVP) assessment initiated on 22nd Jul'26.</li><li>On-Prem Proxy Readiness: 70% policy configuration completed.</li><li>Solution Testing: Passed test cases increased to 98/263 (37%).</li><li>Process-Based Bypass Readiness: Data collection and analysis progressing (50% complete).</li></ul></div>
+          <div class="section"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Continue joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.</li><li>Expand Cisco Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li><li>Validate 8,027 non-reporting endpoints; finalise auto-purge policy.</li><li>Complete on-prem proxy policy configuration.</li><li>Maximize successful completion of pending test cases.</li></ul></div>
+          <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
+          <div class="section"><ul><li>Expedite cross-functional dependency closure to maintain rollout readiness.</li><li>Finalize the SIA rollout decision following MVP agreement.</li><li>Prioritize rollout-critical feature delivery to enable MVP readiness.</li></ul></div>
+        </article>
+        <article class="col">
+          <div class="ch d"><span class="dot"></span>DLP TRACK PROGRESS SUMMARY</div>
+          <div class="section"><span class="stag">Progress This Week</span><ul><li>Product Alignment: Conducted a joint workshop with the Cisco DLP/CASB BU and CX teams to process critical features for rollout.</li><li>Solution Testing: Partially passed test cases increased to 41/107 (38%).</li></ul></div>
+          <div class="section"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Initiate joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.</li><li>Maximize successful completion of pending test cases.</li></ul></div>
+          <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
+          <div class="section"><ul><li>Finalize the Minimum Viable Product (MVP) and close Email and Endpoint DLP solution design.</li><li>Support for Prioritize rollout-critical feature delivery to achieve MVP readiness.</li></ul></div>
+        </article>
+      </section>
+      <div class="footer">Cisco Confidential</div>
+    </div>
+  </div>
+</body>
+</html>

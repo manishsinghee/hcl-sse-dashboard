@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HCL SSE Dashboard Editor</title>
+  <style>
+    :root {
+      --navy:#173c63;
+      --cyan:#27b9ee;
+      --bg:#e9edf3;
+      --card:#fff;
+      --line:#b8c2d1;
+      --text:#10233d;
+      --muted:#3f587a;
+      --green:#1fb39f;
+      --olive:#a2a03e;
+      --blue:#2847f0;
+      --sky:#3ca2f4;
+      --tealHeader:#4ea5c2;
+      --siaHeader:#1f5a95;
+      --dlpHeader:#59239b;
+      --alert:#a61900;
+      --orange:#f09b4d;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .app{display:grid;grid-template-columns:380px 1fr;min-height:100vh}
+    .panel{background:#0f2239;color:#dbe7f5;padding:14px;overflow:auto;border-right:1px solid #2c4666}
+    .panel h2{margin:4px 0 10px;font-size:18px;color:#fff}
+    .group{margin:10px 0 14px;padding:10px;border:1px solid #2d4a6e;border-radius:8px;background:#142b45}
+    .group h3{margin:0 0 8px;font-size:14px;color:#9bd6ff}
+    label{display:block;font-size:12px;margin:6px 0 4px;color:#c6d9ee}
+    input, textarea{width:100%;border:1px solid #35587f;background:#0f2239;color:#fff;border-radius:6px;padding:8px;font:12px/1.3 Segoe UI,Arial,sans-serif}
+    textarea{min-height:70px;resize:vertical}
+    .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    button{border:0;border-radius:6px;padding:8px 10px;font-weight:600;cursor:pointer}
+    .p{background:#24a0ed;color:#fff}.s{background:#1fb39f;color:#06283a}.w{background:#f2c744;color:#12263f}
+    .previewWrap{padding:10px;overflow:auto}
+    .hint{font-size:11px;color:#9ab4cf;margin-top:6px}
+
+    /* Dashboard preview */
+    #preview{width:1600px;margin:0 auto;background:var(--bg);border:1px solid #d0d7e2;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+    .head{background:var(--navy);padding:18px 24px 12px;color:#fff}
+    .head .t{font-size:54px;font-weight:800;line-height:1.05}
+    .head .s{font-size:24px;color:var(--cyan);font-weight:700;margin-top:8px;background:none}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:14px 16px}
+    .kpi{background:#fff;border:1px solid var(--line);min-height:145px;box-shadow:0 2px 6px rgba(0,0,0,.12);position:relative;padding:14px 20px}
+    .kpi:before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:#ddd}
+    .kpi.c1:before{background:var(--green)} .kpi.c2:before{background:var(--olive)} .kpi.c3:before{background:var(--blue)} .kpi.c4:before{background:var(--sky)}
+    .knum{font-size:68px;font-weight:800;line-height:1;margin:0}
+    .knum.c1{color:#0c7b6f}.knum.c2{color:#7f7b2a}.knum.c3{color:#2444ef}.knum.c4{color:#2a8fe5}
+    .klbl{font-size:42px;font-weight:800;line-height:1.05;color:#183459;margin-top:2px}
+    .kpi.c1 .klbl, .kpi.c2 .klbl, .kpi.c3 .klbl, .kpi.c4 .klbl{margin-top:42px}
+    .ksub{font-size:37px;line-height:1.15;color:#425d80;margin-top:12px;white-space:pre-line}
+
+    .ribbons{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 16px 10px}
+    .rib{background:#173f86;color:#fff;border-radius:12px;padding:10px 18px;font-size:48px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+    .rib b{color:#ffef43}
+
+    .cols{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows: auto auto auto auto auto;gap:14px;padding:0 16px 12px}
+    .col{display:grid;grid-row: span 5;grid-template-rows: subgrid;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.12)}
+    .ch{padding:10px 16px;color:#fff;font-weight:800;font-size:48px;position:relative}
+    .ch .dot{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;border-radius:50%;background:#e53614}
+    .ch.z{background:var(--tealHeader)} .ch.sia{background:var(--siaHeader)} .ch.d{background:var(--dlpHeader)}
+    .section{padding:12px 14px 8px}
+    .stag{display:inline-block;background:#1eb39d;color:#fff;font-weight:800;font-size:42px;padding:5px 16px;margin-bottom:8px}
+    .stag.orange{background:var(--orange)}
+    ul{margin:6px 0 0 18px;padding:0;font-size:41px;line-height:1.25}
+    ul ul{margin:4px 0 4px 38px;font-size:38px;list-style-type:circle}
+    li{margin:5px 0}
+    .alertHead{background:var(--alert);color:#fff;text-align:center;font-size:46px;font-weight:800;padding:8px 10px}
+    .footer{padding:6px 16px 12px;text-align:right;color:#3d4b5f;font-size:22px}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="panel">
+    <h2>Dashboard Editor</h2>
+    <div class="group">
+      <h3>Header</h3>
+      <label>Title</label><input id="title" />
+      <label>Subtitle</label><input id="subtitle" />
+    </div>
+
+    <div class="group">
+      <h3>KPI Cards (4)</h3>
+      <label>KPI 1 value</label><input id="k1v" />
+      <label>KPI 1 title</label><input id="k1t" />
+      <label>KPI 1 subtext</label><textarea id="k1s"></textarea>
+      <label>KPI 2 value</label><input id="k2v" />
+      <label>KPI 2 title</label><input id="k2t" />
+      <label>KPI 2 subtext</label><textarea id="k2s"></textarea>
+      <label>KPI 3 value</label><input id="k3v" />
+      <label>KPI 3 title</label><input id="k3t" />
+      <label>KPI 3 subtext</label><textarea id="k3s"></textarea>
+      <label>KPI 4 value</label><input id="k4v" />
+      <label>KPI 4 title</label><input id="k4t" />
+      <label>KPI 4 subtext</label><textarea id="k4s"></textarea>
+    </div>
+
+    <div class="group">
+      <h3>Top Ribbons</h3>
+      <label>Key Progress</label><textarea id="kp"></textarea>
+      <label>Key Next Step</label><textarea id="kn"></textarea>
+    </div>
+
+    <div class="group">
+      <h3>Columns (one bullet per line)</h3>
+      <label>ZTNA - Progress</label><textarea id="zProg"></textarea>
+      <label>ZTNA - Key Focus</label><textarea id="zFocus"></textarea>
+      <label>ZTNA - Exec Attention</label><textarea id="zAtt"></textarea>
+
+      <label>SIA - Progress</label><textarea id="sProg"></textarea>
+      <label>SIA - Key Focus</label><textarea id="sFocus"></textarea>
+      <label>SIA - Exec Attention</label><textarea id="sAtt"></textarea>
+
+      <label>DLP - Progress</label><textarea id="dProg"></textarea>
+      <label>DLP - Key Focus</label><textarea id="dFocus"></textarea>
+      <label>DLP - Exec Attention</label><textarea id="dAtt"></textarea>
+    </div>
+
+    <div class="btns">
+      <button class="p" id="download">Download HTML</button>
+      <button class="s" id="save">Save Local</button>
+      <button class="w" id="reset">Reset</button>
+    </div>
+    <div class="hint">Tip: edit values on left; preview updates instantly. Use Download HTML for shareable dashboard.</div>
+  </aside>
+
+  <main class="previewWrap"><div id="preview"></div></main>
+</div>
+
+<script>
+const defaults = {
+  title:'HCL SSE Deployment - Executive Weekly Update',
+  subtitle:'Progress Report: 16 Jul - 23 Jul 2026',
+  k1v:'170K+', k1t:'DNS USERS DEPLOYED', k1s:'Production stable; migration completed\n27,091 inactive users (30 days) excluded',
+  k2v:'150K+', k2t:'THOUSANDEYES ACTIVE USERS', k2s:'Observability completed',
+  k3v:'900+', k3t:'Adoption of Cisco Secure Client v5.1.18', k3s:'(Active Users)',
+  k4v:'2200+', k4t:'Adoption of Cisco Secure Client v5.1.17', k4s:'(Active Users)',
+  kp:'HCL and Cisco leadership aligned on 16 Jul to redefine the Minimum Viable Product (MVP), expanding SIA and DLP capabilities to better support enterprise rollout.',
+  kn:'Continue SIA alignment under the designated owners and initiate DLP alignment to maintain rollout momentum.',
+  zProg:'Testing Progress:\n- EDS 44 out of 57 applications tested (77%)\n- GTM 43 out of 100 Security Groups tested (43%, +3 this week)\nHCL Cross-Functional Governance: Internal stakeholder alignment and dependency closure initiated for the 31 Oct\'26 ZTNA rollout.\nRollout Prerequisites: Network, Firewall & PAC changes; Resource Connector onboarding in progress.\nReachability Validation: 71% of subnets (1,751) validated across 35K devices; remediation underway for 707 subnets.',
+  zFocus:'Complete Cisco Secure Client v5.1.17 adoption (GTM users).\nClose ZTNA rollout dependencies (Network, Firewall & PAC).\nFinalize WAF design and accelerate testing.\nContinue EDS application & GTM Security Group validation.\nRaise and secure approval for the Change Request to expand the application scope for ZTNA rollout.',
+  zAtt:'Expedite cross-functional dependency closures for remaining ZTNA rollout.',
+  sProg:'Rollout Readiness: Joint Minimum Viable Product (MVP) assessment initiated on 22nd Jul\'26.\nOn-Prem Proxy Readiness: 70% policy configuration completed.\nSolution Testing: Passed test cases increased to 98/263 (37%).\nProcess-Based Bypass Readiness: Data collection and analysis progressing (50% complete).',
+  sFocus:'Continue joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.\nExpand Cisco Secure Client v5.1.18 adoption (GIT/GIS - 3K users).\nValidate 8,027 non-reporting endpoints; finalise auto-purge policy.\nComplete on-prem proxy policy configuration.\nMaximize successful completion of pending test cases.',
+  sAtt:'Expedite cross-functional dependency closure to maintain rollout readiness.\nFinalize the SIA rollout decision following MVP agreement.\nPrioritize rollout-critical feature delivery to enable MVP readiness.',
+  dProg:'Product Alignment: Conducted a joint workshop with the Cisco DLP/CASB BU and CX teams to process critical features for rollout.\nSolution Testing: Partially passed test cases increased to 41/107 (38%).',
+  dFocus:'Initiate joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.\nMaximize successful completion of pending test cases.',
+  dAtt:'Finalize the Minimum Viable Product (MVP) and close Email and Endpoint DLP solution design.\nSupport for Prioritize rollout-critical feature delivery to achieve MVP readiness.'
+};
+
+const ids = Object.keys(defaults);
+for (const id of ids) document.getElementById(id).value = defaults[id];
+
+function bullets(text){
+  const lines = text.split('\n').filter(Boolean);
+  let out = '<ul>';
+  let inSub = false;
+  for(let line of lines){
+    if(line.startsWith('  ') || line.startsWith('- ')){
+      if(!inSub){ out += '<ul>'; inSub = true; }
+      out += `<li>${line.replace(/^-?\s*/,'')}</li>`;
+    } else {
+      if(inSub){ out += '</ul>'; inSub = false; }
+      out += `<li>${line.trim()}</li>`;
+    }
+  }
+  if(inSub) out += '</ul>';
+  out += '</ul>';
+  return out;
+}
+
+function render(){
+  const v = {}; ids.forEach(id=>v[id]=document.getElementById(id).value);
+  const html = `
+  <section class="head"><div class="t">${v.title}</div><div class="s">${v.subtitle}</div></section>
+  <section class="kpis">
+    <div class="kpi c1"><div class="knum c1">${v.k1v}</div><div class="klbl">${v.k1t}</div><div class="ksub">${v.k1s}</div></div>
+    <div class="kpi c2"><div class="knum c2">${v.k2v}</div><div class="klbl">${v.k2t}</div><div class="ksub">${v.k2s}</div></div>
+    <div class="kpi c3"><div class="knum c3">${v.k3v}</div><div class="klbl">${v.k3t}</div><div class="ksub">${v.k3s}</div></div>
+    <div class="kpi c4"><div class="knum c4">${v.k4v}</div><div class="klbl">${v.k4t}</div><div class="ksub">${v.k4s}</div></div>
+  </section>
+  <section class="ribbons">
+    <div class="rib"><b>Key Progress:</b> ${v.kp}</div>
+    <div class="rib"><b>Key Next Step:</b> ${v.kn}</div>
+  </section>
+  <section class="cols">
+    <article class="col">
+      <div class="ch z"><span class="dot" style="background:#f7a24f"></span>&nbsp;&nbsp;&nbsp;&nbsp;ZTNA TRACK PROGRESS SUMMARY</div>
+      <div class="section"><span class="stag">Progress This Week</span>${bullets(v.zProg)}</div>
+      <div class="section"><span class="stag orange">Key Focus / Next Steps</span>${bullets(v.zFocus)}</div>
+      <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
+      <div class="section">${bullets(v.zAtt)}</div>
+    </article>
+    <article class="col">
+      <div class="ch sia"><span class="dot"></span>&nbsp;&nbsp;&nbsp;&nbsp;SIA TRACK PROGRESS SUMMARY</div>
+      <div class="section"><span class="stag">Progress This Week</span>${bullets(v.sProg)}</div>
+      <div class="section"><span class="stag orange">Key Focus / Next Steps</span>${bullets(v.sFocus)}</div>
+      <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
+      <div class="section">${bullets(v.sAtt)}</div>
+    </article>
+    <article class="col">
+      <div class="ch d"><span class="dot"></span>&nbsp;&nbsp;&nbsp;&nbsp;DLP TRACK PROGRESS SUMMARY</div>
+      <div class="section"><span class="stag">Progress This Week</span>${bullets(v.dProg)}</div>
+      <div class="section"><span class="stag orange">Key Focus / Next Steps</span>${bullets(v.dFocus)}</div>
+      <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
+      <div class="section">${bullets(v.dAtt)}</div>
+    </article>
+  </section>
+  <div class="footer">Cisco Confidential</div>`;
+  document.getElementById('preview').innerHTML = html;
+}
+
+ids.forEach(id=>document.getElementById(id).addEventListener('input',render));
+render();
+
+function currentData(){
+  const d={}; ids.forEach(id=>d[id]=document.getElementById(id).value); return d;
+}
+
+document.getElementById('save').onclick = ()=>{
+  localStorage.setItem('hcl_sse_dashboard_editor', JSON.stringify(currentData()));
+  alert('Saved locally.');
+};
+
+const saved = localStorage.getItem('hcl_sse_dashboard_editor');
+if(saved){
+  try{const d=JSON.parse(saved); ids.forEach(id=>{ if(d[id]!==undefined) document.getElementById(id).value=d[id];}); render();}catch(e){}
+}
+
+document.getElementById('reset').onclick = ()=>{ ids.forEach(id=>document.getElementById(id).value=defaults[id]); render(); };
+
+document.getElementById('download').onclick = ()=>{
+  const blob = new Blob([`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">`+
+  `<title>HCL SSE Weekly Updates Dashboard</title><style>${document.querySelector('style').innerHTML}\n.app,.panel{display:none !important}\n.previewWrap{padding:0}.previewWrap #preview{width:100%;border:0;box-shadow:none}.footer{text-align:left}</style></head><body><div class="previewWrap"><div id="preview">${document.getElementById('preview').innerHTML}</div></div></body></html>`], {type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='HCL_SSE_Weekly_Updates_Dashboard_Editable.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+</script>
+</body>
+</html>
