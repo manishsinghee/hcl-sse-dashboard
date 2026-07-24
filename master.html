@@ -252,13 +252,13 @@
     .m-step:hover .tt { visibility: visible; opacity: 1; bottom: 140%; }
 
   
-    /* Testing Tracker Styles */
-    .test-table-wrap { margin-top: 16px; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; background: rgba(0,0,0,0.2); }
-    .test-table-title { background: rgba(255,255,255,0.05); color: #8da4c2; text-align: center; font-size: 10px; font-weight: 800; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); letter-spacing: 0.5px; text-transform: uppercase; }
-    .test-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 7.5px; color: #c0d1e6; }
-    .test-table th { background: rgba(255,255,255,0.02); font-weight: 800; padding: 6px 1px; border: 1px solid rgba(255,255,255,0.05); color: #8da4c2; text-transform: uppercase; }
-    .test-table td { padding: 6px 1px; border: 1px solid rgba(255,255,255,0.05); font-weight: 700; color: #fff; }
-    .grn-sq { display: inline-block; width: 6px; height: 6px; background: #2ecc71; margin-right: 3px; vertical-align: middle; border-radius: 2px; box-shadow: 0 0 4px #2ecc71; }
+    /* Testing Gantt Styles */
+    .test-gantt-wrap { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 12px; }
+    .test-gantt-row { display: flex; align-items: center; margin-bottom: 8px; }
+    .test-gantt-row:last-child { margin-bottom: 0; }
+    .test-gantt-label { width: 60px; font-size: 9.5px; font-weight: 700; color: #c0d1e6; text-transform: uppercase; }
+    .test-gantt-track { flex: 1; height: 16px; background: rgba(255,255,255,0.05); border-radius: 8px; position: relative; overflow: hidden; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.5); }
+    .test-gantt-bar { height: 100%; position: absolute; left: 0; top: 0; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; font-size: 9.5px; font-weight: 800; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); min-width: 16px; justify-content: center; }
 
   </style>
 </head>
@@ -376,12 +376,17 @@
           </ul>
         </div>
       
-        <div class="test-table-wrap">
-          <div class="test-table-title">Use cases Testing Updates</div>
-          <table class="test-table">
-            <tr><th>Total</th><th>Available</th><th>Roadmap</th><th>Passed</th><th>Partial</th><th>Failed</th><th>WIP</th><th>P1s</th></tr>
-            <tr><td>88</td><td>69</td><td>19</td><td><span class="grn-sq"></span> 38</td><td>7</td><td>10</td><td>14</td><td>3</td></tr>
-          </table>
+        <div class="section-title" style="font-size: 11px; margin: 24px 0 12px 0; color: #8da4c2; text-transform: uppercase; letter-spacing: 1px;">Solution Testing Updates</div>
+        <div class="test-gantt-wrap">
+          <div style="display: flex; justify-content: space-between; font-size: 9px; color: #8da4c2; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px;">
+            <span>Total: <span style="color:#fff;">88</span></span>
+            <span>P1s: <span style="color:#e74c3c;">3</span></span>
+          </div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Passed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 43.2%; background: #2ecc71;">38</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Partial</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 8.0%; background: #f39c12;">7</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Failed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 11.4%; background: #e74c3c;">10</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">WIP</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 15.9%; background: #3498db;">14</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Roadmap</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 21.6%; background: #95a5a6;">19</div></div></div>
         </div>
       </article>
 
@@ -412,12 +417,18 @@
           </ul>
         </div>
       
-        <div class="test-table-wrap">
-          <div class="test-table-title">Use cases Testing Updates</div>
-          <table class="test-table">
-            <tr><th>Total</th><th>Available</th><th>Roadmap</th><th>Passed</th><th>Partial</th><th>Failed</th><th>WIP</th><th>Duplicate</th><th>FR-Gap</th><th>New FR</th><th>P1s</th></tr>
-            <tr><td>263</td><td>233</td><td>26</td><td><span class="grn-sq"></span> 98</td><td>56</td><td>58</td><td>15</td><td>3</td><td>6</td><td>1</td><td>145</td></tr>
-          </table>
+        <div class="section-title" style="font-size: 11px; margin: 24px 0 12px 0; color: #8da4c2; text-transform: uppercase; letter-spacing: 1px;">Solution Testing Updates</div>
+        <div class="test-gantt-wrap">
+          <div style="display: flex; justify-content: space-between; font-size: 9px; color: #8da4c2; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px;">
+            <span>Total: <span style="color:#fff;">263</span></span>
+            <span>P1s: <span style="color:#e74c3c;">145</span></span>
+          </div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Passed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 37.3%; background: #2ecc71;">98</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Partial</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 21.3%; background: #f39c12;">56</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Failed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 22.1%; background: #e74c3c;">58</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">WIP</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 5.7%; background: #3498db;">15</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Roadmap</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 9.9%; background: #95a5a6;">26</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Other</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 3.8%; background: #7f8c8d; font-size:8px;">10</div></div></div>
         </div>
       </article>
 
@@ -445,12 +456,17 @@
           </ul>
         </div>
       
-        <div class="test-table-wrap">
-          <div class="test-table-title">Use cases Testing Updates</div>
-          <table class="test-table">
-            <tr><th>Total</th><th>Available</th><th>Roadmap</th><th>Passed</th><th>Partial</th><th>Failed</th><th>WIP</th><th>P1s</th></tr>
-            <tr><td>107</td><td>102</td><td>5</td><td>0</td><td>41</td><td>59</td><td>2</td><td></td></tr>
-          </table>
+        <div class="section-title" style="font-size: 11px; margin: 24px 0 12px 0; color: #8da4c2; text-transform: uppercase; letter-spacing: 1px;">Solution Testing Updates</div>
+        <div class="test-gantt-wrap">
+          <div style="display: flex; justify-content: space-between; font-size: 9px; color: #8da4c2; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px;">
+            <span>Total: <span style="color:#fff;">107</span></span>
+            <span>P1s: <span style="color:#e74c3c;">0</span></span>
+          </div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Passed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 0%; background: #2ecc71;">0</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Partial</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 38.3%; background: #f39c12;">41</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Failed</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 55.1%; background: #e74c3c;">59</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">WIP</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 1.9%; background: #3498db; padding:0; min-width:12px;">2</div></div></div>
+          <div class="test-gantt-row"><div class="test-gantt-label">Roadmap</div><div class="test-gantt-track"><div class="test-gantt-bar" style="width: 4.7%; background: #95a5a6; padding:0; min-width:12px;">5</div></div></div>
         </div>
       </article>
     </section>
