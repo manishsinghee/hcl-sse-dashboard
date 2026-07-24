@@ -207,6 +207,38 @@
     .p-stat.ong { color: var(--warning); }
     .p-stat.plan { color: #7b93b2; }
     .p-stat.rej { color: var(--alert); }
+  
+    /* SSE Top Highlights */
+    .sse-highlights { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; width: 100%; }
+    .sse-badge { 
+      background: rgba(255,255,255,0.05); 
+      border: 1px solid rgba(255,255,255,0.1); 
+      padding: 6px 14px; 
+      border-radius: 20px; 
+      font-size: 12px; 
+      font-weight: 600; 
+      color: #fff; 
+      box-shadow: inset 1px 1px 2px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.3); 
+      animation: floatBadge 3s infinite ease-in-out alternate; 
+      backdrop-filter: blur(4px); 
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sse-badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 5px var(--cyan);
+    }
+    @keyframes floatBadge { 
+      0% { transform: translateY(0); box-shadow: 0 2px 4px rgba(0,0,0,0.3); } 
+      100% { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.4); background: rgba(39, 185, 238, 0.1); border-color: rgba(39, 185, 238, 0.3); } 
+    }
+
   </style>
 </head>
 <body>
