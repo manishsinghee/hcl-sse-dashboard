@@ -178,7 +178,7 @@
     .res-bar-fill::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%); border-radius: 8px 8px 0 0; }
 
     /* Track Columns */
-    .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
     .col { padding: 0; }
     .ch { padding: 20px 24px; color: #fff; font-weight: 800; font-size: 18px; text-transform: uppercase; background: rgba(0,0,0,0.3); box-shadow: 0 4px 10px rgba(0,0,0,0.3); letter-spacing: 1px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); }
     .ch.z { color: var(--c-ztna); border-bottom: 3px solid var(--c-ztna); }
@@ -197,6 +197,16 @@
     .toolbar button{background:#173c63;color:#fff;border:none;padding:10px 16px;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,.3);transition:background 0.2s}
     .toolbar button:hover{background:#27b9ee;color:#000}
     [contenteditable="true"]{outline:1px dashed #27b9ee;background:rgba(39,185,238,0.05);min-height:1em}
+  
+    .ch.dns { color: var(--c-dns); border-bottom: 3px solid var(--c-dns); background: rgba(0,0,0,0.2); }
+    .phase-item { display: flex; justify-content: space-between; align-items:flex-start; font-size: 11px; margin-bottom: 8px; border-bottom: 1px dashed rgba(255,255,255,0.05); padding-bottom: 6px; line-height: 1.3; }
+    .phase-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .phase-name { color: #a4bada; padding-right: 8px; flex: 1; }
+    .p-stat { font-weight: 800; text-align: right; flex-shrink: 0; max-width: 55%; }
+    .p-stat.comp { color: var(--success); }
+    .p-stat.ong { color: var(--warning); }
+    .p-stat.plan { color: #7b93b2; }
+    .p-stat.rej { color: var(--alert); }
   </style>
 </head>
 <body>
@@ -250,6 +260,114 @@
         <div class="rib"><b>Key Next Steps</b>Continue SIA alignment under the designated owners and initiate DLP alignment to maintain rollout momentum.</div>
       </section>
     </div>
+
+<!-- 6. TRACK UPDATES -->
+    <div class="section-title">Detailed Track Summaries</div>
+    <section class="cols">
+
+      <article class="col">
+        <div class="ch dns">DNS TRACK</div>
+        <div class="section" style="background: rgba(0,0,0,0.15);">
+          <div class="phase-item"><span class="phase-name">Customer Requirement Documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
+          <div class="phase-item"><span class="phase-name">Solution Design documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
+          <div class="phase-item"><span class="phase-name">Policy Configuration/Migration</span> <span class="p-stat comp">Completed</span></div>
+          <div class="phase-item"><span class="phase-name">Solution Testing</span> <span class="p-stat comp">Completed</span></div>
+          <div class="phase-item"><span class="phase-name">Ring Testing</span> <span class="p-stat comp">Completed</span></div>
+          <div class="phase-item"><span class="phase-name">Rollout Completion</span> <span class="p-stat comp">Completed</span></div>
+          <div class="phase-item"><span class="phase-name">Hyper care Support</span> <span class="p-stat comp">Completed</span></div>
+        </div>
+        <div class="section"><span class="stag prog">Progress This Week</span>
+          <ul>
+            <li>Production stable; migration completed.</li>
+            <li>27,091 inactive users excluded.</li>
+          </ul>
+        </div>
+        <div class="section"><span class="stag focus">Key Focus</span>
+          <ul>
+            <li>Maintain operational stability.</li>
+            <li>Monitor Hyper care support.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="col">
+        <div class="ch z">ZTNA TRACK</div>
+        <div class="section" style="background: rgba(0,0,0,0.15);">
+          <div class="phase-item"><span class="phase-name">Customer Requirement Documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
+          <div class="phase-item"><span class="phase-name">Solution Design documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
+          <div class="phase-item"><span class="phase-name">Policy Configuration/Migration</span> <span class="p-stat comp">Completed</span></div>
+          <div class="phase-item"><span class="phase-name">Solution Testing</span> <span class="p-stat ong">Ongoing</span></div>
+          <div class="phase-item"><span class="phase-name">Ring Testing</span> <span class="p-stat ong">Ongoing</span></div>
+          <div class="phase-item"><span class="phase-name">Rollout Completion</span> <span class="p-stat plan">Planned</span></div>
+          <div class="phase-item"><span class="phase-name">Hyper care Support</span> <span class="p-stat plan">Planned</span></div>
+        </div>
+        <div class="section"><span class="stag prog">Progress This Week</span>
+          <ul>
+            <li>Testing Progress:<ul><li>EDS 44 out of 57 applications tested (77%)</li><li>GTM 43 out of 100 Security Groups tested (43%)</li></ul></li>
+            <li>HCL Cross-Functional Governance initiated for 31 Oct rollout.</li>
+            <li>Reachability Validation: 71% of subnets (1,751) validated across 35K devices.</li>
+          </ul>
+        </div>
+        <div class="section"><span class="stag focus">Key Focus</span>
+          <ul>
+            <li>Complete Secure Client v5.1.17 adoption (GTM users).</li>
+            <li>Finalize WAF design and accelerate testing.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="col">
+        <div class="ch sia">SIA TRACK</div>
+        <div class="section" style="background: rgba(0,0,0,0.15);">
+          <div class="phase-item"><span class="phase-name">Customer Requirement Documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
+          <div class="phase-item"><span class="phase-name">Solution Design documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
+          <div class="phase-item"><span class="phase-name">Policy Configuration/Migration</span> <span class="p-stat comp">Completed</span></div>
+          <div class="phase-item"><span class="phase-name">Solution Testing</span> <span class="p-stat ong">Ongoing</span></div>
+          <div class="phase-item"><span class="phase-name">Ring Testing</span> <span class="p-stat ong">Ongoing</span></div>
+          <div class="phase-item"><span class="phase-name">Rollout Completion</span> <span class="p-stat plan">To be Planned</span></div>
+          <div class="phase-item"><span class="phase-name">Hyper care Support</span> <span class="p-stat plan">To be Planned</span></div>
+        </div>
+        <div class="section"><span class="stag prog">Progress This Week</span>
+          <ul>
+            <li>Joint MVP assessment initiated on 22nd Jul'26.</li>
+            <li>On-Prem Proxy Readiness: 70% policy config completed.</li>
+            <li>Solution Testing: Passed test cases increased to 98/263 (37%).</li>
+            <li>Process-Based Bypass Readiness: 50% complete.</li>
+          </ul>
+        </div>
+        <div class="section"><span class="stag focus">Key Focus</span>
+          <ul>
+            <li>Continue MVP alignment.</li>
+            <li>Expand Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li>
+            <li>Complete on-prem proxy policy configuration.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="col">
+        <div class="ch d">DLP TRACK</div>
+        <div class="section" style="background: rgba(0,0,0,0.15);">
+          <div class="phase-item"><span class="phase-name">Customer Requirement Documentation</span> <span class="p-stat comp">Completed and Signed-off by HCL</span></div>
+          <div class="phase-item"><span class="phase-name">Solution Design documentation</span> <span class="p-stat rej">Completed and Rejected by HCL</span></div>
+          <div class="phase-item"><span class="phase-name">Policy Configuration/Migration</span> <span class="p-stat comp">Completed</span></div>
+          <div class="phase-item"><span class="phase-name">Solution Testing</span> <span class="p-stat ong">Ongoing</span></div>
+          <div class="phase-item"><span class="phase-name">Ring Testing</span> <span class="p-stat plan">To be Planned</span></div>
+          <div class="phase-item"><span class="phase-name">Rollout Completion</span> <span class="p-stat plan">To be Planned</span></div>
+          <div class="phase-item"><span class="phase-name">Hyper care Support</span> <span class="p-stat plan">To be Planned</span></div>
+        </div>
+        <div class="section"><span class="stag prog">Progress This Week</span>
+          <ul>
+            <li>Product Alignment: Conducted a joint workshop with Cisco DLP/CASB BU and CX teams.</li>
+            <li>Solution Testing: Partially passed test cases increased to 41/107 (38%).</li>
+          </ul>
+        </div>
+        <div class="section"><span class="stag focus">Key Focus</span>
+          <ul>
+            <li>Initiate joint alignment and finalise MVP.</li>
+            <li>Maximize successful completion of pending test cases.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
 
     <!-- 4. PROJECT TIMELINE -->
     <div class="section-title">Program Timeline</div>
@@ -422,62 +540,6 @@
         </div>
       </div>
     </div>
-
-    <!-- 6. TRACK UPDATES -->
-    <div class="section-title">Detailed Track Summaries</div>
-    <section class="cols">
-      <article class="col">
-        <div class="ch z">ZTNA TRACK</div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
-          <ul>
-            <li>Testing Progress:<ul><li>EDS 44 out of 57 applications tested (77%)</li><li>GTM 43 out of 100 Security Groups tested (43%)</li></ul></li>
-            <li>HCL Cross-Functional Governance initiated for 31 Oct rollout.</li>
-            <li>Reachability Validation: 71% of subnets (1,751) validated across 35K devices.</li>
-          </ul>
-        </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
-          <ul>
-            <li>Complete Secure Client v5.1.17 adoption (GTM users).</li>
-            <li>Finalize WAF design and accelerate testing.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="col">
-        <div class="ch sia">SIA TRACK</div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
-          <ul>
-            <li>Joint MVP assessment initiated on 22nd Jul'26.</li>
-            <li>On-Prem Proxy Readiness: 70% policy config completed.</li>
-            <li>Solution Testing: Passed test cases increased to 98/263 (37%).</li>
-            <li>Process-Based Bypass Readiness: 50% complete.</li>
-          </ul>
-        </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
-          <ul>
-            <li>Continue MVP alignment.</li>
-            <li>Expand Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li>
-            <li>Complete on-prem proxy policy configuration.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="col">
-        <div class="ch d">DLP TRACK</div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
-          <ul>
-            <li>Product Alignment: Conducted a joint workshop with Cisco DLP/CASB BU and CX teams.</li>
-            <li>Solution Testing: Partially passed test cases increased to 41/107 (38%).</li>
-          </ul>
-        </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
-          <ul>
-            <li>Initiate joint alignment and finalise MVP.</li>
-            <li>Maximize successful completion of pending test cases.</li>
-          </ul>
-        </div>
-      </article>
-    </section>
 
   </div>
 
