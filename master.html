@@ -179,7 +179,7 @@
 
     /* Track Columns */
     .cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .col { padding: 0; }
+    .col { padding: 0; display: flex; flex-direction: column; background: rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
     .ch { padding: 20px 24px; color: #fff; font-weight: 800; font-size: 18px; text-transform: uppercase; background: rgba(0,0,0,0.3); box-shadow: 0 4px 10px rgba(0,0,0,0.3); letter-spacing: 1px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); }
     .ch.z { color: var(--c-ztna); border-bottom: 3px solid var(--c-ztna); }
     .ch.sia { color: var(--c-sia); border-bottom: 3px solid var(--c-sia); }
@@ -339,13 +339,13 @@
           <div class="m-step comp"><div class="tt">Rollout: Completed</div>Rollout</div>
           <div class="m-step comp"><div class="tt">Hypercare: Completed</div>Hyper<br>Care</div>
         </div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
+        <div class="section" style="min-height: 200px;"><span class="stag prog">Progress This Week</span>
           <ul>
             <li>Production stable; migration completed.</li>
             <li>27,091 inactive users excluded.</li>
           </ul>
         </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
+        <div class="section" style="min-height: 150px;"><span class="stag focus">Key Focus</span>
           <ul>
             <li>Maintain operational stability.</li>
             <li>Monitor Hyper care support.</li>
@@ -363,20 +363,20 @@
           <div class="m-step plan"><div class="tt">Rollout: Planned</div>Rollout</div>
           <div class="m-step plan"><div class="tt">Hypercare: Planned</div>Hyper<br>Care</div>
         </div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
+        <div class="section" style="min-height: 200px;"><span class="stag prog">Progress This Week</span>
           <ul>
             <li>Testing Progress:<ul><li>EDS 44 out of 57 applications tested (77%)</li><li>GTM 43 out of 100 Security Groups tested (43%)</li></ul></li>
             <li>HCL Cross-Functional Governance initiated for 31 Oct rollout.</li>
             <li>Reachability Validation: 71% of subnets (1,751) validated across 35K devices.</li>
           </ul>
         </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
+        <div class="section" style="min-height: 150px;"><span class="stag focus">Key Focus</span>
           <ul>
             <li>Complete Secure Client v5.1.17 adoption (GTM users).</li>
             <li>Finalize WAF design and accelerate testing.</li>
           </ul>
         </div>
-        <div class="section"><span class="stag attn">Executive Attention Required</span>
+        <div class="section" style="min-height: 140px;"><span class="stag attn">Executive Attention Required</span>
           <ul>
             <li>Expedite cross-functional dependency closures for remaining ZTNA rollout.</li>
           </ul>
@@ -394,7 +394,7 @@
           <div class="m-step pend"><div class="tt">Rollout: Decision Pending</div>Rollout</div>
           <div class="m-step pend"><div class="tt">Hypercare: Decision Pending</div>Hyper<br>Care</div>
         </div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
+        <div class="section" style="min-height: 200px;"><span class="stag prog">Progress This Week</span>
           <ul>
             <li>Joint MVP assessment initiated on 22nd Jul'26.</li>
             <li>On-Prem Proxy Readiness: 70% policy config completed.</li>
@@ -402,14 +402,14 @@
             <li>Process-Based Bypass Readiness: 50% complete.</li>
           </ul>
         </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
+        <div class="section" style="min-height: 150px;"><span class="stag focus">Key Focus</span>
           <ul>
             <li>Continue MVP alignment.</li>
             <li>Expand Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li>
             <li>Complete on-prem proxy policy configuration.</li>
           </ul>
         </div>
-        <div class="section"><span class="stag attn">Executive Attention Required</span>
+        <div class="section" style="min-height: 140px;"><span class="stag attn">Executive Attention Required</span>
           <ul>
             <li>Expedite cross-functional dependency closure to maintain rollout readiness.</li>
             <li>Finalize the SIA rollout decision following MVP agreement.</li>
@@ -429,19 +429,19 @@
           <div class="m-step pend"><div class="tt">Rollout: Decision Pending</div>Rollout</div>
           <div class="m-step pend"><div class="tt">Hypercare: Decision Pending</div>Hyper<br>Care</div>
         </div>
-        <div class="section"><span class="stag prog">Progress This Week</span>
+        <div class="section" style="min-height: 200px;"><span class="stag prog">Progress This Week</span>
           <ul>
             <li>Product Alignment: Conducted a joint workshop with Cisco DLP/CASB BU and CX teams.</li>
             <li>Solution Testing: Partially passed test cases increased to 41/107 (38%).</li>
           </ul>
         </div>
-        <div class="section"><span class="stag focus">Key Focus</span>
+        <div class="section" style="min-height: 150px;"><span class="stag focus">Key Focus</span>
           <ul>
             <li>Initiate joint alignment and finalise MVP.</li>
             <li>Maximize successful completion of pending test cases.</li>
           </ul>
         </div>
-        <div class="section"><span class="stag attn">Executive Attention Required</span>
+        <div class="section" style="min-height: 140px;"><span class="stag attn">Executive Attention Required</span>
           <ul>
             <li>Finalize the Minimum Viable Product (MVP) and close Email and Endpoint DLP solution design.</li>
             <li>Support for Prioritize rollout-critical feature delivery to achieve MVP readiness.</li>
