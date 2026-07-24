@@ -63,7 +63,7 @@
     .ksub { font-size: 13px; color: #8da4c2; white-space: pre-line; }
 
     /* Ribbons */
-    .ribbons { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .ribbons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .rib { background: var(--panel); padding: 20px 24px; border-radius: var(--clay-radius); box-shadow: var(--clay-shadow); font-size: 15px; line-height: 1.5; border: none; position: relative; overflow: hidden; }
     .rib::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--cyan); box-shadow: inset -2px 0 4px rgba(0,0,0,0.3); }
     .rib b { color: #eccc68; font-size: 16px; display: block; margin-bottom: 8px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
@@ -207,6 +207,7 @@
       <section class="ribbons">
         <div class="rib"><b>Key Progress</b>HCL and Cisco leadership aligned on 16 Jul to redefine the Minimum Viable Product (MVP), expanding SIA and DLP capabilities to better support enterprise rollout.</div>
         <div class="rib"><b>Key Next Steps</b>Continue SIA alignment under the designated owners and initiate DLP alignment to maintain rollout momentum.</div>
+        <div class="rib"><b>Scope Description</b>Design and Deployment of Cisco Secure Access Security Service Edge (SSE) Advanced Services Solution for HCL.</div>
       </section>
     </div>
 
