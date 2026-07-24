@@ -114,7 +114,7 @@
     .ribbons { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .rib { padding: 24px 28px; font-size: 16px; line-height: 1.6; }
     .rib::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, var(--cyan), #59c8f2); box-shadow: inset -2px 0 4px rgba(0,0,0,0.3); }
-    .rib b { color: #eccc68; font-size: 15px; display: block; margin-bottom: 10px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 1px; }
+    .rib b { color: #eccc68; font-size: 15px; display: block; margin-bottom: 8px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 1px; }
 
     /* Section Headers */
     .section-title { font-size: 24px; font-weight: 800; color: var(--white); margin: 20px 0 16px 0; display: flex; align-items: center; gap: 16px; text-shadow: 2px 2px 4px rgba(0,0,0,0.4); letter-spacing: 0.5px; }
@@ -171,7 +171,7 @@
     .res-header h4 { margin: 0; color: var(--white); font-size: 16px; text-transform: uppercase; letter-spacing: 1px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); }
     .res-stat { margin-bottom: 22px; }
     .res-stat:last-child { margin-bottom: 0; }
-    .res-stat-header { display: flex; justify-content: space-between; font-size: 13px; color: var(--white); margin-bottom: 10px; font-weight: 800; letter-spacing: 0.5px; }
+    .res-stat-header { display: flex; justify-content: space-between; font-size: 13px; color: var(--white); margin-bottom: 8px; font-weight: 800; letter-spacing: 0.5px; }
     .res-stat-header span.val { color: var(--cyan); text-shadow: 1px 2px 4px rgba(0,0,0,0.5); font-size: 14px; }
     .res-bar-bg { width: 100%; height: 16px; background: rgba(0,0,0,0.4); border-radius: 8px; overflow: hidden; box-shadow: var(--glass-clay-inner); border: 1px solid rgba(255,255,255,0.05); }
     .res-bar-fill { height: 100%; border-radius: 8px; background: linear-gradient(90deg, #1fb39f 0%, #27b9ee 100%); box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.4); position: relative; }
@@ -190,9 +190,9 @@
     .stag.prog { color: #2ecc71; border: 1px solid rgba(46,204,113,0.3); }
     .stag.focus { color: var(--cyan); border: 1px solid rgba(39,185,238,0.3); }
     .stag.attn { color: #e74c3c; border: 1px solid rgba(231,76,60,0.3); }
-    ul { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.7; color: #e2e8f0; }
+    ul { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; color: #e2e8f0; }
     ul ul { margin-top: 8px; padding-left: 18px; font-size: 13px; color: #a4bada; }
-    li { margin-bottom: 10px; }
+    li { margin-bottom: 8px; }
 
     .toolbar{position:fixed;bottom:20px;right:20px;display:flex;gap:10px;z-index:100}
     .toolbar button{background:#173c63;color:#fff;border:none;padding:10px 16px;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,.3);transition:background 0.2s}
@@ -352,7 +352,7 @@
           <div class="m-step plan"><div class="tt">Rollout: Planned</div>Rollout</div>
           <div class="m-step plan"><div class="tt">Hypercare: Planned</div>Hyper<br>Care</div>
         </div>
-        <div class="section" style="min-height: 200px;"><span class="stag prog">Progress This Week</span>
+        <div class="section" style="min-height: 260px;"><span class="stag prog">Progress This Week</span>
           <ul>
             <li>Testing Progress:
               <ul>
@@ -365,7 +365,7 @@
             <li>Reachability Validation: 2,019 of 2,781 matched subnets (73%) validated across 43K devices; 762 subnets under remediation.</li>
           </ul>
         </div>
-        <div class="section" style="min-height: 150px;"><span class="stag focus">Key Focus</span>
+        <div class="section" style="min-height: 200px;"><span class="stag focus">Key Focus</span>
           <ul>
             <li>Complete Cisco Secure Client v5.1.17 adoption (GTM users).</li>
             <li>Close ZTNA rollout dependencies (Network, Firewall & PAC).</li>
@@ -374,7 +374,7 @@
             <li>Raise and secure approval for the Change Request to expand the application scope for ZTNA rollout.</li>
           </ul>
         </div>
-        <div class="section" style="min-height: 140px;"><span class="stag attn">Executive Attention Required</span>
+        <div class="section" style="min-height: 160px;"><span class="stag attn">Executive Attention Required</span>
           <ul>
             <li>Expedite cross-functional dependency closures for remaining ZTNA rollout.</li>
           </ul>
@@ -392,7 +392,7 @@
           <div class="m-step pend"><div class="tt">Rollout: Decision Pending</div>Rollout</div>
           <div class="m-step pend"><div class="tt">Hypercare: Decision Pending</div>Hyper<br>Care</div>
         </div>
-        <div class="section" style="min-height: 200px;"><span class="stag prog">Progress This Week</span>
+        <div class="section" style="min-height: 260px;"><span class="stag prog">Progress This Week</span>
           <ul>
             <li>Joint MVP assessment initiated on 22nd Jul'26.</li>
             <li>On-Prem Proxy Readiness: 70% policy config completed.</li>
@@ -400,14 +400,14 @@
             <li>Process-Based Bypass Readiness: 50% complete.</li>
           </ul>
         </div>
-        <div class="section" style="min-height: 150px;"><span class="stag focus">Key Focus</span>
+        <div class="section" style="min-height: 200px;"><span class="stag focus">Key Focus</span>
           <ul>
             <li>Continue MVP alignment.</li>
             <li>Expand Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li>
             <li>Complete on-prem proxy policy configuration.</li>
           </ul>
         </div>
-        <div class="section" style="min-height: 140px;"><span class="stag attn">Executive Attention Required</span>
+        <div class="section" style="min-height: 160px;"><span class="stag attn">Executive Attention Required</span>
           <ul>
             <li>Expedite cross-functional dependency closure to maintain rollout readiness.</li>
             <li>Finalize the SIA rollout decision following MVP agreement.</li>
@@ -427,19 +427,19 @@
           <div class="m-step pend"><div class="tt">Rollout: Decision Pending</div>Rollout</div>
           <div class="m-step pend"><div class="tt">Hypercare: Decision Pending</div>Hyper<br>Care</div>
         </div>
-        <div class="section" style="min-height: 200px;"><span class="stag prog">Progress This Week</span>
+        <div class="section" style="min-height: 260px;"><span class="stag prog">Progress This Week</span>
           <ul>
             <li>Product Alignment: Conducted a joint workshop with Cisco DLP/CASB BU and CX teams.</li>
             <li>Solution Testing: Partially passed test cases increased to 41/107 (38%).</li>
           </ul>
         </div>
-        <div class="section" style="min-height: 150px;"><span class="stag focus">Key Focus</span>
+        <div class="section" style="min-height: 200px;"><span class="stag focus">Key Focus</span>
           <ul>
             <li>Initiate joint alignment and finalise MVP.</li>
             <li>Maximize successful completion of pending test cases.</li>
           </ul>
         </div>
-        <div class="section" style="min-height: 140px;"><span class="stag attn">Executive Attention Required</span>
+        <div class="section" style="min-height: 160px;"><span class="stag attn">Executive Attention Required</span>
           <ul>
             <li>Finalize the Minimum Viable Product (MVP) and close Email and Endpoint DLP solution design.</li>
             <li>Support for Prioritize rollout-critical feature delivery to achieve MVP readiness.</li>
