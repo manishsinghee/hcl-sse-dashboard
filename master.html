@@ -173,6 +173,9 @@
     .res-stat:last-child { margin-bottom: 0; }
     .res-stat-header { display: flex; justify-content: space-between; font-size: 13px; color: var(--white); margin-bottom: 8px; font-weight: 800; letter-spacing: 0.5px; }
     .res-stat-header span.val { color: var(--cyan); text-shadow: 1px 2px 4px rgba(0,0,0,0.5); font-size: 14px; }
+    .res-card::-webkit-scrollbar { width: 8px; }
+    .res-card::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
+    .res-card::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
     .res-bar-bg { width: 100%; height: 16px; background: rgba(0,0,0,0.4); border-radius: 8px; overflow: hidden; box-shadow: var(--glass-clay-inner); border: 1px solid rgba(255,255,255,0.05); }
     .res-bar-fill { height: 100%; border-radius: 8px; background: linear-gradient(90deg, #1fb39f 0%, #27b9ee 100%); box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.4); position: relative; }
     .res-bar-fill::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%); border-radius: 8px 8px 0 0; }
@@ -623,7 +626,7 @@
     <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 24px;">
       <div>
         <div class="section-title" style="margin-top:0">Risks & Issues Log</div>
-        <div class="risk-matrix">
+        <div class="risk-matrix" style="max-height: 380px; overflow-y: auto;">
           <table>
             <thead>
               <tr>
@@ -801,7 +804,7 @@
       
       <div>
         <div class="section-title" style="margin-top:0">Resource Allocation</div>
-                <div class="res-card" style="padding: 16px 20px;">
+                <div class="res-card" style="padding: 16px 20px; max-height: 380px; overflow-y: auto;">
           <div class="res-header" style="margin-bottom: 12px; padding-bottom: 8px;"><h4>Assigned Project Team</h4></div>
           
 
