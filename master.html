@@ -888,7 +888,7 @@
       isEditing = !isEditing;
       const btn = document.getElementById('editBtn');
       const saveBtn = document.getElementById('saveBtn');
-      const elements = document.querySelectorAll('.t, .s, .knum, .klbl, .ksub, .rib, li, td, th, p, h4');
+      const elements = document.querySelectorAll('.t, .s, .knum, .klbl, .ksub, .rib, li, td, th, p, h4, span, .val, strong, .ch, .section-title, .month');
       if (isEditing) {
         btn.innerText = "Stop Editing"; btn.style.background = "#e53614"; saveBtn.style.display = "block";
         elements.forEach(el => el.setAttribute("contenteditable", "true"));
