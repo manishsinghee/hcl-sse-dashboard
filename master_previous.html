@@ -149,7 +149,7 @@
   </style>
 </head>
 <body>
-  <div class="dashboard-container">
+  <div id="pdf-content" class="dashboard-container">
     
     <!-- 1. HEADER -->
     <section class="head">
@@ -430,6 +430,16 @@
 
   </div>
 
+  
+    <!-- PDF DOWNLOAD SECTION -->
+    <div class="download-section" style="display:flex; justify-content:center; margin-top:40px; margin-bottom:20px; width: 100%;">
+      <button onclick="downloadPDF()" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 20px rgba(0,0,0,0.6), inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='none'; this.style.boxShadow='0 8px 16px rgba(0,0,0,0.4), inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.2)'" style="background: linear-gradient(135deg, #27b9ee, #1fb39f); color: #fff; padding: 18px 48px; font-size: 18px; font-weight: 800; border: none; border-radius: 40px; box-shadow: 0 8px 16px rgba(0,0,0,0.4), inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.2); cursor: pointer; transition: all 0.3s ease; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 1.5px; display: flex; align-items: center; gap: 12px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Download Full Report (PDF)
+      </button>
+    </div>
+
+  </div>
   <!-- Edit Controls -->
   <div class="toolbar">
     <button id="editBtn" onclick="toggleEdit()">Edit Dashboard</button>
@@ -461,5 +471,50 @@
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }
   </script>
+
+  <!-- External Library for PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById('pdf-content');
+      const dlSection = document.querySelector('.download-section');
+      const toolbar = document.querySelector('.toolbar');
+      
+      // 1. Temporarily hide UI buttons so they don't appear in the PDF
+      if(dlSection) dlSection.style.display = 'none';
+      if(toolbar) toolbar.style.display = 'none';
+
+      // 2. Temporarily expand the Gantt Chart so the PDF captures all hidden rows instead of a scrollbar
+      const gantt = document.querySelector('.gantt-box');
+      const originalMaxHeight = gantt ? gantt.style.maxHeight : null;
+      if(gantt) gantt.style.maxHeight = 'none';
+      
+      // Determine background color based on theme
+      const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#1a1e29';
+
+      // 3. Configure high-quality A3 Landscape PDF export
+      const opt = {
+        margin:       [10, 10, 10, 10], // top, left, bottom, right
+        filename:     'HCL_SSE_Master_Program_Report.pdf',
+        image:        { type: 'jpeg', quality: 1.0 },
+        html2canvas:  { 
+            scale: 2, 
+            useCORS: true, 
+            letterRendering: true, 
+            backgroundColor: bgColor 
+        },
+        jsPDF:        { unit: 'mm', format: 'a3', orientation: 'landscape' }
+      };
+
+      // 4. Generate & Download
+      html2pdf().set(opt).from(element).save().then(() => {
+        // 5. Restore UI state
+        if(dlSection) dlSection.style.display = 'flex';
+        if(toolbar) toolbar.style.display = 'flex';
+        if(gantt) gantt.style.maxHeight = originalMaxHeight || '320px';
+      });
+    }
+  </script>
 </body>
+
 </html>
