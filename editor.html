@@ -46,7 +46,8 @@
     .head .s{font-size:24px;color:var(--cyan);font-weight:700;margin-top:8px;background:none}
     .head-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px;text-align:right;font-size:20px;color:#9bd6ff;font-weight:600;line-height:1.5}
     .logos{display:flex;gap:20px;align-items:center}
-    .logos img{height:36px;filter:brightness(0) invert(1)}
+    .logos img.cisco{height:42px;filter:brightness(0) invert(1)}
+    .logos img.hcl{height:28px}
     .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:14px 16px}
     .kpi{background:#fff;border:1px solid var(--line);min-height:145px;box-shadow:0 2px 6px rgba(0,0,0,.12);position:relative;padding:14px 20px}
     .kpi:before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:#ddd}
@@ -185,8 +186,8 @@ function render(){
     </div>
     <div class="head-right">
       <div class="logos">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/HCL_Technologies_logo.svg" alt="HCLTech" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco" style="height:42px" />
+        <img class="hcl" src="https://upload.wikimedia.org/wikipedia/commons/e/ec/HCLTech-new-logo.svg" alt="HCLTech" />
+        <img class="cisco" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco" />
       </div>
       <div>Status Date: 24 Jul 2026</div>
     </div>
