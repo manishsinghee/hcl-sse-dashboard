@@ -63,19 +63,25 @@
     .section-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 
     /* Gantt Box (Embedded) */
-    .gantt-box { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .phase-header { background: #122036; color: var(--white); font-weight: 700; padding: 6px 16px; text-transform: uppercase; letter-spacing: 1px; font-size: 11px; border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); }
-    .timeline-header { display: flex; background: #09101a; border-bottom: 1px solid var(--border); }
-    .spacer { width: 180px; min-width: 180px; border-right: 1px solid var(--border); }
+    .gantt-box { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; max-height: 280px; }
+    .gantt-scroll { overflow-y: auto; flex: 1; }
+    /* Scrollbar styling for Gantt */
+    .gantt-scroll::-webkit-scrollbar { width: 8px; }
+    .gantt-scroll::-webkit-scrollbar-track { background: var(--bg); }
+    .gantt-scroll::-webkit-scrollbar-thumb { background: #3f587a; border-radius: 4px; }
+    
+    .phase-header { background: #122036; color: var(--white); font-weight: 700; padding: 4px 14px; text-transform: uppercase; letter-spacing: 1px; font-size: 10px; border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); }
+    .timeline-header { display: flex; background: #09101a; border-bottom: 1px solid var(--border); z-index: 10; }
+    .spacer { width: 140px; min-width: 140px; border-right: 1px solid var(--border); }
     .months-container { display: flex; flex: 1; }
-    .month { flex: 1; text-align: center; padding: 10px 0; color: #7b93b2; font-size: 11px; font-weight: 800; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.05); }
-    .task-row { display: flex; border-bottom: 1px solid var(--border); height: 40px; position: relative; }
-    .task-label { width: 180px; min-width: 180px; padding: 0 16px; display: flex; align-items: center; font-weight: bold; font-size: 13px; background: rgba(0,0,0,0.3); border-right: 1px solid var(--border); border-left: 4px solid transparent; color: var(--white); }
+    .month { flex: 1; text-align: center; padding: 6px 0; color: #7b93b2; font-size: 10px; font-weight: 800; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.05); }
+    .task-row { display: flex; border-bottom: 1px solid var(--border); height: 26px; position: relative; }
+    .task-label { width: 140px; min-width: 140px; padding: 0 14px; display: flex; align-items: center; font-weight: bold; font-size: 11px; background: rgba(0,0,0,0.3); border-right: 1px solid var(--border); border-left: 4px solid transparent; color: var(--white); }
     .task-label.dns { border-left-color: var(--c-dns); } .task-label.ztna { border-left-color: var(--c-ztna); } .task-label.dlp { border-left-color: var(--c-dlp); } .task-label.sia { border-left-color: var(--c-sia); }
     .task-timeline { flex: 1; position: relative; }
     .grid-bg { display: flex; position: absolute; inset: 0; pointer-events: none; }
     .grid-col { flex: 1; border-right: 1px solid rgba(255,255,255,0.03); }
-    .bar { position: absolute; height: 24px; top: 8px; border-radius: 4px; display: flex; align-items: center; padding: 0 10px; font-size: 11px; font-weight: 700; color: #fff; white-space: nowrap; }
+    .bar { position: absolute; height: 18px; top: 4px; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; font-size: 10px; font-weight: 700; color: #fff; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.4); }
     .bar.dns { background-color: var(--c-dns); } .bar.ztna { background-color: var(--c-ztna); } .bar.dlp { background-color: var(--c-dlp); } .bar.sia { background-color: var(--c-sia); }
     @keyframes barberpole { 0% { background-position: 0 0; } 100% { background-position: 28px 0; } }
     .bar.ongoing { background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent); background-size: 28px 28px; animation: barberpole 1.5s linear infinite; }
@@ -194,8 +200,9 @@
         </div>
       </div>
       
-      <!-- CRD -->
-      <div class="phase-header" style="border-top:none;">CRD Phase</div>
+      <div class="gantt-scroll">
+        <!-- CRD -->
+        <div class="phase-header" style="border-top:none;">CRD Phase</div>
       <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns" style="left: 3.3%; width: 22.5%;">13 Aug - 03 Nov</div></div></div>
       <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna" style="left: 14.1%; width: 11.6%;">23 Sep - 04 Nov</div></div></div>
       <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp" style="left: 14.1%; width: 13.3%;">23 Sep - 11 Nov</div></div></div>
@@ -228,6 +235,7 @@
       <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna pending" style="left: 65%; width: 25%; color:var(--c-ztna);">92 Days Planned</div></div></div>
       <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia pending" style="left: 65%; width: 25%; color:var(--c-sia);">92 Days Planned</div></div></div>
       <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp pending" style="left: 65%; width: 24%; color:var(--c-dlp);">89 Days Planned</div></div></div>
+      </div>
     </div>
 
     <!-- 5. RAID TRACKER, FINANCIALS & RESOURCES -->
