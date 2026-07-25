@@ -64,8 +64,11 @@
     .rib{background:#173f86;color:#fff;border-radius:8px;padding:12px 16px;font-size:16px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.2)}
     .rib b{color:#ffef43}
 
-    .cols{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows: auto auto auto auto auto;gap:16px;padding:0 16px 16px}
-    .col{display:grid;grid-row: span 5;grid-template-rows: subgrid;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.12)}
+    .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 16px 16px}
+    .col{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.12)}
+    .prog-sec { min-height: 220px; }
+    .focus-sec { min-height: 200px; }
+    .attn-sec { flex-grow: 1; }
     
     .ch{padding:10px 14px 10px 24px;color:#fff;font-weight:800;font-size:16px;position:relative}
     .ch .dot{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:50%;background:#e53614}
@@ -79,7 +82,7 @@
     ul ul{margin:4px 0 4px 20px;font-size:13px;list-style-type:circle}
     li{margin:6px 0}
     
-    .alertHead{background:var(--alert);color:#fff;text-align:center;font-size:15px;font-weight:800;padding:8px 10px;margin-top:auto;}
+    .alertHead{background:var(--alert);color:#fff;text-align:center;font-size:15px;font-weight:800;padding:8px 10px;}
     .footer{padding:8px 16px 16px;text-align:left;color:#3d4b5f;font-size:13px}
     
     .toolbar{position:fixed;bottom:20px;right:20px;display:flex;gap:10px;z-index:100}
@@ -118,24 +121,24 @@
       <section class="cols">
         <article class="col">
           <div class="ch z"><span class="dot" style="background:#f7a24f"></span>ZTNA TRACK PROGRESS SUMMARY</div>
-          <div class="section"><span class="stag">Progress This Week</span><ul><li>Testing Progress:<ul><li>EDS 44 out of 57 applications tested (77%)</li><li>GTM 43 out of 100 Security Groups tested (43%, +3 this week)</li></ul></li><li>HCL Cross-Functional Governance: Internal stakeholder alignment and dependency closure initiated for the 31 Oct'26 ZTNA rollout.</li><li>Rollout Prerequisites: Network, Firewall & PAC changes; Resource Connector onboarding in progress.</li><li>Reachability Validation: 71% of subnets (1,751) validated across 35K devices; remediation underway for 707 subnets.</li></ul></div>
-          <div class="section"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Complete Cisco Secure Client v5.1.17 adoption (GTM users).</li><li>Close ZTNA rollout dependencies (Network, Firewall & PAC).</li><li>Finalize WAF design and accelerate testing.</li><li>Continue EDS application & GTM Security Group validation.</li><li>Raise and secure approval for the Change Request to expand the application scope for ZTNA rollout.</li></ul></div>
+          <div class="section prog-sec"><span class="stag">Progress This Week</span><ul><li>Testing Progress:<ul><li>EDS 44 out of 57 applications tested (77%)</li><li>GTM 43 out of 100 Security Groups tested (43%, +3 this week)</li></ul></li><li>HCL Cross-Functional Governance: Internal stakeholder alignment and dependency closure initiated for the 31 Oct'26 ZTNA rollout.</li><li>Rollout Prerequisites: Network, Firewall & PAC changes; Resource Connector onboarding in progress.</li><li>Reachability Validation: 71% of subnets (1,751) validated across 35K devices; remediation underway for 707 subnets.</li></ul></div>
+          <div class="section focus-sec"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Complete Cisco Secure Client v5.1.17 adoption (GTM users).</li><li>Close ZTNA rollout dependencies (Network, Firewall & PAC).</li><li>Finalize WAF design and accelerate testing.</li><li>Continue EDS application & GTM Security Group validation.</li><li>Raise and secure approval for the Change Request to expand the application scope for ZTNA rollout.</li></ul></div>
           <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
-          <div class="section"><ul><li>Expedite cross-functional dependency closures for remaining ZTNA rollout.</li></ul></div>
+          <div class="section attn-sec"><ul><li>Expedite cross-functional dependency closures for remaining ZTNA rollout.</li></ul></div>
         </article>
         <article class="col">
           <div class="ch sia"><span class="dot"></span>SIA TRACK PROGRESS SUMMARY</div>
-          <div class="section"><span class="stag">Progress This Week</span><ul><li>Rollout Readiness: Joint Minimum Viable Product (MVP) assessment initiated on 22nd Jul'26.</li><li>On-Prem Proxy Readiness: 70% policy configuration completed.</li><li>Solution Testing: Passed test cases increased to 98/263 (37%).</li><li>Process-Based Bypass Readiness: Data collection and analysis progressing (50% complete).</li></ul></div>
-          <div class="section"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Continue joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.</li><li>Expand Cisco Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li><li>Validate 8,027 non-reporting endpoints; finalise auto-purge policy.</li><li>Complete on-prem proxy policy configuration.</li><li>Maximize successful completion of pending test cases.</li></ul></div>
+          <div class="section prog-sec"><span class="stag">Progress This Week</span><ul><li>Rollout Readiness: Joint Minimum Viable Product (MVP) assessment initiated on 22nd Jul'26.</li><li>On-Prem Proxy Readiness: 70% policy configuration completed.</li><li>Solution Testing: Passed test cases increased to 98/263 (37%).</li><li>Process-Based Bypass Readiness: Data collection and analysis progressing (50% complete).</li></ul></div>
+          <div class="section focus-sec"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Continue joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.</li><li>Expand Cisco Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li><li>Validate 8,027 non-reporting endpoints; finalise auto-purge policy.</li><li>Complete on-prem proxy policy configuration.</li><li>Maximize successful completion of pending test cases.</li></ul></div>
           <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
-          <div class="section"><ul><li>Expedite cross-functional dependency closure to maintain rollout readiness.</li><li>Finalize the SIA rollout decision following MVP agreement.</li><li>Prioritize rollout-critical feature delivery to enable MVP readiness.</li></ul></div>
+          <div class="section attn-sec"><ul><li>Expedite cross-functional dependency closure to maintain rollout readiness.</li><li>Finalize the SIA rollout decision following MVP agreement.</li><li>Prioritize rollout-critical feature delivery to enable MVP readiness.</li></ul></div>
         </article>
         <article class="col">
           <div class="ch d"><span class="dot"></span>DLP TRACK PROGRESS SUMMARY</div>
-          <div class="section"><span class="stag">Progress This Week</span><ul><li>Product Alignment: Conducted a joint workshop with the Cisco DLP/CASB BU and CX teams to process critical features for rollout.</li><li>Solution Testing: Partially passed test cases increased to 41/107 (38%).</li></ul></div>
-          <div class="section"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Initiate joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.</li><li>Maximize successful completion of pending test cases.</li></ul></div>
+          <div class="section prog-sec"><span class="stag">Progress This Week</span><ul><li>Product Alignment: Conducted a joint workshop with the Cisco DLP/CASB BU and CX teams to process critical features for rollout.</li><li>Solution Testing: Partially passed test cases increased to 41/107 (38%).</li></ul></div>
+          <div class="section focus-sec"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Initiate joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.</li><li>Maximize successful completion of pending test cases.</li></ul></div>
           <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
-          <div class="section"><ul><li>Finalize the Minimum Viable Product (MVP) and close Email and Endpoint DLP solution design.</li><li>Support for Prioritize rollout-critical feature delivery to achieve MVP readiness.</li></ul></div>
+          <div class="section attn-sec"><ul><li>Finalize the Minimum Viable Product (MVP) and close Email and Endpoint DLP solution design.</li><li>Support for Prioritize rollout-critical feature delivery to achieve MVP readiness.</li></ul></div>
         </article>
       </section>
       <div class="footer">Cisco Confidential</div>
