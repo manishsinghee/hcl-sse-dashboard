@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>YBL LCS Weekly Project Status Report</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #1a202c; /* outer background */
+    margin: 0;
+    padding: 20px;
+  }
+  .toolbar {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .copy-btn {
+    background: linear-gradient(135deg, #27b9ee, #3498db);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  }
+  .copy-btn:hover {
+    background: linear-gradient(135deg, #3498db, #27b9ee);
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="copy-btn" onclick="copyToClipboard()">📋 Copy Dashboard for Email</button>
+  <p style="font-size:13px; color:#a0aec0; margin-top:8px;">Clicking this will copy the dashboard formatting perfectly for Outlook/Gmail.</p>
+</div>
+
+<!-- EMAIL CONTAINER START -->
+<div id="email-content" style="max-width: 850px; margin: 0 auto; background-color: #010408; font-family: 'Segoe UI', Arial, Helvetica, sans-serif; color: #c0d1e6;">
+  
+  <!-- Using a table wrapper for the border to ensure email client compatibility -->
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #010408; border-top: 4px solid #2ecc71; border-left: 4px solid #3498db; border-right: 4px solid #f09b4d; border-bottom: 4px solid #ff4757;">
+    <tr>
+      <td>
+        
+        <!-- Header -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0a101a; border-bottom: 1px solid #1a202c;">
+          <tr>
+            <td style="padding: 30px 20px; text-align: left;">
+              <div style="color: #27b9ee; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;">Weekly Project Status Report</div>
+              <div style="color: #ffffff; font-size: 26px; font-weight: bold; margin: 0; text-shadow: 1px 2px 4px rgba(0,0,0,0.5);">YBL LCS (Network & Security)</div>
+            </td>
+            <td style="padding: 30px 20px; text-align: right; vertical-align: middle;">
+              <!-- Logos -->
+              <table cellpadding="0" cellspacing="0" border="0" align="right" style="background-color: #ffffff; border-radius: 30px;">
+                <tr>
+                  <td style="padding: 10px 15px 10px 20px; border-right: 1px solid #dddddd;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/250px-Cisco_logo_blue_2016.svg.png" alt="Cisco" width="45" height="24" style="display: block; border: 0;" />
+                  </td>
+                  <td style="padding: 10px 20px 10px 15px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/85/Yes_Bank_logo.svg/250px-Yes_Bank_logo.svg.png" alt="YES Bank" width="140" height="24" style="display: block; border: 0;" />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Project Details -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding: 20px;">
+          <tr>
+            <td style="padding-bottom: 20px;">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0d131c; border-left: 4px solid #27b9ee; padding: 15px; border-radius: 4px; border: 1px solid #1a202c;">
+                <tr>
+                  <td width="150" style="font-size: 14px; color: #a4bada; font-weight: bold; vertical-align: top;">Project Manager:</td>
+                  <td style="font-size: 14px; color: #ffffff; font-weight: bold; vertical-align: top;">Manish Kumar Singh</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 14px; color: #a4bada; font-weight: bold; vertical-align: top; padding-top: 10px;">Project Scope:</td>
+                  <td style="font-size: 14px; color: #c0d1e6; vertical-align: top; padding-top: 10px;">
+                    <ul style="margin: 0; padding-left: 18px; line-height: 1.6;">
+                      <li><strong style="color:#ffffff;">LCS Services</strong></li>
+                      <li>Software Compliance - Bug Scrub Report, Software Compliance Report & Software Upgrades</li>
+                      <li>Configuration Best Practice Compliance – Reporting, Violations Remediation & Config. BP Compliance</li>
+                      <li>PSIRTs and Field Notices - Notification and Remediation</li>
+                      <li>Hardware Lifecycle Milestone Checks - Reporting</li>
+                      <li>Critical Change Windows Support</li>
+                    </ul>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Section 1: Highlights -->
+          <tr>
+            <td>
+              <h3 style="margin: 0 0 10px 0; font-size: 18px; color: #2ecc71; border-bottom: 1px solid #1a202c; padding-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">🎯 Key Highlights for the Week</h3>
+              <table width="100%" cellpadding="10" cellspacing="0" border="0" style="border-collapse: collapse; font-size: 13px;">
+                <thead>
+                  <tr>
+                    <th width="5%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Sr</th>
+                    <th style="background-color: #0a101a; color: #ffffff; text-align: left; border: 1px solid #1a202c;">Key Highlights for the Week</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #ffffff;">1</td>
+                    <td style="border: 1px solid #1a202c; background-color: #010408;">NOC - Latest Software Conformance and HW Milestone Reports of NOC inventory for Jun'26 shared with YBL team</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #ffffff;">2</td>
+                    <td style="border: 1px solid #1a202c; background-color: #060b13;">NOC - Bug scrub of C8500 for 17.15.5 version is currently in-progress</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #ffffff;">3</td>
+                    <td style="border: 1px solid #1a202c; background-color: #010408;">ISE - All 10 nodes have been successfully upgraded to BCS recommended 3.3P11 version</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #ffffff;">4</td>
+                    <td style="border: 1px solid #1a202c; background-color: #060b13;">SOC - Latest Software Conformance and HW Milestone Reports of ASA and Umbrella for June'26 shared with YBL team</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Section 2: Actions -->
+          <tr>
+            <td style="padding-top: 25px;">
+              <h3 style="margin: 0 0 10px 0; font-size: 18px; color: #3498db; border-bottom: 1px solid #1a202c; padding-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">⚡ Key Actions – For the week</h3>
+              <table width="100%" cellpadding="10" cellspacing="0" border="0" style="border-collapse: collapse; font-size: 13px;">
+                <thead>
+                  <tr>
+                    <th width="5%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Sr</th>
+                    <th style="background-color: #0a101a; color: #ffffff; text-align: left; border: 1px solid #1a202c;">Key Actions – For the week</th>
+                    <th width="15%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Target Closure</th>
+                    <th width="15%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Owner</th>
+                    <th width="10%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Company</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #ffffff;">1</td>
+                    <td style="border: 1px solid #1a202c; background-color: #010408;">NOC - Deliver Bug scrub report of C8500 for 17.15.5 version </td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #ff4757; font-weight:bold;">23-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Ashish/Dhiraj</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Cisco</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #ffffff;">2</td>
+                    <td style="border: 1px solid #1a202c; background-color: #060b13;">NOC - Latest Software Conformance Report of NOC inventory for Jul'26 to be shared with YBL team</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #2ecc71;">21-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;">Ashish</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;">Cisco</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #ffffff;">3</td>
+                    <td style="border: 1px solid #1a202c; background-color: #010408;">ACI - APIC, CIMC and Switch upgrade of Delta DC to be planned based on CW approval (tentatively 25th July)</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #2ecc71;">25-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Ashish/Mehul</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Cisco/YBL</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #ffffff;">4</td>
+                    <td style="border: 1px solid #1a202c; background-color: #060b13;">ISE - Health-check report to be initiated</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #2ecc71;">17-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;">Purva</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;">Cisco</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #ffffff;">5</td>
+                    <td style="border: 1px solid #1a202c; background-color: #010408;">SOC - Latest Software Conformance and HW Milestone Reports of ASA and Umbrella for July'26 shared with YBL team</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #2ecc71;">20-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Purva</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Cisco</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #ffffff;">6</td>
+                    <td style="border: 1px solid #1a202c; background-color: #060b13;">SOC - Discussion for secure client software recommendation to be initiated.</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #2ecc71;">21-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;">Purva/Babar</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;">Cisco</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Section 3: MoM -->
+          <tr>
+            <td style="padding-top: 25px;">
+              <h3 style="margin: 0 0 10px 0; font-size: 18px; color: #f09b4d; border-bottom: 1px solid #1a202c; padding-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">🤝 Minutes of Meeting - 15 July 2026</h3>
+              <table width="100%" cellpadding="10" cellspacing="0" border="0" style="border-collapse: collapse; font-size: 13px;">
+                <thead>
+                  <tr>
+                    <th width="5%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Sr</th>
+                    <th style="background-color: #0a101a; color: #ffffff; text-align: left; border: 1px solid #1a202c;">Action Items</th>
+                    <th width="15%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Target Closure</th>
+                    <th width="15%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Owner</th>
+                    <th width="10%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Company</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #ffffff;">1</td>
+                    <td style="border: 1px solid #1a202c; background-color: #010408;">NOC - In the view of upcoming Annual RBI Audit starting from 23rd July, YBL team requested to prioritise the Bug scrub report delivery of C8500 for 17.15.5 version</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #2ecc71;">22-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Ashish</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Cisco</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #ffffff;">2</td>
+                    <td style="border: 1px solid #1a202c; background-color: #060b13;">ACI - YBL team requested to check for VMware VCF 9.0 support with ACI release 6.1.6 which is to be released by end of July tentatively.</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #2ecc71;">17-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;">Ashish</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;">Cisco</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #ffffff;">3</td>
+                    <td style="border: 1px solid #1a202c; background-color: #010408;">ISE - YBL team enquired about the impact of latest PSIRT getting released on 15th July; Cisco BCS team inform about the PISRT and its impact once it is public by 15th July 9PM IST</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #2ecc71;">17-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Purva</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Cisco</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #ffffff;">4</td>
+                    <td style="border: 1px solid #1a202c; background-color: #060b13;">ISE - In the view of upcoming Annual RBI Audit starting from 23rd July, YBL team requested to prioritise the health check report delivery by 23rd July</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #ff4757; font-weight:bold;">23-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;">Purva</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;">Cisco</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #ffffff;">5</td>
+                    <td style="border: 1px solid #1a202c; background-color: #010408;">SOC - In the view of upcoming Annual RBI Audit starting from 23rd July, YBL team requested to submit the latest Software Conformance and HW Milestone Reports of ASA and Umbrella for July'26 by 23rd July</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #2ecc71;">22-Jul-26</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Purva</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408;">Cisco</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Section 4: Risks -->
+          <tr>
+            <td style="padding-top: 25px;">
+              <h3 style="margin: 0 0 10px 0; font-size: 18px; color: #ff4757; border-bottom: 1px solid #1a202c; padding-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">⚠️ Key Risks</h3>
+              <table width="100%" cellpadding="10" cellspacing="0" border="0" style="border-collapse: collapse; font-size: 13px;">
+                <thead>
+                  <tr>
+                    <th width="5%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Sr</th>
+                    <th style="background-color: #0a101a; color: #ffffff; text-align: left; border: 1px solid #1a202c;">Key Risks</th>
+                    <th width="15%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Target Closure</th>
+                    <th width="15%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Owner</th>
+                    <th width="10%" style="background-color: #0a101a; color: #ffffff; text-align: center; border: 1px solid #1a202c;">Company</th>
+                  </tr>
+                </thead>
+                <tbody contenteditable="true">
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #ffffff;">1</td>
+                    <td style="border: 1px solid #1a202c; background-color: #010408; color: #556b85;">[Click here to add risk description]</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #556b85;">DD-MMM-YY</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #556b85;">Name</td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #010408; color: #556b85;">Cisco/YBL</td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13; color: #ffffff;">2</td>
+                    <td style="border: 1px solid #1a202c; background-color: #060b13;"></td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;"></td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;"></td>
+                    <td align="center" style="border: 1px solid #1a202c; background-color: #060b13;"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style="font-size:11px; color:#556b85; text-align:right; margin-top:4px;">* Note: The table rows above can be clicked and edited directly before copying to email.</p>
+            </td>
+          </tr>
+
+          <!-- Documentation & Footer -->
+          <tr>
+            <td style="padding-top: 30px; padding-bottom: 20px;">
+              <div style="background-color: #0a101a; border-radius: 6px; padding: 15px; text-align: center; border: 1px solid #1a202c;">
+                <h4 style="margin: 0 0 5px 0; color: #ffffff; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">📁 Documentation</h4>
+                <p style="margin: 0; font-size: 12px; color: #a4bada;">Weekly Project Status Report, risk log, latest use-cases status and issue-log can be downloaded from the Cisco portal:</p>
+                <a href="https://dcpcs.cloudapps.cisco.com/dcpcs/download.jsp?contentId=1976647&language=en-us" style="color: #27b9ee; font-size: 12px; font-weight: bold; text-decoration: none; word-break: break-all;">Access Cisco Web Portal Link</a>
+              </div>
+              
+              <div style="margin-top: 20px; text-align: center; border-top: 1px solid #1a202c; padding-top: 15px;">
+                <p style="font-size: 10px; color: #556b85; margin: 0; line-height: 1.4;">
+                  &copy; 2026 Cisco and/or its affiliates. All rights reserved. Cisco and the Cisco logo are trademarks or registered trademarks of Cisco and/or its affiliates in the U.S. and other countries. To view a list of Cisco trademarks, see the Trademarks page on the Cisco website.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- EMAIL CONTAINER END -->
+
+<script>
+function copyToClipboard() {
+  const container = document.getElementById('email-content');
+  
+  // Create a Range object
+  const range = document.createRange();
+  range.selectNode(container);
+  
+  // Select the text
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
+  
+  try {
+    // Execute the copy command
+    document.execCommand('copy');
+    
+    // Change button text temporarily
+    const btn = document.querySelector('.copy-btn');
+    const originalText = btn.innerText;
+    btn.innerText = "✅ Copied! Now Paste (Ctrl+V/Cmd+V) into Outlook/Gmail";
+    btn.style.background = "#2ecc71";
+    
+    setTimeout(() => {
+      btn.innerText = originalText;
+      btn.style.background = "linear-gradient(135deg, #27b9ee, #3498db)";
+    }, 4000);
+  } catch (err) {
+    alert('Failed to copy. Please manually select the table and copy it.');
+  }
+  
+  // Deselect the text
+  selection.removeAllRanges();
+}
+</script>
+
+</body>
+</html>
