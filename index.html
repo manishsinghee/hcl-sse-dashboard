@@ -3,203 +3,1035 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HCL SSE Weekly Updates Dashboard</title>
+  <title>HCL SSE Master Program Dashboard</title>
   <style>
     :root {
-      --navy:#173c63;
-      --cyan:#27b9ee;
-      --bg:#e9edf3;
-      --card:#fff;
-      --line:#b8c2d1;
-      --text:#10233d;
-      --muted:#3f587a;
-      --green:#1fb39f;
-      --olive:#a2a03e;
-      --blue:#2847f0;
-      --sky:#3ca2f4;
-      --tealHeader:#4ea5c2;
-      --siaHeader:#1f5a95;
-      --dlpHeader:#59239b;
-      --alert:#a61900;
-      --orange:#f09b4d;
+      /* Background Mesh & Colors */
+      --bg-color: #010408;
+      --glass-bg: rgba(26, 32, 44, 0.4);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-border-light: rgba(255, 255, 255, 0.15);
+      --text: #c0d1e6;
+      --white: #ffffff;
+      
+      /* Accents */
+      --cyan: #27b9ee;
+      --c-dns: #2ecc71;
+      --c-ztna: #f09b4d;
+      --c-dlp: #a55eea;
+      --c-sia: #3498db;
+      
+      /* Status */
+      --alert: #ff4757;
+      --warning: #ffa502;
+      --success: #2ecc71;
+      
+      /* Glassmorphism + Claymorphism Fusion Variables */
+      --clay-radius: 24px;
+      /* Massive soft outer shadow + sharp inner highlight + soft inner shadow */
+      --glass-clay-shadow: 
+        12px 12px 24px rgba(0,0,0,0.6), 
+        -8px -8px 24px rgba(255,255,255,0.02), 
+        inset 2px 2px 4px rgba(255,255,255,0.1), 
+        inset -4px -4px 8px rgba(0,0,0,0.4);
+      --glass-clay-inner: 
+        inset 6px 6px 12px rgba(0,0,0,0.5), 
+        inset -4px -4px 8px rgba(255,255,255,0.05);
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Segoe UI,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
+    
+    * { box-sizing: border-box; }
+    
+    /* Vibrant Frosted Mesh Background */
+    body { 
+      margin: 0; 
+      font-family: 'Segoe UI', Arial, sans-serif; 
+      background-color: var(--bg-color);
+      background-image: 
+        radial-gradient(ellipse at 85% -10%, rgba(0, 188, 235, 0.25), transparent 50%), 
+        radial-gradient(ellipse at 10% 110%, rgba(138, 43, 226, 0.15), transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(0, 80, 140, 0.2), transparent 70%);
+      background-attachment: fixed;
+      color: var(--text); 
+      padding: 24px; 
       min-width: fit-content;
       min-height: 100vh;
       box-sizing: border-box;
-      border-top: 4px solid var(--green);
-      border-left: 4px solid var(--cyan);
-      border-right: 4px solid var(--orange);
-      border-bottom: 4px solid var(--alert);
+      /* Full page framing borders based on original design */
+      border-top: 4px solid var(--c-dns); /* Green */
+      border-left: 4px solid var(--c-sia); /* Blue */
+      border-right: 4px solid var(--c-ztna); /* Amber */
+      border-bottom: 4px solid var(--alert); /* Red */
     }
-    .previewWrap{padding:20px;overflow:auto}
-    #preview{width:100%;max-width:1400px;margin:0 auto;background:var(--bg);border:1px solid #d0d7e2;box-shadow:0 2px 10px rgba(0,0,0,.12)}
     
-    .head{background:var(--navy);padding:14px 20px;color:#fff;display:flex;justify-content:space-between;align-items:flex-start}
-    .head .t{font-size:26px;font-weight:800;line-height:1.05}
-    .head .s{font-size:16px;color:var(--cyan);font-weight:700;margin-top:6px;background:none}
-    .head-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;text-align:right;font-size:14px;color:#9bd6ff;font-weight:600;line-height:1.5}
-    .logos{display:flex;gap:16px;align-items:center}
-    .logos img.cisco{height:26px;filter:brightness(0) invert(1)}
-    .logos img.hcl{height:18px;filter:brightness(0) invert(1)}
-    
-    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:16px}
-    .kpi{background:#fff;border:1px solid var(--line);min-height:120px;box-shadow:0 2px 6px rgba(0,0,0,.12);position:relative;padding:16px}
-    .kpi:before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:#ddd}
-    .kpi.c1:before{background:#2ecc71} .kpi.c2:before{background:var(--green)} .kpi.c3:before{background:#1f5a95} .kpi.c4:before{background:#3ca2f4}
-    
-    .knum{font-size:36px;font-weight:800;line-height:1;margin:0}
-    .knum.c1{color:#219c53}.knum.c2{color:#0c7b6f}.knum.c3{color:#1f5a95}.knum.c4{color:#2a8fe5}
-    
-    .klbl{font-size:16px;font-weight:800;line-height:1.15;color:#183459;margin-top:4px}
-    .space-above { margin-top: 24px; } /* 1 line space scaled down */
-    .ksub{font-size:14px;line-height:1.25;color:#425d80;margin-top:8px;white-space:pre-line}
+    .dashboard-container { max-width: 98%; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
 
-    .ribbons{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 16px 12px}
-    .rib{background:#173f86;color:#fff;border-radius:8px;padding:12px 16px;font-size:16px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.2)}
-    .rib b{color:#ffef43}
+    /* Frosted Glass + Clay Base Class */
+    .glass-clay-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--clay-radius);
+      box-shadow: var(--glass-clay-shadow);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    }
+    .glass-clay-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 
+        16px 16px 32px rgba(0,0,0,0.7), 
+        -8px -8px 24px rgba(255,255,255,0.03), 
+        inset 2px 2px 4px rgba(255,255,255,0.15), 
+        inset -4px -4px 8px rgba(0,0,0,0.5);
+    }
 
-    .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 16px 16px}
-    .col{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.12)}
-    .prog-sec { min-height: 220px; }
-    .focus-sec { min-height: 200px; }
+    /* Header */
+    .head { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 20px; border-bottom: 1px solid var(--glass-border-light); }
+    .head .t { font-size: 38px; font-weight: 800; color: var(--white); line-height: 1.1; text-shadow: 2px 4px 8px rgba(0,0,0,0.6); letter-spacing: -0.5px; }
+    .head .s { font-size: 18px; color: var(--cyan); margin-top: 8px; font-weight: 600; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); letter-spacing: 1px; text-transform: uppercase;}
+    .head-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; text-align: right; font-size: 14px; font-weight: 600; }
+    .logos { display: flex; gap: 12px; align-items: center; background: rgba(0,0,0,0.2); padding: 10px 20px; border-radius: 30px; box-shadow: var(--glass-clay-inner); border: 1px solid var(--glass-border);}
+    .logos img.cisco { height: 32px; filter: brightness(0) invert(1); }
+    .logos img.hcl { height: 22px; filter: brightness(0) invert(1); }
+
+    /* RAG Health Indicators */
+    .health-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .health-card { padding: 12px 16px; display: flex; align-items: center; gap: 18px; }
+    .dot { width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 3px 3px 6px rgba(255,255,255,0.5), inset -3px -3px 6px rgba(0,0,0,0.4), 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0; }
+    .dot.green { background: linear-gradient(135deg, #2ecc71, #27ae60); box-shadow: inset 3px 3px 6px rgba(255,255,255,0.5), inset -3px -3px 6px rgba(0,0,0,0.4), 0 0 20px rgba(46,204,113,0.4); }
+    .dot.amber { background: linear-gradient(135deg, #ffa502, #eccc68); box-shadow: inset 3px 3px 6px rgba(255,255,255,0.5), inset -3px -3px 6px rgba(0,0,0,0.4), 0 0 20px rgba(255,165,2,0.4); }
+    .dot.red { background: linear-gradient(135deg, #ff4757, #ff6b81); box-shadow: inset 3px 3px 6px rgba(255,255,255,0.5), inset -3px -3px 6px rgba(0,0,0,0.4), 0 0 20px rgba(255,71,87,0.4); }
+    .health-info h4 { margin: 0 0 6px 0; color: var(--white); font-size: 16px; letter-spacing: 0.5px; }
+    .health-info p { margin: 0; font-size: 13px; color: #a4bada; line-height: 1.4; }
+
+    /* KPIs */
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .kpi { position: relative; background: rgba(0,0,0,0.2); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); box-shadow: inset 1px 1px 2px rgba(255,255,255,0.1), 0 4px 10px rgba(0,0,0,0.3); padding: 16px 20px; }
+    .kpi::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.4); }
+    .kpi.c1::before { background: linear-gradient(90deg, #2ecc71, #27ae60); } 
+    .kpi.c2::before { background: linear-gradient(90deg, #1fb39f, #159f8c); } 
+    .kpi.c3::before { background: linear-gradient(90deg, #3498db, #2980b9); } 
+    .kpi.c4::before { background: linear-gradient(90deg, #00bceb, #0096c7); }
+    .knum { font-size: 36px; font-weight: 800; line-height: 1; margin: 0 0 8px 0; text-shadow: 2px 4px 8px rgba(0,0,0,0.5); letter-spacing: -1px; }
+    .knum.c1 { color: #2ecc71; } .knum.c2 { color: #1fb39f; } .knum.c3 { color: #3498db; } .knum.c4 { color: #00bceb; }
+    .klbl { font-size: 12px; font-weight: 800; color: var(--white); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+    .ksub { font-size: 12px; color: #a4bada; white-space: pre-line; line-height: 1.3; }
+
+    /* Ribbons */
+    .ribbons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .rib { position: relative; background: rgba(0,0,0,0.2); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); box-shadow: inset 1px 1px 2px rgba(255,255,255,0.1), 0 4px 10px rgba(0,0,0,0.3); padding: 14px 20px; font-size: 14px; line-height: 1.4; }
+    .rib::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, var(--cyan), #59c8f2); box-shadow: inset -2px 0 4px rgba(0,0,0,0.3); }
+    .rib b { color: #eccc68; font-size: 14px; display: block; margin-bottom: 4px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Section Headers */
+    .section-title { font-size: 24px; font-weight: 800; color: var(--white); margin: 20px 0 16px 0; display: flex; align-items: center; gap: 16px; text-shadow: 2px 2px 4px rgba(0,0,0,0.4); letter-spacing: 0.5px; }
+    .section-title::after { content: ""; flex: 1; height: 2px; background: linear-gradient(90deg, var(--glass-border-light), transparent); box-shadow: 0 1px 0 rgba(0,0,0,0.5); }
+
+    /* Gantt Box (Embedded) */
+    .gantt-box { display: flex; flex-direction: column; max-height: 260px; padding: 0; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; box-shadow: var(--glass-clay-inner); overflow: hidden; }
+    .gantt-scroll { overflow-y: auto; flex: 1; }
+    .gantt-scroll::-webkit-scrollbar { width: 12px; }
+    .gantt-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 0 0 8px 0; box-shadow: var(--glass-clay-inner); }
+    .gantt-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 6px; border: 3px solid rgba(0,0,0,0.2); }
+    
+    .phase-header { background: rgba(0,0,0,0.4); color: var(--white); font-weight: 800; padding: 8px 16px; text-transform: uppercase; letter-spacing: 2px; font-size: 11px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); border-bottom: 1px solid var(--glass-border); border-top: 1px solid var(--glass-border); }
+    .timeline-header { display: flex; background: rgba(0,0,0,0.5); z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.4); backdrop-filter: blur(10px); }
+    .spacer { width: 150px; min-width: 150px; border-right: 1px solid rgba(255,255,255,0.05); }
+    .months-container { display: flex; flex: 1; }
+    .month { flex: 1; text-align: center; padding: 12px 0; color: #a4bada; font-size: 11px; font-weight: 800; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,0.05); }
+    .task-row { display: flex; border-bottom: 1px solid rgba(255,255,255,0.03); height: 34px; position: relative; transition: background 0.2s; }
+    .task-row:hover { background: rgba(255,255,255,0.05); }
+    .task-label { width: 150px; min-width: 150px; padding: 0 16px; display: flex; align-items: center; font-weight: bold; font-size: 12px; background: rgba(0,0,0,0.2); border-right: 1px solid rgba(255,255,255,0.05); color: var(--white); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+    .task-timeline { flex: 1; position: relative; }
+    .grid-bg { display: flex; position: absolute; inset: 0; pointer-events: none; }
+    .grid-col { flex: 1; border-right: 1px dashed rgba(255,255,255,0.05); }
+    .bar { position: absolute; height: 20px; top: 7px; border-radius: 10px; display: flex; align-items: center; padding: 0 12px; font-size: 10px; font-weight: 800; color: #fff; white-space: nowrap; box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.4), 2px 4px 8px rgba(0,0,0,0.5); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); letter-spacing: 0.5px; }
+    .bar.dns { background: linear-gradient(90deg, var(--c-dns), #27ae60); } .bar.ztna { background: linear-gradient(90deg, var(--c-ztna), #ffb87a); } .bar.dlp { background: linear-gradient(90deg, var(--c-dlp), #c287f7); } .bar.sia { background: linear-gradient(90deg, var(--c-sia), #2980b9); }
+    @keyframes barberpole { 0% { background-position: 0 0; } 100% { background-position: 28px 0; } }
+    .bar.ongoing { background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent); background-size: 28px 28px; animation: barberpole 1.5s linear infinite; }
+    .bar.pending { background: rgba(0,0,0,0.3); border: 1px dashed rgba(255,255,255,0.4); box-shadow: var(--glass-clay-inner); text-shadow: none; }
+    .bar.dns.pending { border-color: var(--c-dns); color: var(--c-dns); } .bar.ztna.pending { border-color: var(--c-ztna); color: var(--c-ztna); } .bar.dlp.pending { border-color: var(--c-dlp); color: var(--c-dlp); } .bar.sia.pending { border-color: var(--c-sia); color: var(--c-sia); }
+
+    /* Top Risks Matrix */
+    .risk-matrix { padding: 0; }
+    .risk-matrix table { width: 100%; border-collapse: collapse; text-align: left; }
+    .risk-matrix th { background: rgba(0,0,0,0.3); padding: 18px 20px; color: var(--white); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--glass-border-light); }
+    .risk-matrix td { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; vertical-align: middle; line-height: 1.5; color: #e2e8f0; }
+    .risk-matrix tr:last-child td { border-bottom: none; }
+    .risk-matrix tr:hover td { background: rgba(255,255,255,0.03); }
+    .risk-tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; box-shadow: inset 1px 1px 2px rgba(255,255,255,0.3), 1px 2px 4px rgba(0,0,0,0.4); letter-spacing: 0.5px; }
+
+    /* Financial Cards */
+    .fin-card { padding: 24px 28px; }
+    .fin-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); font-size: 14px; }
+    .fin-row:last-child { border-bottom: none; }
+    .fin-row span { color: #a4bada; font-weight: 600; letter-spacing: 0.5px; }
+    .fin-row strong { color: var(--white); font-size: 16px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); font-weight: 800; }
+    .fin-val-red { color: #ff6b81 !important; }
+    .fin-val-green { color: #2ecc71 !important; }
+    .fin-header { display: flex; justify-content: space-between; margin-bottom: 8px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-border-light); }
+    .fin-header h4 { margin: 0; color: var(--white); font-size: 16px; text-transform: uppercase; letter-spacing: 1px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); }
+
+    /* Resource Progress Bars */
+    .res-card { padding: 24px 28px; }
+    .res-header { display: flex; justify-content: space-between; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-border-light); }
+    .res-header h4 { margin: 0; color: var(--white); font-size: 16px; text-transform: uppercase; letter-spacing: 1px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); }
+    .res-stat { margin-bottom: 22px; }
+    .res-stat:last-child { margin-bottom: 0; }
+    .res-stat-header { display: flex; justify-content: space-between; font-size: 13px; color: var(--white); margin-bottom: 8px; font-weight: 800; letter-spacing: 0.5px; }
+    .res-stat-header span.val { color: var(--cyan); text-shadow: 1px 2px 4px rgba(0,0,0,0.5); font-size: 14px; }
+    .res-card::-webkit-scrollbar { width: 8px; }
+    .res-card::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
+    .res-card::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+    .res-bar-bg { width: 100%; height: 16px; background: rgba(0,0,0,0.4); border-radius: 8px; overflow: hidden; box-shadow: var(--glass-clay-inner); border: 1px solid rgba(255,255,255,0.05); }
+    .res-bar-fill { height: 100%; border-radius: 8px; background: linear-gradient(90deg, #1fb39f 0%, #27b9ee 100%); box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.4); position: relative; }
+    .res-bar-fill::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%); border-radius: 8px 8px 0 0; }
+
+    /* Track Columns */
+    .cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .col { padding: 0; display: flex; flex-direction: column; background: rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+    .ch { padding: 12px 16px; color: #fff; font-weight: 800; font-size: 18px; text-transform: uppercase; background: rgba(0,0,0,0.3); box-shadow: 0 4px 10px rgba(0,0,0,0.3); letter-spacing: 1px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); }
+    .ch.z { color: var(--c-ztna); border-bottom: 3px solid var(--c-ztna); }
+    .ch.sia { color: var(--c-sia); border-bottom: 3px solid var(--c-sia); }
+    .ch.d { color: var(--c-dlp); border-bottom: 3px solid var(--c-dlp); }
+    .section { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .prog-sec { height: 350px; }
+    .focus-sec { height: 330px; }
     .attn-sec { flex-grow: 1; }
-    
-    .ch{padding:10px 14px 10px 24px;color:#fff;font-weight:800;font-size:16px;position:relative}
-    .ch .dot{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:50%;background:#e53614}
-    .ch.z{background:var(--tealHeader)} .ch.sia{background:var(--siaHeader)} .ch.d{background:var(--dlpHeader)}
-    
-    .section{padding:12px 14px 8px}
-    .stag{display:inline-block;background:#1eb39d;color:#fff;font-weight:800;font-size:13px;padding:4px 10px;margin-bottom:8px}
-    .stag.orange{background:var(--orange)}
-    
-    ul{margin:6px 0 0 20px;padding:0;font-size:14px;line-height:1.4}
-    ul ul{margin:4px 0 4px 20px;font-size:13px;list-style-type:circle}
-    li{margin:6px 0}
-    
-    .alertHead{background:var(--alert);color:#fff;text-align:center;font-size:15px;font-weight:800;padding:8px 10px;}
-    .footer{padding:8px 16px 16px;text-align:left;color:#3d4b5f;font-size:13px}
-    
+    .section:last-child { border-bottom: none; }
+    .stag { display: inline-block; color: var(--white); font-weight: 800; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 1px 2px 4px rgba(0,0,0,0.5); background: rgba(0,0,0,0.2); padding: 4px 10px; border-radius: 12px; box-shadow: inset 1px 1px 2px rgba(255,255,255,0.1); }
+    .stag.prog { color: #2ecc71; border: 1px solid rgba(46,204,113,0.3); }
+    .stag.focus { color: var(--cyan); border: 1px solid rgba(39,185,238,0.3); }
+    .stag.attn { color: #e74c3c; border: 1px solid rgba(231,76,60,0.3); }
+    ul { margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.5; color: #e2e8f0; }
+    ul ul { margin-top: 8px; padding-left: 18px; font-size: 13px; color: #a4bada; }
+    li { margin-bottom: 8px; }
+
     .toolbar{position:fixed;bottom:20px;right:20px;display:flex;gap:10px;z-index:100}
     .toolbar button{background:#173c63;color:#fff;border:none;padding:10px 16px;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,.3);transition:background 0.2s}
     .toolbar button:hover{background:#27b9ee;color:#000}
-    [contenteditable="true"]{outline:2px dashed #27b9ee;background:rgba(39,185,238,0.05);min-height:1em}
+    [contenteditable="true"]{outline:1px dashed #27b9ee;background:rgba(39,185,238,0.05);min-height:1em}
+  
+    .ch.dns { color: var(--c-dns); border-bottom: 3px solid var(--c-dns); background: rgba(0,0,0,0.2); }
+    .phase-item { display: flex; justify-content: space-between; align-items:flex-start; font-size: 11px; margin-bottom: 8px; border-bottom: 1px dashed rgba(255,255,255,0.05); padding-bottom: 6px; line-height: 1.3; }
+    .phase-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .phase-name { color: #a4bada; padding-right: 8px; flex: 1; }
+    .p-stat { font-weight: 800; text-align: right; flex-shrink: 0; max-width: 55%; }
+    .p-stat.comp { color: var(--success); }
+    .p-stat.ong { color: var(--warning); }
+    .p-stat.plan { color: #7b93b2; }
+    .p-stat.rej { color: var(--alert); }
+  
+    /* SSE Top Highlights */
+    .sse-highlights { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; width: 100%; }
+    .sse-badge { 
+      background: rgba(255,255,255,0.05); 
+      border: 1px solid rgba(255,255,255,0.1); 
+      padding: 6px 14px; 
+      border-radius: 20px; 
+      font-size: 12px; 
+      font-weight: 600; 
+      color: #fff; 
+      box-shadow: inset 1px 1px 2px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.3); 
+      animation: floatBadge 3s infinite ease-in-out alternate; 
+      backdrop-filter: blur(4px); 
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sse-badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 5px var(--cyan);
+    }
+    @keyframes floatBadge { 
+      0% { transform: translateY(0); box-shadow: 0 2px 4px rgba(0,0,0,0.3); } 
+      100% { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.4); background: rgba(39, 185, 238, 0.1); border-color: rgba(39, 185, 238, 0.3); } 
+    }
+
+  
+    /* Miniature Phase Stepper */
+    .mini-stepper { display: flex; gap: 4px; padding: 10px 12px; background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .m-step { flex: 1; text-align: center; font-size: 9px; font-weight: 800; padding: 6px 2px; border-radius: 4px; text-transform: uppercase; color: #fff; box-shadow: inset 1px 1px 2px rgba(255,255,255,0.2), 0 2px 4px rgba(0,0,0,0.3); letter-spacing: 0; position: relative; line-height: 1.2; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; }
+    .m-step.comp { background: linear-gradient(135deg, #2ecc71, #27ae60); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+    .m-step.ong { background: linear-gradient(135deg, #ffa502, #eccc68); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); box-shadow: 0 0 8px rgba(255,165,2,0.6), inset 1px 1px 2px rgba(255,255,255,0.4); }
+    .m-step.rej { background: linear-gradient(135deg, #ff4757, #ff6b81); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+    .m-step.plan { background: rgba(52, 152, 219, 0.1); color: #74b9ff; box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2); border: 1px dashed rgba(52, 152, 219, 0.5); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+    .m-step.pend { background: repeating-linear-gradient(45deg, rgba(255, 165, 2, 0.15), rgba(255, 165, 2, 0.15) 4px, rgba(0, 0, 0, 0.2) 4px, rgba(0, 0, 0, 0.2) 8px); color: #fbc531; border: 1px dashed rgba(255, 165, 2, 0.4); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+    .m-step.red-pend { background: repeating-linear-gradient(45deg, rgba(231, 76, 60, 0.2), rgba(231, 76, 60, 0.2) 4px, rgba(0, 0, 0, 0.3) 4px, rgba(0, 0, 0, 0.3) 8px); color: #ff7675; border: 1px dashed rgba(231, 76, 60, 0.6); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+    .m-step .tt { visibility: hidden; opacity: 0; position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%); background: #000; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 11px; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 20; border: 1px solid rgba(255,255,255,0.1); transition: 0.2s; pointer-events: none;}
+    .m-step:hover .tt { visibility: visible; opacity: 1; bottom: 140%; }
+
+  
+    /* Testing Gantt Styles */
+    .test-gantt-wrap { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 12px; }
+    .test-gantt-row { display: flex; align-items: center; margin-bottom: 8px; }
+    .test-gantt-row:last-child { margin-bottom: 0; }
+    .test-gantt-label { width: 60px; font-size: 9.5px; font-weight: 700; color: #c0d1e6; text-transform: uppercase; }
+    .test-gantt-track { flex: 1; height: 16px; background: rgba(255,255,255,0.05); border-radius: 8px; position: relative; overflow: hidden; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.5); }
+    .test-gantt-bar { height: 100%; position: absolute; left: 0; top: 0; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; font-size: 9.5px; font-weight: 800; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); min-width: 16px; justify-content: center; }
+
+  
+    .copy-btn {
+      background: linear-gradient(135deg, #00bceb, #8b5cf6) !important;
+      color: white !important;
+      border: none;
+      padding: 10px 16px !important;
+      font-size: 14px !important;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(139,92,246,0.4) !important;
+      transition: all 0.3s ease !important;
+    }
+    .copy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139,92,246,0.6) !important;
+      background: linear-gradient(135deg, #8b5cf6, #00bceb) !important;
+    }
+    
   </style>
 </head>
 <body>
-  <div class="previewWrap">
-    <div id="preview">
-      <section class="head">
-        <div class="head-left">
-          <div class="t">HCL SSE Deployment - Executive Weekly Update</div>
-          <div class="s">Progress Report: 16 Jul - 23 Jul 2026</div>
+  <div id="pdf-content" class="dashboard-container">
+    
+    <!-- 1. HEADER -->
+    <section class="head">
+      <div class="head-left">
+        <div class="t">HCL SSE Master Program Dashboard</div>
+        <div class="s">Executive Briefing & Unified Status Report</div>
+
+        <div class="sse-highlights">
+          <span style="font-size:14px; font-weight:800; color:var(--cyan); text-transform:uppercase; letter-spacing:1px; text-shadow:1px 1px 2px rgba(0,0,0,0.5); margin-right:4px;">SSE SCOPE:</span>
+          <span class="sse-badge" style="animation-delay: 0s;">DNS Security</span>
+          <span class="sse-badge" style="animation-delay: 0.2s;">SPA - ZTNA</span>
+          <span class="sse-badge" style="animation-delay: 0.4s;">ThousandEyes</span>
+          <span class="sse-badge" style="animation-delay: 0.6s;">SIA – SWG, CASB, FWaaS, Sandboxing, RBI, Web DLP</span>
+          <span class="sse-badge" style="animation-delay: 0.8s;">DLP - Email DLP and Endpoint DLP</span>
         </div>
-        <div class="head-right">
-      <div class="logos">
-        <img class="hcl" src="https://upload.wikimedia.org/wikipedia/commons/e/e5/HCLTech-new-logo.svg" alt="HCLTech" />
-        <img class="cisco" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco" />
       </div>
-          <div>Status Date: 24 Jul 2026</div>
+      <div class="head-right">
+        <div class="logos">
+          <img class="hcl" src="https://upload.wikimedia.org/wikipedia/commons/e/e5/HCLTech-new-logo.svg" alt="HCLTech" />
+          <img class="cisco" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco" />
         </div>
-      </section>
+        <div>Status Date: 30 Jul 2026</div>
+      </div>
+    </section>
+
+    <!-- 2. PROGRAM HEALTH (NEW) -->
+    <div class="health-bar">
+      <div class="health-card">
+        <div class="dot red"></div>
+        <div class="health-info"><h4>Schedule</h4><p>Baseline completion was 30 Jun 2026. ZTNA pushed to 31 Oct 2026; SIA/DLP rollouts pending decision.</p></div>
+      </div>
+      <div class="health-card">
+        <div class="dot amber"></div>
+        <div class="health-info"><h4>Scope</h4><p>CR Pending for 1,021 App Expansion.</p></div>
+      </div>
+      <div class="health-card">
+        <div class="dot green"></div>
+        <div class="health-info"><h4>Budget</h4><p>Tracking healthy. Actual costs ($0.69M) are under budgeted costs ($1.15M).</p></div>
+      </div>
+      <div class="health-card">
+        <div class="dot green"></div>
+        <div class="health-info"><h4>Resources</h4><p>HCL & Cisco joint teams fully deployed.</p></div>
+      </div>
+    </div>
+
+    <!-- 3. METRICS & EXECUTIVE RIBBONS -->
+    <div style="display:flex; flex-direction: column; gap:16px;">
       <section class="kpis">
-        <div class="kpi c1"><div class="knum c1">170K+</div><div class="klbl space-above">DNS USERS DEPLOYED</div><div class="ksub">Production stable; migration completed
-27,091 inactive users (30 days) excluded</div></div>
-        <div class="kpi c2"><div class="knum c2">150K+</div><div class="klbl space-above">THOUSANDEYES ACTIVE USERS</div><div class="ksub">Observability completed</div></div>
-        <div class="kpi c3"><div class="knum c3">900+</div><div class="klbl space-above">Adoption of Cisco Secure Client v5.1.18</div><div class="ksub">(Active Users)</div></div>
-        <div class="kpi c4"><div class="knum c4">2200+</div><div class="klbl space-above">Adoption of Cisco Secure Client v5.1.17</div><div class="ksub">(Active Users)</div></div>
+        <div class="kpi c1"><div class="knum c1">170K+</div><div class="klbl">DNS USERS DEPLOYED</div><div class="ksub">Production stable; migration completed.<br>27,091 inactive users excluded.</div></div>
+        <div class="kpi c2"><div class="knum c2">150K+</div><div class="klbl">THOUSANDEYES ACTIVE</div><div class="ksub">Observability rollout completed.</div></div>
+        <div class="kpi c3"><div class="knum c3">1200+</div><div class="klbl">CLIENT V5.1.18 ADOPTION</div><div class="ksub">Active user endpoints migrating.</div></div>
+        <div class="kpi c4"><div class="knum c4">2200+</div><div class="klbl">CLIENT V5.1.17 ADOPTION</div><div class="ksub">Active user endpoints migrating.</div></div>
       </section>
       <section class="ribbons">
-        <div class="rib"><b>Key Progress:</b> HCL and Cisco leadership aligned on 16 Jul to redefine the Minimum Viable Product (MVP), expanding SIA and DLP capabilities to better support enterprise rollout.</div>
-        <div class="rib"><b>Key Next Step:</b> Continue SIA alignment under the designated owners and initiate DLP alignment to maintain rollout momentum.</div>
+        <div class="rib"><b>Key Progress</b>HCL and Cisco leadership aligned on 16 Jul to redefine the Minimum Viable Product (MVP), expanding SIA and DLP capabilities to better support enterprise rollout.</div>
+        <div class="rib"><b>Key Next Steps</b>Continue SIA alignment under the designated owners and initiate DLP alignment to maintain rollout momentum.</div>
       </section>
-      <section class="cols">
-        <article class="col">
-          <div class="ch z"><span class="dot" style="background:#f7a24f"></span>ZTNA TRACK PROGRESS SUMMARY</div>
-          <div class="section prog-sec"><span class="stag">Progress This Week</span><ul><li>Testing Progress:<ul><li>EDS 44 out of 57 applications tested (77%)</li><li>GTM 43 out of 100 Security Groups tested (43%, +3 this week)</li></ul></li><li>HCL Cross-Functional Governance: Internal stakeholder alignment and dependency closure initiated for the 31 Oct'26 ZTNA rollout.</li><li>Rollout Prerequisites: Network, Firewall & PAC changes; Resource Connector onboarding in progress.</li><li>Reachability Validation: 71% of subnets (1,751) validated across 35K devices; remediation underway for 707 subnets.</li></ul></div>
-          <div class="section focus-sec"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Complete Cisco Secure Client v5.1.17 adoption (GTM users).</li><li>Close ZTNA rollout dependencies (Network, Firewall & PAC).</li><li>Finalize WAF design and accelerate testing.</li><li>Continue EDS application & GTM Security Group validation.</li><li>Raise and secure approval for the Change Request to expand the application scope for ZTNA rollout.</li></ul></div>
-          <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
-          <div class="section attn-sec"><ul><li>Expedite cross-functional dependency closures for remaining ZTNA rollout.</li></ul></div>
-        </article>
-        <article class="col">
-          <div class="ch sia"><span class="dot"></span>SIA TRACK PROGRESS SUMMARY</div>
-          <div class="section prog-sec"><span class="stag">Progress This Week</span><ul><li>Rollout Readiness: Joint Minimum Viable Product (MVP) assessment initiated on 22nd Jul'26.</li><li>On-Prem Proxy Readiness: 70% policy configuration completed.</li><li>Solution Testing: Passed test cases increased to 98/263 (37%).</li><li>Process-Based Bypass Readiness: Data collection and analysis progressing (50% complete).</li></ul></div>
-          <div class="section focus-sec"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Continue joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.</li><li>Expand Cisco Secure Client v5.1.18 adoption (GIT/GIS - 3K users).</li><li>Validate 8,027 non-reporting endpoints; finalise auto-purge policy.</li><li>Complete on-prem proxy policy configuration.</li><li>Maximize successful completion of pending test cases.</li></ul></div>
-          <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
-          <div class="section attn-sec"><ul><li>Expedite cross-functional dependency closure to maintain rollout readiness.</li><li>Finalize the SIA rollout decision following MVP agreement.</li><li>Prioritize rollout-critical feature delivery to enable MVP readiness.</li></ul></div>
-        </article>
-        <article class="col">
-          <div class="ch d"><span class="dot"></span>DLP TRACK PROGRESS SUMMARY</div>
-          <div class="section prog-sec"><span class="stag">Progress This Week</span><ul><li>Product Alignment: Conducted a joint workshop with the Cisco DLP/CASB BU and CX teams to process critical features for rollout.</li><li>Solution Testing: Partially passed test cases increased to 41/107 (38%).</li></ul></div>
-          <div class="section focus-sec"><span class="stag orange">Key Focus / Next Steps</span><ul><li>Initiate joint alignment and finalise the Minimum Viable Product (MVP) required for rollout.</li><li>Maximize successful completion of pending test cases.</li></ul></div>
-          <div class="alertHead">EXECUTIVE ATTENTION REQUIRED</div>
-          <div class="section attn-sec"><ul><li>Finalize the Minimum Viable Product (MVP) and close Email and Endpoint DLP solution design.</li><li>Support for Prioritize rollout-critical feature delivery to achieve MVP readiness.</li></ul></div>
-        </article>
-      </section>
-      <div class="footer">Cisco Confidential</div>
     </div>
+
+<!-- 6. TRACK UPDATES -->
+    <div class="section-title">Detailed Track Summaries</div>
+    <section class="cols">
+      <article class="col">
+        <div class="ch z" style="display: flex; justify-content: space-between; align-items: center;">ZTNA TRACK <div style="width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ffd060, #f39c12); box-shadow: 0 0 10px rgba(243,156,18,0.5), inset -2px -2px 4px rgba(0,0,0,0.3);" title="Amber"></div></div>
+                <div class="mini-stepper">
+          <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
+          <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
+          <div class="m-step comp"><div class="tt">Policy Config: Completed</div>Policy<br>Config.</div>
+          <div class="m-step ong"><div class="tt">Solution Testing: Ongoing</div>Sol.<br>Test</div>
+          <div class="m-step ong"><div class="tt">Ring Testing: Ongoing</div>Ring<br>Test</div>
+          <div class="m-step ong"><div class="tt">Rollout: Ongoing</div>Rollout</div>
+          <div class="m-step ong"><div class="tt">Hypercare: Ongoing</div>Hyper<br>Care</div>
+        </div>
+        <div class="section prog-sec"><span class="stag prog">Progress This Week</span>
+          <ul>
+            <li><b>Apps/Security Groups Testing:</b> 44/57 EDS apps (77%) and 44/100 GTM Security Groups (43%) validated.</li>
+            <li><b>Client Rollout (v5.1.17):</b> GTM agent deployment at 95% (2,259/2,376 users).</li>
+            <li><b>Rollout Readiness:</b> Network, Firewall (target 31 Jul) & PAC changes ongoing; 2/4 Connectors onboarded.</li>
+            <li><b>GTM Migration Readiness:</b> End-to-end readiness & approvals secured for Jul 30-31 migration of 5 Groups (62 users).</li>
+            <li><b>GTM Production Rollout:</b> Migration of 5 Groups initiated 30 Jul; target completion 31 Jul.</li>
+          </ul>
+        </div>
+        <div class="section focus-sec"><span class="stag focus">Key Focus</span>
+          <ul>
+            <li><b>Client Adoption:</b> Complete v5.1.17 rollout for GTM users.</li>
+            <li><b>Dependencies:</b> Close pending Network, Firewall & PAC tasks.</li>
+            <li><b>Testing:</b> Finalize WAF design; accelerate EDS & GTM validation.</li>
+            <li><b>Scope CR:</b> Secure approval for 1,021 app expansion.</li>
+          </ul>
+        </div>
+        <div class="section attn-sec"><span class="stag attn">Executive Attention Required</span>
+          <ul>
+            <li>Expedite cross-functional dependency closures for remaining ZTNA rollout.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="col">
+        <div class="ch sia" style="display: flex; justify-content: space-between; align-items: center;">SIA TRACK <div style="width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff6b6b, #e74c3c); box-shadow: 0 0 10px rgba(231,76,60,0.5), inset -2px -2px 4px rgba(0,0,0,0.3);" title="Red"></div></div>
+                <div class="mini-stepper">
+          <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
+          <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
+          <div class="m-step comp"><div class="tt">Policy Config: Completed</div>Policy<br>Config.</div>
+          <div class="m-step ong"><div class="tt">Solution Testing: Ongoing</div>Sol.<br>Test</div>
+          <div class="m-step ong"><div class="tt">Ring Testing: Ongoing</div>Ring<br>Test</div>
+          <div class="m-step red-pend"><div class="tt">Rollout: Decision Pending</div>Rollout</div>
+          <div class="m-step red-pend"><div class="tt">Hypercare: Decision Pending</div>Hyper<br>Care</div>
+        </div>
+        <div class="section prog-sec"><span class="stag prog">Progress This Week</span>
+          <ul>
+            <li><b>MVP Assessment:</b> Joint MVP review initiated 22 Jul; SIA & CASB use cases reviewed.</li>
+            <li><b>Client Rollout (v5.1.18.314):</b> 1,275 endpoints onboarded for Ring-1/GIT/GIS rollout.</li>
+            <li><b>On-Prem Proxy Readiness:</b> 70% policy config complete; 64 vulnerabilities remediated across 4 servers.</li>
+          </ul>
+        </div>
+        <div class="section focus-sec"><span class="stag focus">Key Focus</span>
+          <ul>
+            <li><b>MVP Readiness:</b> Finalize MVP alignment for production rollout.</li>
+            <li><b>Client Rollout:</b> Deploy v5.1.18 to Ring-1 & GIT/GIS (~3K endpoints).</li>
+            <li><b>Endpoint Hygiene:</b> Validate 8K inactive endpoints; finalize purge policy.</li>
+            <li><b>On-Prem Proxy:</b> Complete policy config.</li>
+            <li><b>Solution Testing:</b> Drive closure of pending test cases.</li>
+            <li><b>Process-Based Bypass Readiness:</b> Complete Data collection and analysis.</li>
+          </ul>
+        </div>
+        <div class="section attn-sec"><span class="stag attn">Executive Attention Required</span>
+          <ul>
+            <li>Expedite cross-functional dependency closure to maintain rollout readiness.</li>
+            <li>Finalize the SIA rollout decision following MVP agreement.</li>
+            <li>Prioritize rollout-critical feature delivery to enable MVP readiness.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="col">
+        <div class="ch d" style="display: flex; justify-content: space-between; align-items: center;">DLP TRACK <div style="width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff6b6b, #e74c3c); box-shadow: 0 0 10px rgba(231,76,60,0.5), inset -2px -2px 4px rgba(0,0,0,0.3);" title="Red"></div></div>
+                <div class="mini-stepper">
+          <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
+          <div class="m-step rej"><div class="tt">SDD: Discarded</div>SDD</div>
+          <div class="m-step comp"><div class="tt">Policy Config: Completed</div>Policy<br>Config.</div>
+          <div class="m-step ong"><div class="tt">Solution Testing: Ongoing</div>Sol.<br>Test</div>
+          <div class="m-step ong"><div class="tt">Ring Testing: Ongoing</div>Ring<br>Test</div>
+          <div class="m-step red-pend"><div class="tt">Rollout: Decision Pending</div>Rollout</div>
+          <div class="m-step red-pend"><div class="tt">Hypercare: Decision Pending</div>Hyper<br>Care</div>
+        </div>
+        <div class="section prog-sec"><span class="stag prog">Progress This Week</span>
+          <ul>
+            <li><b>Solution Testing:</b> 41/107 (38%) partially passed; closing pending gaps.</li>
+            <li><b>Policy Testing Status (July'26):</b>
+              <ul>
+                <li>Web DLP: Partial Success 86% → 91%</li>
+                <li>Email DLP: Partial Success 54% → 62%</li>
+                <li>Endpoint DLP: Partial Success 62% → 73%</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="section focus-sec"><span class="stag focus">Key Focus</span>
+          <ul>
+            <li><b>MVP Alignment:</b> Initiate joint alignment and finalise MVP.</li>
+            <li><b>Solution Testing:</b> Maximize successful completion of pending test cases.</li>
+          </ul>
+        </div>
+        <div class="section attn-sec"><span class="stag attn">Executive Attention Required</span>
+          <ul>
+            <li>Finalize MVP & close Email/Endpoint DLP design.</li>
+            <li>Prioritize critical features for MVP readiness.</li>
+          </ul>
+        </div>
+      </article>
+    
+
+      <article class="col">
+        <div class="ch dns" style="display: flex; justify-content: space-between; align-items: center;"><div>DNS TRACK <span style="font-size: 11px; color: #2ecc71; letter-spacing: 1px; text-shadow: none;">(Completed)</span></div> <div style="width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #6ce29b, #2ecc71); box-shadow: 0 0 10px rgba(46,204,113,0.5), inset -2px -2px 4px rgba(0,0,0,0.3);" title="Green"></div></div>
+                <div class="mini-stepper">
+          <div class="m-step comp"><div class="tt">CRD: Completed</div>CRD</div>
+          <div class="m-step comp"><div class="tt">SDD: Completed</div>SDD</div>
+          <div class="m-step comp"><div class="tt">Policy Config: Completed</div>Policy<br>Config.</div>
+          <div class="m-step comp"><div class="tt">Solution Testing: Completed</div>Sol.<br>Test</div>
+          <div class="m-step comp"><div class="tt">Ring Testing: Completed</div>Ring<br>Test</div>
+          <div class="m-step comp"><div class="tt">Rollout: Completed</div>Rollout</div>
+          <div class="m-step comp"><div class="tt">Hypercare: Completed</div>Hyper<br>Care</div>
+        </div>
+
+      </article>
+    </section>
+
+    <!-- SOLUTION TESTING UPDATES -->
+    <div class="section-title">Solution Testing Updates</div>
+    <section class="cols">
+      <article class="col">
+        <div class="test-gantt-wrap" style="display:flex; flex-direction: column; gap:16px; padding: 12px;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #8da4c2; font-weight: 800; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px;">
+            <span>Total Tests: <span style="color:#fff;">88</span></span>
+            <span>P1s: <span style="color:#e74c3c;">3</span></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:24px;">
+            <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#2ecc71 0% 43.2%, #f39c12 43.2% 51.2%, #e74c3c 51.2% 62.6%, #3498db 62.6% 78.5%, #95a5a6 78.5% 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: #060b13; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
+                <span style="color:#fff; font-size: 16px; font-weight: 800;">88</span>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 11px; color: #c0d1e6; font-weight: 600; width: 100%;">
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#2ecc71; border-radius:2px;"></div>Passed</div> <span style="color:#fff">38 <span style="color:#8da4c2; font-size:9px;">(43%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#f39c12; border-radius:2px;"></div>Partial</div> <span style="color:#fff">7 <span style="color:#8da4c2; font-size:9px;">(8%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#e74c3c; border-radius:2px;"></div>Failed</div> <span style="color:#fff">10 <span style="color:#8da4c2; font-size:9px;">(11%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#3498db; border-radius:2px;"></div>WIP</div> <span style="color:#fff">14 <span style="color:#8da4c2; font-size:9px;">(16%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#95a5a6; border-radius:2px;"></div>Roadmap</div> <span style="color:#fff">19 <span style="color:#8da4c2; font-size:9px;">(22%)</span></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="col">
+        <div class="test-gantt-wrap" style="display:flex; flex-direction: column; gap:16px; padding: 12px;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #8da4c2; font-weight: 800; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px;">
+            <span>Total Tests: <span style="color:#fff;">263</span></span>
+            <span>P1s: <span style="color:#e74c3c;">145</span></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#2ecc71 0% 37.3%, #f39c12 37.3% 58.6%, #e74c3c 58.6% 80.7%, #3498db 80.7% 86.4%, #95a5a6 86.4% 96.3%, #7f8c8d 96.3% 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: #060b13; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
+                <span style="color:#fff; font-size: 16px; font-weight: 800;">263</span>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 4px; font-size: 11px; color: #c0d1e6; font-weight: 600; width: 100%;">
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:4px; white-space:nowrap;"><div style="width:8px; height:8px; background:#2ecc71; border-radius:2px; flex-shrink:0;"></div>Passed</div> <span style="color:#fff; white-space:nowrap; margin-left:4px;">98 <span style="color:#8da4c2; font-size:9px;">(37%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:4px; white-space:nowrap;"><div style="width:8px; height:8px; background:#f39c12; border-radius:2px; flex-shrink:0;"></div>Partial</div> <span style="color:#fff; white-space:nowrap; margin-left:4px;">56 <span style="color:#8da4c2; font-size:9px;">(21%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:4px; white-space:nowrap;"><div style="width:8px; height:8px; background:#e74c3c; border-radius:2px; flex-shrink:0;"></div>Failed</div> <span style="color:#fff; white-space:nowrap; margin-left:4px;">58 <span style="color:#8da4c2; font-size:9px;">(22%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:4px; white-space:nowrap;"><div style="width:8px; height:8px; background:#3498db; border-radius:2px; flex-shrink:0;"></div>WIP</div> <span style="color:#fff; white-space:nowrap; margin-left:4px;">15 <span style="color:#8da4c2; font-size:9px;">(6%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:4px; white-space:nowrap;"><div style="width:8px; height:8px; background:#95a5a6; border-radius:2px; flex-shrink:0;"></div>Roadmap</div> <span style="color:#fff; white-space:nowrap; margin-left:4px;">26 <span style="color:#8da4c2; font-size:9px;">(10%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:4px; white-space:nowrap;"><div style="width:8px; height:8px; background:#7f8c8d; border-radius:2px; flex-shrink:0;"></div>Other</div> <span style="color:#fff; white-space:nowrap; margin-left:4px;">10 <span style="color:#8da4c2; font-size:9px;">(4%)</span></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="col">
+        <div class="test-gantt-wrap" style="display:flex; flex-direction: column; gap:16px; padding: 12px;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #8da4c2; font-weight: 800; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px;">
+            <span>Total Tests: <span style="color:#fff;">107</span></span>
+            <span>P1s: <span style="color:#e74c3c;">0</span></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:24px;">
+            <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#f39c12 0% 38.3%, #e74c3c 38.3% 93.4%, #3498db 93.4% 95.3%, #95a5a6 95.3% 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: #060b13; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
+                <span style="color:#fff; font-size: 16px; font-weight: 800;">107</span>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 11px; color: #c0d1e6; font-weight: 600; width: 100%;">
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#2ecc71; border-radius:2px;"></div>Passed</div> <span style="color:#fff">0 <span style="color:#8da4c2; font-size:9px;">(0%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#f39c12; border-radius:2px;"></div>Partial</div> <span style="color:#fff">41 <span style="color:#8da4c2; font-size:9px;">(38%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#e74c3c; border-radius:2px;"></div>Failed</div> <span style="color:#fff">59 <span style="color:#8da4c2; font-size:9px;">(55%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#3498db; border-radius:2px;"></div>WIP</div> <span style="color:#fff">2 <span style="color:#8da4c2; font-size:9px;">(2%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#95a5a6; border-radius:2px;"></div>Roadmap</div> <span style="color:#fff">5 <span style="color:#8da4c2; font-size:9px;">(5%)</span></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+      <article class="col">
+        <div class="test-gantt-wrap" style="display:flex; flex-direction: column; gap:16px; padding: 12px;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #8da4c2; font-weight: 800; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px;">
+            <span>Total Tests: <span style="color:#fff;">23</span></span>
+            <span>P1s: <span style="color:#e74c3c;">0</span></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:24px;">
+            <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#2ecc71 0% 91.3%, #3498db 91.3% 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: #060b13; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
+                <span style="color:#fff; font-size: 16px; font-weight: 800;">23</span>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 11px; color: #c0d1e6; font-weight: 600; width: 100%;">
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#2ecc71; border-radius:2px;"></div>Passed</div> <span style="color:#fff">21 <span style="color:#8da4c2; font-size:9px;">(91%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#f39c12; border-radius:2px;"></div>Partial</div> <span style="color:#fff">0 <span style="color:#8da4c2; font-size:9px;">(0%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#e74c3c; border-radius:2px;"></div>Failed</div> <span style="color:#fff">0 <span style="color:#8da4c2; font-size:9px;">(0%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#3498db; border-radius:2px;"></div>WIP</div> <span style="color:#fff">2 <span style="color:#8da4c2; font-size:9px;">(9%)</span></span></div>
+               <div style="display:flex; align-items:center; justify-content: space-between;"><div style="display:flex; align-items:center; gap:6px;"><div style="width:8px; height:8px; background:#95a5a6; border-radius:2px;"></div>Roadmap</div> <span style="color:#fff">0 <span style="color:#8da4c2; font-size:9px;">(0%)</span></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    
+    <!-- FEATURE REQUESTS UPDATES -->
+    <div class="section-title">Feature Requests Updates</div>
+    <div style="display: flex; gap: 16px; margin-bottom: 12px; align-items: center; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 12px; box-shadow: var(--glass-clay-inner);">
+      
+      <!-- Chart Area -->
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="position: relative; width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#2ecc71 0% 58.3%, #3498db 58.3% 79.1%, #f39c12 79.1% 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+          <!-- Donut hole -->
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: #060b13; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
+            <span style="color:#fff; font-size: 16px; font-weight: 800;">120</span>
+            <span style="color:#8da4c2; font-size: 9px; text-transform: uppercase;">Total</span>
+          </div>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 10px; color: #c0d1e6; font-size: 12px; font-weight: 600;">
+           <div style="display: flex; align-items: center; gap: 8px;"><div style="width: 12px; height: 12px; background: #2ecc71; border-radius: 2px;"></div> 58% Delivered</div>
+           <div style="display: flex; align-items: center; gap: 8px;"><div style="width: 12px; height: 12px; background: #3498db; border-radius: 2px;"></div> 21% In Progress</div>
+           <div style="display: flex; align-items: center; gap: 8px;"><div style="width: 12px; height: 12px; background: #f39c12; border-radius: 2px;"></div> 21% Pending</div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div style="width: 1px; height: 100px; background: rgba(255,255,255,0.1);"></div>
+
+      <!-- Table Area -->
+      <div style="flex: 1; border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; text-align: center;">
+          <div style="background: rgba(255,255,255,0.05); padding: 12px; font-weight: 700; color: #c0d1e6; border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">Delivered</div>
+          <div style="background: rgba(255,255,255,0.05); padding: 12px; font-weight: 700; color: #c0d1e6; border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">In Progress</div>
+          <div style="background: rgba(255,255,255,0.05); padding: 12px; font-weight: 700; color: #c0d1e6; border-bottom: 1px solid rgba(255,255,255,0.05);">Pending</div>
+          
+          <div style="padding: 12px; border-right: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; gap: 12px; color: #fff; font-size: 14px; font-weight: 600;">
+            <div style="width: 24px; height: 12px; background: #2ecc71; border-radius: 2px;"></div> 70 FRs
+          </div>
+          <div style="padding: 12px; border-right: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; gap: 12px; color: #fff; font-size: 14px; font-weight: 600;">
+            <div style="width: 24px; height: 12px; background: #3498db; border-radius: 2px;"></div> 25 FRs
+          </div>
+          <div style="padding: 12px; display: flex; align-items: center; justify-content: center; gap: 12px; color: #fff; font-size: 14px; font-weight: 600;">
+            <div style="width: 24px; height: 12px; background: #f39c12; border-radius: 2px;"></div> 25 FRs
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <!-- 4. PROJECT TIMELINE -->
+    <div class="section-title">Program Timeline</div>
+    <div class="gantt-box" style="margin-bottom: 12px;">
+      <div class="timeline-header">
+        <div class="spacer"></div>
+        <div class="months-container">
+          <div class="month" title="August 2025">Aug '25</div><div class="month">Sep</div><div class="month">Oct</div><div class="month">Nov</div><div class="month">Dec</div><div class="month" title="January 2026">Jan '26</div><div class="month">Feb</div><div class="month">Mar</div><div class="month">Apr</div><div class="month">May</div><div class="month">Jun</div><div class="month">Jul</div><div class="month">Aug</div><div class="month">Sep</div><div class="month">Oct</div><div class="month">Nov</div><div class="month">Dec '26</div>
+        </div>
+      </div>
+      
+      <div class="gantt-scroll">
+        <!-- CRD -->
+        <div class="phase-header" style="border-top:none;">CRD Phase</div>
+        <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns" style="left: 2.3%; width: 16.0%;">13 Aug - 03 Nov (Closed)</div></div></div>
+        <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna" style="left: 10.2%; width: 8.1%;">23 Sep - 04 Nov (Closed)</div></div></div>
+        <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp" style="left: 10.2%; width: 9.4%;">23 Sep - 11 Nov (Closed)</div></div></div>
+        <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia" style="left: 10.2%; width: 9.6%;">23 Sep - 12 Nov (Closed)</div></div></div>
+
+        <!-- SDD -->
+        <div class="phase-header">SDD Phase</div>
+        <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns" style="left: 10.4%; width: 14.5%;">24 Sep - 08 Dec (Closed)</div></div></div>
+        <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna" style="left: 18.5%; width: 13.9%;">05 Nov - 16 Jan (Closed)</div></div></div>
+        <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia" style="left: 19.9%; width: 26.8%;">12 Nov - 31 March '26 (Closed)</div></div></div>
+        <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp" style="left: 35.7%; width: 12.9%; background: var(--alert);">02 Feb - 09 Apr '26 (Rejected)</div></div></div>
+
+        <!-- Solution Testing -->
+        <div class="phase-header">Solution Testing Phase</div>
+        <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna ongoing" style="left: 33.6%; width: 35.3%;">22 Jan '26 — Ongoing</div></div></div>
+        <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia ongoing" style="left: 39.0%; width: 29.4%;">19 Feb '26 — Ongoing</div></div></div>
+        <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns" style="left: 26.2%; width: 8.9%;">15 Dec '25 - 30 Jan '26 (Closed)</div></div></div>
+        <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp ongoing" style="left: 41.7%; width: 23.5%;">05 Mar '26 — Ongoing</div></div></div>
+
+        <!-- Ring Testing -->
+        <div class="phase-header">Ring Testing Phase</div>
+        <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna ongoing" style="left: 67.3%; width: 10%;">16 Jul '26 — Ongoing</div></div></div>
+        <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia ongoing" style="left: 67.3%; width: 10%;">16 Jul '26 — Ongoing</div></div></div>
+        <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns" style="left: 33.2%; width: 6.0%;">20 Jan - 20 Feb (Closed)</div></div></div>
+        <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp pending" style="left: 45%; width: 12%; color:var(--c-dlp);">Awaiting Go/No-Go</div></div></div>
+
+        <!-- Rollout -->
+        <div class="phase-header">Rollout Phase</div>
+        <div class="task-row"><div class="task-label dns">DNS</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dns" style="left: 38.4%; width: 14.8%;">16 Feb - 04 May '26 (Closed)</div></div></div>
+        <div class="task-row"><div class="task-label ztna">ZTNA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar ztna pending" style="left: 70.8%; width: 17.2%; color:var(--c-ztna);">03 Aug - 31 Oct '26</div></div></div>
+        <div class="task-row"><div class="task-label sia">SIA</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar sia pending" style="left: 64.4%; width: 11.9%; color:var(--c-sia);">Jul - Aug '26 (Pending MVP)</div></div></div>
+        <div class="task-row"><div class="task-label dlp">DLP</div><div class="task-timeline"><div class="grid-bg"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="bar dlp pending" style="left: 64.4%; width: 11.9%; color:var(--c-dlp);">Jul - Aug '26 (Pending MVP)</div></div></div>
+      </div>
+    </div>
+
+    <!-- 5. RAID TRACKER, FINANCIALS & RESOURCES -->
+    <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 12px;">
+      <div>
+        <div class="section-title" style="margin-top:0">Risks & Issues Log</div>
+        <div class="risk-matrix" style="max-height: 380px; overflow-y: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 80px;">Type</th>
+                <th style="width: 80px;">Ref ID</th>
+                <th>Name / Description</th>
+                <th style="width: 100px;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-19906</span></td>
+                <td>Requirement Misalignment During Feature Request (FR) Definition</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-3834</span></td>
+                <td>Usecases Availability Against Customer-Committed Timelines</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-15612</span></td>
+                <td>Partial Availability of Certain Security Use Cases</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-15611</span></td>
+                <td>DLP Solution Design Acceptance Risk</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-9170</span></td>
+                <td>Infrastructure Readiness Risk Impacting SSE Rollout</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-3837</span></td>
+                <td>Potential Increase in Support Tickets Impacting User Experience</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-3835</span></td>
+                <td>Business Disruption Risk Due to Accelerated Migration of ZTNA, SIA DLP</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-9572</span></td>
+                <td>Misalignment in Use Case Understanding and Documentation between HCL and Cisco Presales during FR Creation</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-2788</span></td>
+                <td>Feature Availability Gap in Cisco SSE Against HCL-Requested Timelines</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8035</span></td>
+                <td>Partial Availability of HCL-Identified Critical (P1) Use Cases Across ZTNA, SIA, and DLP</td>
+                <td style="color:#ff4757; font-weight:600;">Escalated</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8034</span></td>
+                <td>DLP Solution Design Does Not Meet Enterprise Security & Compliance Requirements</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8033</span></td>
+                <td>Open Infrastructure Dependencies Impacting Rollout Readiness</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-2791</span></td>
+                <td>Elevated Support Ticket Volume Impacting User Experience</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-2789</span></td>
+                <td>Potential Service Disruption During Accelerated Migration of ZTNA, SIA, and DLP</td>
+                <td style="color:#ffa502; font-weight:600;">In Progress</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-15610</span></td>
+                <td>Delay in HCL SIA Design Sign-off Despite Multiple Solution Options</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed - Resolved</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-15613</span></td>
+                <td>UZTNA Design: A New Requirement - Rollout Blocker</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed - Resolved</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-7035</span></td>
+                <td>Resource Capacity Risk Despite Maximum Optimization</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed - Resolved</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-14338</span></td>
+                <td>Timely Confirmation of Onsite Resource Requirements</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed - Resolved</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag" style="color:var(--warning);border-color:var(--warning);background:rgba(255,165,2,0.15)">Risk</span></td>
+                <td><span style="color:var(--cyan);">R-3836</span></td>
+                <td>Lack of Local HCL Project Management Ownership in Noida</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed - Resolved</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8036</span></td>
+                <td>Universal ZTNA (UZTNA) Design Requirement as Rollout Blocker</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8032</span></td>
+                <td>Specialist Resource Shortfall for VPNaaS Delivery Support</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8030</span></td>
+                <td>Pending HCL Sign-off on Final SIA Design Approach</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-2790</span></td>
+                <td>Delay in Onsite Resource Confirmation for Rollout Support</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed</td>
+              </tr>
+              <tr>
+                <td><span class="risk-tag">Issue</span></td>
+                <td><span style="color:var(--cyan);">I-8031</span></td>
+                <td>Absence of Local HCL PM Ownership for Day-to-Day Execution</td>
+                <td style="color:#2ecc71; font-weight:600;">Closed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div>
+        <div class="section-title" style="margin-top:0">Financial Summary</div>
+        <div class="fin-card">
+          <div class="fin-header"><h4>Revenue vs Costs (USD)</h4></div>
+          <div class="fin-row"><span>Revenue Budget</span><strong>$1.31M</strong></div>
+          <div class="fin-row"><span>Revenue Actuals</span><strong>$0.23M</strong></div>
+          <hr style="border: 0; border-top: 1px solid var(--border); margin: 4px 0; width: 100%;">
+          <div class="fin-row"><span>Total Budgeted Costs</span><strong>$1.15M</strong></div>
+          <div class="fin-row"><span>Total Actual Costs</span><strong class="fin-val-green">$0.69M</strong></div>
+          <hr style="border: 0; border-top: 1px solid var(--border); margin: 4px 0; width: 100%;">
+          <div class="fin-row"><span>As Sold Margin</span><strong class="fin-val-green">12.34% ($0.16M)</strong></div>
+          <div class="fin-row"><span>Actual Margin</span><strong class="fin-val-green">~20%</strong></div>
+          <div style="font-size: 10px; color: #7b93b2; text-align: right; margin-top: 8px;">Converted at 83 INR/USD (Jul 2025) <br>Last Updated: 7/30/2026 10:30 PM</div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="section-title" style="margin-top:0">Resource Allocation</div>
+                <div class="res-card" style="padding: 16px 20px; max-height: 380px; overflow-y: auto;">
+          <div class="res-header" style="margin-bottom: 12px; padding-bottom: 8px;"><h4>Assigned Project Team</h4></div>
+          
+
+          <!-- Program Management -->
+          <div style="font-size: 10px; font-weight: 800; color: #8da4c2; text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 12px;">Program Management</div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Nikhil Jairath</b> | Customer Exp. Manager</span><span class="val" style="color:#7b93b2;">—</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 10%; background: #3f587a;"></div></div>
+          </div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Manish Kumar Singh</b> | Customer PM (ZTNA, SIA)</span><span class="val">75%</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 75%;"></div></div>
+          </div>
+
+          <!-- ZTNA Track -->
+          <div style="font-size: 10px; font-weight: 800; color: var(--c-ztna); text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 12px; margin-top: 20px;">ZTNA Track</div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Nirav Raval</b> | Solution Architect (ZTNA)</span><span class="val" style="color:var(--c-ztna);">70%</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 70%; background: var(--c-ztna);"></div></div>
+          </div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Raynor Pereira</b> | Technical Engineer (ZTNA)</span><span class="val" style="color:var(--c-ztna);">50%</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 50%; background: var(--c-ztna);"></div></div>
+          </div>
+
+          <!-- SIA Track -->
+          <div style="font-size: 10px; font-weight: 800; color: var(--c-sia); text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 12px; margin-top: 20px;">SIA Track</div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Manu Saxena</b> | Solution Architect (SIA)</span><span class="val" style="color:var(--c-sia);">70%</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 70%; background: var(--c-sia);"></div></div>
+          </div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Mrityunjaya Hatagundi</b> | Technical Engineer (SIA)</span><span class="val" style="color:var(--c-sia);">50%</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 50%; background: var(--c-sia);"></div></div>
+          </div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Sadashiv Palde</b> | Technical Engineer (SIA)</span><span class="val" style="color:var(--c-sia);">50%</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 50%; background: var(--c-sia);"></div></div>
+          </div>
+
+          <!-- DLP Track -->
+          <div style="font-size: 10px; font-weight: 800; color: var(--c-dlp); text-transform: uppercase; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 12px; margin-top: 20px;">DLP Track</div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Himanshu Singh</b> | Customer PM (DLP)</span><span class="val" style="color:var(--c-dlp);">100%</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 100%; background: var(--c-dlp);"></div></div>
+          </div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Mnason Pattan</b> | Solution Architect (DLP)</span><span class="val" style="color:var(--c-dlp);">70%</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 70%; background: var(--c-dlp);"></div></div>
+          </div>
+          <div class="res-stat" style="margin-bottom: 12px;">
+            <div class="res-stat-header" style="margin-bottom: 4px; font-size: 11px;"><span><b>Arihant Mehtha</b> | Technical Engineer (DLP)</span><span class="val" style="color:var(--c-dlp);">70%</span></div>
+            <div class="res-bar-bg" style="height: 6px;"><div class="res-bar-fill" style="width: 70%; background: var(--c-dlp);"></div></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </div>
+
   
+    <!-- PDF DOWNLOAD SECTION -->
+    <div class="download-section" style="display:flex; justify-content:center; margin-top:40px; margin-bottom:20px; width: 100%;">
+      
+    </div>
+
+  </div>
+  <!-- Edit Controls -->
   <div class="toolbar">
-    <button id="editBtn" onclick="toggleEdit()">Edit Text</button>
+    <button class="copy-btn" onclick="copyToClipboard()">📋 Copy to Email</button>
+    <button id="editBtn" onclick="toggleEdit()">Edit Dashboard</button>
     <button id="saveBtn" onclick="saveChanges()" style="display:none;background:#1fb39f;color:#000">Save HTML</button>
   </div>
 
   <script>
     let isEditing = false;
-    
     function toggleEdit() {
       isEditing = !isEditing;
       const btn = document.getElementById('editBtn');
       const saveBtn = document.getElementById('saveBtn');
-      
-      // Select all text-bearing elements
-      const elements = document.querySelectorAll('.t, .s, .knum, .klbl, .ksub, .rib, li, .alertHead, .head-right div:last-child');
-      
+      const elements = document.querySelectorAll('.t, .s, .knum, .klbl, .ksub, .rib, li, td, th, p, h4, span, .val, strong, .ch, .section-title, .month');
       if (isEditing) {
-        btn.innerText = "Stop Editing";
-        btn.style.background = "#e53614";
-        saveBtn.style.display = "block";
+        btn.innerText = "Stop Editing"; btn.style.background = "#e53614"; saveBtn.style.display = "block";
         elements.forEach(el => el.setAttribute("contenteditable", "true"));
       } else {
-        btn.innerText = "Edit Text";
-        btn.style.background = "#173c63";
-        saveBtn.style.display = "none";
+        btn.innerText = "Edit Dashboard"; btn.style.background = "#173c63"; saveBtn.style.display = "none";
         elements.forEach(el => el.removeAttribute("contenteditable"));
       }
     }
-
     function saveChanges() {
-      // Force exit edit mode to clean up the outline/styles before saving
       if (isEditing) toggleEdit();
-      
       const clone = document.documentElement.cloneNode(true);
-      
-      // Remove the toolbar from the saved file so it doesn't show up in the downloaded HTML
-      const toolbar = clone.querySelector('.toolbar');
-      if (toolbar) toolbar.remove();
-      
-      // Also remove any stray contenteditable attributes just in case
-      const editables = clone.querySelectorAll('[contenteditable]');
-      editables.forEach(el => el.removeAttribute('contenteditable'));
-
-      const htmlContent = "<!doctype html>\n" + clone.outerHTML;
-      const blob = new Blob([htmlContent], { type: "text/html" });
-      const url = URL.createObjectURL(blob);
-      
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "HCL_SSE_Weekly_Updates_Dashboard_Edited.html";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const toolbar = clone.querySelector('.toolbar'); if (toolbar) toolbar.remove();
+      clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+      const blob = new Blob(["<!doctype html>\n" + clone.outerHTML], { type: "text/html" });
+      const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "HCL_SSE_Master_Dashboard.html";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }
   </script>
+
+  <!-- External Library for PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById('pdf-content');
+      const dlSection = document.querySelector('.download-section');
+      const toolbar = document.querySelector('.toolbar');
+      
+      // 1. Temporarily hide UI buttons so they don't appear in the PDF
+      if(dlSection) dlSection.style.display = 'none';
+      if(toolbar) toolbar.style.display = 'none';
+
+      // 2. Temporarily expand the Gantt Chart so the PDF captures all hidden rows instead of a scrollbar
+      const gantt = document.querySelector('.gantt-box');
+      const originalMaxHeight = gantt ? gantt.style.maxHeight : null;
+      if(gantt) gantt.style.maxHeight = 'none';
+      
+      // Determine background color based on theme
+      const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#1a1e29';
+
+      // 3. Configure high-quality A3 Landscape PDF export
+      const opt = {
+        margin:       [10, 10, 10, 10], // top, left, bottom, right
+        filename:     'HCL_SSE_Master_Program_Report.pdf',
+        image:        { type: 'jpeg', quality: 1.0 },
+        html2canvas:  { 
+            scale: 2, 
+            useCORS: true, 
+            letterRendering: true, 
+            backgroundColor: bgColor 
+        },
+        jsPDF:        { unit: 'mm', format: 'a3', orientation: 'landscape' }
+      };
+
+      // 4. Generate & Download
+      html2pdf().set(opt).from(element).save().then(() => {
+        // 5. Restore UI state
+        if(dlSection) dlSection.style.display = 'flex';
+        if(toolbar) toolbar.style.display = 'flex';
+        if(gantt) gantt.style.maxHeight = originalMaxHeight || '320px';
+      });
+    }
+  
+    function copyToClipboard() {
+      const container = document.getElementById('pdf-content');
+      
+      const range = document.createRange();
+      range.selectNode(container);
+      
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      
+      try {
+        document.execCommand('copy');
+        
+        const btn = document.querySelector('.copy-btn');
+        const originalText = btn.innerText;
+        btn.innerText = "✅ Copied!";
+        btn.style.background = "linear-gradient(135deg, #10b981, #059669)";
+        
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.style.background = "linear-gradient(135deg, #00bceb, #8b5cf6)";
+        }, 4000);
+      } catch (err) {
+        alert('Failed to copy. Please manually select the table and copy it.');
+      }
+      
+      selection.removeAllRanges();
+    }
+    
+  </script>
 </body>
+
 </html>
+
