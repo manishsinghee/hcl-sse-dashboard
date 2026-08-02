@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>YBL LCS Weekly Project Status Report</title>
+<style>
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #000000; /* Deep black outer canvas */
+    margin: 0;
+    padding: 30px 10px;
+  }
+  .toolbar {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .copy-btn {
+    background: linear-gradient(135deg, #00bceb, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(139,92,246,0.4);
+    transition: all 0.3s ease;
+  }
+  .copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139,92,246,0.6);
+    background: linear-gradient(135deg, #8b5cf6, #00bceb);
+  }
+</style>
+</head>
+<body style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+
+<div class="toolbar">
+  <button class="copy-btn" onclick="copyToClipboard()">📋 Copy Dashboard for Email</button>
+  <p style="font-size:13px; color:#94a3b8; margin-top:8px;">Copies the Cisco Live Keynote dark-mode theme for Outlook/Gmail.</p>
+</div>
+
+
+<!-- EMAIL CONTAINER START -->
+<!--[if mso | IE]>
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="850" align="center" style="width:850px; margin:0 auto;">
+<tr>
+<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+<![endif]-->
+<div id="email-content" bgcolor="#000000" style="max-width: 850px; margin: 0 auto; background-color: #000000; padding: 15px; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+  
+  <!-- Outer Dashboard Border & Shadow -->
+  <table role="presentation" width="850" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#050B14" style="max-width: 850px; margin: 0 auto; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; mso-line-height-rule: exactly; background-color: #050B14; border-top: 6px solid #00bceb; border-bottom: 6px solid #f97316; border-left: 2px solid #1e293b; border-right: 2px solid #1e293b; border-radius: 16px; border-collapse: separate; overflow: hidden; box-shadow: 0px 20px 50px rgba(0,0,0,0.5);">
+    <tr>
+      <td>
+        
+        <!-- Header -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#050B14" style="background-color: #0B1120; border-bottom: 1px solid #1e293b;">
+          <tr>
+            <td style="padding: 12px 15px; text-align: left; width: 60%;">
+              <div style="display: inline-block; background-color: #1e293b; padding: 5px 15px; border-radius: 20px; color: #e2e8f0; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; border: 1px solid #475569; box-shadow: 0 2px 8px rgba(255,255,255,0.05);">
+                ✦ Executive Weekly Update
+              </div>
+              <div style="color: #ffffff; font-size: 28px; font-weight: 800; margin: 0; letter-spacing: -0.5px; text-shadow: 0 0 20px rgba(255,255,255,0.2);">
+                YBL LCS Status Report
+              </div>
+              <div style="color: #38bdf8; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; margin-top: 8px; font-weight: 500; letter-spacing: 0.5px;">
+                Collaboration Division
+              </div>
+            </td>
+            <td align="right" style="padding: 20px; text-align: right; vertical-align: middle; width: 40%;">
+              <!-- Logos Card (White for visibility of standard logos) -->
+              <table cellpadding="0" cellspacing="0" border="0" align="right" style="background-color: #ffffff; border-radius: 12px; padding: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5); float: right; margin-left: auto; margin-right: 0;">
+                <tr>
+                  <td style="padding: 10px 15px; border-right: 1px solid #cbd5e1;">
+                    <img src="data:image/png;base64,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" alt="YES Bank" width="130" height="28" style="display: block; border: 0; object-fit: contain;" />
+                  </td>
+                  <td style="padding: 10px 15px;">
+                    <img src="data:image/png;base64,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" alt="Cisco" width="60" height="32" style="display: block; border: 0; object-fit: contain;" />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Body Content -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="padding: 20px; background-color: #050B14;">
+          
+          <!-- Project Info Tiles -->
+          <tr>
+            <td style="padding-bottom: 30px;">
+              
+              <!-- Tile 1: RAG Status -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0B1120; border-radius: 12px; border: 1px solid #1e293b; box-shadow: 0 4px 10px rgba(0,0,0,0.3); margin-bottom: 10px;">
+                <tr>
+                  <td style="padding: 6px 15px; border-left: 6px solid #10b981; border-radius: 12px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td width="185" style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px; color: #10b981; font-weight: 800; vertical-align: middle; letter-spacing: 0.5px; white-space: nowrap;">
+                          <span style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; margin-right: 6px;">🚦</span> PROJECT HEALTH:
+                        </td>
+                        <td style="vertical-align: middle;">
+                          
+                          <!-- Health Categories Grid -->
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                              <td width="20%" align="center" style="padding: 0 8px;">
+                                <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; vertical-align: middle;">Overall:</div>
+                                <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; color: #10b981; text-shadow: 0 0 10px rgba(16,185,129,0.8); line-height: 1; display: inline-block; vertical-align: middle; margin-left: 6px;">●</div>
+                              </td>
+                              <td width="20%" align="center" style="padding: 0 8px;">
+                                <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; vertical-align: middle;">Scope:</div>
+                                <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; color: #10b981; text-shadow: 0 0 10px rgba(16,185,129,0.8); line-height: 1; display: inline-block; vertical-align: middle; margin-left: 6px;">●</div>
+                              </td>
+                              <td width="20%" align="center" style="padding: 0 8px;">
+                                <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; vertical-align: middle;">Schedule:</div>
+                                <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; color: #10b981; text-shadow: 0 0 10px rgba(16,185,129,0.8); line-height: 1; display: inline-block; vertical-align: middle; margin-left: 6px;">●</div>
+                              </td>
+                              <td width="20%" align="center" style="padding: 0 8px;">
+                                <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; vertical-align: middle;">Resources:</div>
+                                <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; color: #10b981; text-shadow: 0 0 10px rgba(16,185,129,0.8); line-height: 1; display: inline-block; vertical-align: middle; margin-left: 6px;">●</div>
+                              </td>
+                              <td width="20%" align="center" style="padding: 0 8px;">
+                                <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; vertical-align: middle;">Cost:</div>
+                                <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; color: #10b981; text-shadow: 0 0 10px rgba(16,185,129,0.8); line-height: 1; display: inline-block; vertical-align: middle; margin-left: 6px;">●</div>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Tile 2: Project Scope -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0B1120; border-radius: 12px; border: 1px solid #1e293b; box-shadow: 0 4px 10px rgba(0,0,0,0.3); margin-bottom: 10px;">
+                <tr>
+                  <td style="padding: 6px 15px; border-left: 6px solid #8b5cf6; border-radius: 12px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td width="180" style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px; color: #c084fc; font-weight: 800; vertical-align: middle; letter-spacing: 0.5px; white-space: nowrap;">
+                          <span style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; margin-right: 6px;">🎯</span> PROJECT SCOPE:
+                        </td>
+                        <td style="vertical-align: middle;">
+                          
+                                                    <!-- Scope Grid -->
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 2px; margin-bottom: 2px;">
+                            <tr>
+                              <td width="50%" style="padding: 3px 6px 3px 0; vertical-align: top;">
+                                <div style="background-color: #111827; border: 1px solid #374151; border-left: 3px solid #8b5cf6; border-radius: 6px; padding: 6px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); height: 100%; box-sizing: border-box;">
+                                  <div style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 13px; color: #ffffff; font-weight: 800; margin-bottom: 2px; white-space: nowrap; letter-spacing: -0.3px;"><span style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 14px; margin-right: 4px; vertical-align: middle;">💿</span> Software Compliance</div>
+                                  <div style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; font-weight: 500; line-height: 1.3;">Bug Scrub, Compliance Reports &amp; Upgrades</div>
+                                </div>
+                              </td>
+                              <td width="50%" style="padding: 3px 0 3px 6px; vertical-align: top;">
+                                <div style="background-color: #111827; border: 1px solid #374151; border-left: 3px solid #8b5cf6; border-radius: 6px; padding: 6px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); height: 100%; box-sizing: border-box;">
+                                  <div style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 13px; color: #ffffff; font-weight: 800; margin-bottom: 2px; white-space: nowrap; letter-spacing: -0.3px;"><span style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 14px; margin-right: 4px; vertical-align: middle;">⚙️</span> Config Best Practices Compliance</div>
+                                  <div style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; font-weight: 500; line-height: 1.3;">Reporting, Remediation &amp; Compliance</div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td width="50%" style="padding: 3px 6px 3px 0; vertical-align: top;">
+                                <div style="background-color: #111827; border: 1px solid #374151; border-left: 3px solid #8b5cf6; border-radius: 6px; padding: 6px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); height: 100%; box-sizing: border-box;">
+                                  <div style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 13px; color: #ffffff; font-weight: 800; margin-bottom: 2px; white-space: nowrap; letter-spacing: -0.3px;"><span style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 14px; margin-right: 4px; vertical-align: middle;">🛡️</span> PSIRTs &amp; Field Notices Vulnerabilities Compliance</div>
+                                  <div style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; font-weight: 500; line-height: 1.3;">Notification and Remediation</div>
+                                </div>
+                              </td>
+                              <td width="50%" style="padding: 3px 0 3px 6px; vertical-align: top;">
+                                <div style="background-color: #111827; border: 1px solid #374151; border-left: 3px solid #8b5cf6; border-radius: 6px; padding: 6px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); height: 100%; box-sizing: border-box;">
+                                  <div style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 13px; color: #ffffff; font-weight: 800; margin-bottom: 2px; white-space: nowrap; letter-spacing: -0.3px;"><span style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 14px; margin-right: 4px; vertical-align: middle;">🔄</span> Hardware Lifecycle</div>
+                                  <div style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; font-weight: 500; line-height: 1.3;">Milestone Checks - Reporting</div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td width="50%" style="padding: 3px 6px 3px 0; vertical-align: top;">
+                                <div style="background-color: #111827; border: 1px solid #374151; border-left: 3px solid #8b5cf6; border-radius: 6px; padding: 6px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); height: 100%; box-sizing: border-box;">
+                                  <div style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 13px; color: #ffffff; font-weight: 800; margin-bottom: 2px; white-space: nowrap; letter-spacing: -0.3px;"><span style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 14px; margin-right: 4px; vertical-align: middle;">⏱️</span> Critical Change Windows</div>
+                                  <div style="font-family: \'Segoe UI\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; font-weight: 500; line-height: 1.3;">Critical Change Windows Support</div>
+                                </div>
+                              </td>
+                              <td width="50%" style="padding: 3px 0 3px 6px; vertical-align: top;">
+                                <div style="background-color: rgba(139,92,246,0.1); border: 1px dashed #8b5cf6; border-radius: 6px; padding: 12px 8px; box-shadow: inset 0 0 8px rgba(139,92,246,0.1); height: 100%; box-sizing: border-box; text-align: center;">
+                                  <div style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11px; color: #d8b4fe; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin: 0;">
+                                    <span style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; margin-right: 4px; vertical-align: middle;">🌟</span> Core LCS Services
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Tile 3: Project Manager -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0B1120; border-radius: 12px; border: 1px solid #1e293b; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                <tr>
+                  <td style="padding: 6px 15px; border-left: 6px solid #00bceb; border-radius: 12px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td width="220" style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px; color: #3b82f6; font-weight: 800; vertical-align: middle; letter-spacing: 0.5px; white-space: nowrap;">
+                          <span style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; margin-right: 6px;">👤</span> PROJECT MANAGER:
+                        </td>
+                        <td style="font-size: 16px; color: #f8fafc; font-weight: 600; vertical-align: middle;">
+                          Manish Kumar Singh
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Section 1: Highlights -->
+          <tr>
+            <td style="padding-bottom: 30px;">
+              
+              <!-- Graphic Section Header -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 8px;">
+                <tr>
+                  <td width="48" valign="middle">
+                    <div style="background-color: #10b981; border-radius: 12px; width: 32px; height: 32px; line-height: 32px; text-align: center; color: white; font-size: 16px; box-shadow: 0 0 15px rgba(16,185,129,0.5);">✨</div>
+                  </td>
+                  <td valign="middle">
+                    <h3 style="margin: 0; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #f8fafc; letter-spacing: 0.5px; font-weight: 700; text-transform: uppercase;">Key Highlights for the Week</h3>
+                  </td>
+                </tr>
+              </table>
+
+              <table width="100%" cellpadding="8" cellspacing="0" border="0" style="border-collapse: separate; border-spacing: 0; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+                <thead>
+                  <tr>
+                    <th width="5%" style="background-color: #0B1120; color: #10b981; text-align: center; border-bottom: 1px solid #1e293b; font-weight: 800;">#</th>
+                    <th style="background-color: #0B1120; color: #10b981; text-align: left; border-bottom: 1px solid #1e293b; font-weight: 800; letter-spacing: 0.5px;">HIGHLIGHT DESCRIPTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr style="background-color: #0B1120;">
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #10b981; font-weight: 800; font-size: 16px;">1</td>
+                    <td style="border-bottom: 1px solid #1e293b; color: #cbd5e1; font-weight: 500; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.5; padding: 10px;">One high-severity PSIRT (CVE-2026-20150, CVE-2026-20153, CVE-2026-20156, CVE-2026-20157, CVE-2026-20158, CVE-2026-20187) was shared with the YBL team on 16th July, confirming that ROM-OS devices running on the 26 release are affected. The fix is available in version 26.7.1.7.</td>
+                  </tr>
+                  <tr style="background-color: #0B1120;">
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #10b981; font-weight: 800; font-size: 16px;">2</td>
+                    <td style="border-bottom: 1px solid #1e293b; color: #cbd5e1; font-weight: 500; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.5; padding: 10px;">Latest Hardware Milestone Report delivered to YBL team on 27th July.</td>
+                  </tr>
+                  <tr style="background-color: #0B1120;">
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #10b981; font-weight: 800; font-size: 16px;">3</td>
+                    <td style="border-bottom: 1px solid #1e293b; color: #cbd5e1; font-weight: 500; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.5; padding: 10px;">Implementation of the recommendations identified in the Configuration Best Practices report - <span style="color: #10b981; font-weight: bold;">9% Completed</span>.</td>
+                  </tr>
+</tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Section 2: Actions -->
+          <tr>
+            <td style="padding-bottom: 40px;">
+              <!-- Graphic Section Header -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 15px;">
+                <tr>
+                  <td width="48" valign="middle">
+                    <div style="background-color: #00bceb; border-radius: 12px; width: 32px; height: 32px; line-height: 32px; text-align: center; color: white; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; box-shadow: 0 0 15px rgba(0,188,235,0.5);">⚡</div>
+                  </td>
+                  <td valign="middle">
+                    <h3 style="margin: 0; font-size: 16px; color: #f8fafc; letter-spacing: 0.5px; font-weight: 700; text-transform: uppercase;">Key Actions – For the Week</h3>
+                  </td>
+                </tr>
+              </table>
+
+              <table width="100%" cellpadding="10" cellspacing="0" border="0" style="border-collapse: separate; border-spacing: 0; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+                
+                
+                <!-- Standard Header -->
+                <thead>
+                  <tr>
+                    <th width="5%" style="background-color: #0f172a; color: #38bdf8; text-align: center; border-bottom: 1px solid #1e293b; font-weight: 800;">#</th>
+                    <th style="background-color: #0f172a; color: #38bdf8; text-align: left; border-bottom: 1px solid #1e293b; font-weight: 800; letter-spacing: 0.5px;">ACTION ITEM</th>
+                    <th width="15%" style="background-color: #0f172a; color: #38bdf8; text-align: center; border-bottom: 1px solid #1e293b; font-weight: 800; letter-spacing: 0.5px;">TIMELINE</th>
+                    <th width="12%" style="background-color: #0f172a; color: #38bdf8; text-align: center; border-bottom: 1px solid #1e293b; font-weight: 800; letter-spacing: 0.5px;">OWNER</th>
+                    <th width="12%" style="background-color: #0f172a; color: #38bdf8; text-align: center; border-bottom: 1px solid #1e293b; font-weight: 800; letter-spacing: 0.5px;">TEAM</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr style="background-color: #0B1120;">
+                    <td align="center" width="5%" style="border-bottom: 1px solid #1e293b; color: #38bdf8; font-weight: 800; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; border-right: 1px solid #1e293b;">1</td>
+                    <td style="border-bottom: 1px solid #1e293b; color: #cbd5e1; font-weight: 500; border-right: 1px solid #1e293b; padding: 10px; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px;">Deliver the latest Software Conformance and Hardware Milestone Report for July '26 to the YBL team by 24th July.</td>
+                    <td align="center" width="15%" style="border-bottom: 1px solid #1e293b; border-right: 1px solid #1e293b;"><span style="background-color: #0B1120; color: #10b981; border: 1px solid #10b981; padding: 4px 10px; border-radius: 12px; font-weight: bold; font-size: 11px; box-shadow: 0 0 10px rgba(16,185,129,0.2);">24-Jul-26</span></td>
+                    <td align="center" width="12%" style="border-bottom: 1px solid #1e293b; color: #94a3b8; border-right: 1px solid #1e293b; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px;">Shambu<br>Tarun</td>
+                    <td align="center" width="12%" style="border-bottom: 1px solid #1e293b; color: #94a3b8; font-weight: 500; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px;">Cisco</td>
+                  </tr>
+                  <tr style="background-color: #0B1120;">
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #38bdf8; font-weight: 800; font-size: 14px; border-right: 1px solid #1e293b;">2</td>
+                    <td style="border-bottom: 1px solid #1e293b; color: #cbd5e1; font-weight: 500; border-right: 1px solid #1e293b; padding: 10px; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px;">Implementation of the recommendations identified in the Configuration Best Practices report - WIP</td>
+                    <td align="center" style="border-bottom: 1px solid #1e293b; border-right: 1px solid #1e293b;"><span style="background-color: #0B1120; color: #10b981; border: 1px solid #10b981; padding: 4px 10px; border-radius: 12px; font-weight: bold; font-size: 11px; box-shadow: 0 0 10px rgba(16,185,129,0.2);">31-Aug-26</span></td>
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #94a3b8; border-right: 1px solid #1e293b; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px;">Hamza<br>Pankaj<br>Nibin</td>
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #94a3b8; font-weight: 500; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px;">Cisco</td>
+                  </tr>
+                  <tr style="background-color: #0B1120;">
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #38bdf8; font-weight: 800; font-size: 14px; border-right: 1px solid #1e293b;">3</td>
+                    <td style="border-bottom: 1px solid #1e293b; color: #cbd5e1; font-weight: 500; border-right: 1px solid #1e293b; padding: 10px; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px;">Continue the software/patch upgrade of the remaining 5 ESXi servers from 8.0.3 (Build 24859861) to 8.0.3 (Build 25205845), ensuring TAC support availability under the active AMC contract throughout the upgrade activity.</td>
+                    <td align="center" style="border-bottom: 1px solid #1e293b; border-right: 1px solid #1e293b;"><span style="background-color: #0B1120; color: #38bdf8; border: 1px solid #00bceb; padding: 4px 10px; border-radius: 12px; font-weight: bold; font-size: 11px; box-shadow: 0 0 10px rgba(0,188,235,0.2);">TBD</span></td>
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #94a3b8; border-right: 1px solid #1e293b; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px;">Shambu<br>Tarun</td>
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #94a3b8; font-weight: 500; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px;">Cisco</td>
+                  </tr>
+</tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Section 4: Risks -->
+          <tr>
+            <td style="padding-bottom: 30px;">
+              <!-- Graphic Section Header -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 8px;">
+                <tr>
+                  <td width="48" valign="middle">
+                    <div style="background: linear-gradient(135deg, #ec4899, #be185d); border-radius: 12px; width: 32px; height: 32px; line-height: 32px; text-align: center; color: white; font-size: 16px; box-shadow: 0 0 15px rgba(236,72,153,0.5);">⚠️</div>
+                  </td>
+                  <td valign="middle">
+                    <h3 style="margin: 0; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #f8fafc; letter-spacing: 0.5px; font-weight: 800; text-transform: uppercase;">Key Risk</h3>
+                  </td>
+                </tr>
+              </table>
+
+              <table width="100%" cellpadding="8" cellspacing="0" border="0" style="border-collapse: separate; border-spacing: 0; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; border: 1px solid #1e293b; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+                <thead>
+                  <tr>
+                    <th width="5%" style="background-color: #0f172a; color: #ec4899; text-align: center; border-bottom: 1px solid #1e293b; font-weight: 800;">#</th>
+                    <th style="background-color: #0f172a; color: #ec4899; text-align: left; border-bottom: 1px solid #1e293b; font-weight: 800; letter-spacing: 0.5px;">RISK DESCRIPTION</th>
+                    <th width="16%" style="background-color: #0f172a; color: #ec4899; text-align: center; border-bottom: 1px solid #1e293b; font-weight: 800; letter-spacing: 0.5px;">TIMELINE</th>
+                    <th width="12%" style="background-color: #0f172a; color: #ec4899; text-align: center; border-bottom: 1px solid #1e293b; font-weight: 800; letter-spacing: 0.5px;">OWNER</th>
+                    <th width="12%" style="background-color: #0f172a; color: #ec4899; text-align: center; border-bottom: 1px solid #1e293b; font-weight: 800; letter-spacing: 0.5px;">TEAM</th>
+                  </tr>
+                </thead>
+                <tbody contenteditable="true">
+                  <tr style="background-color: #0B1120;">
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #ec4899; font-weight: 800; font-size: 16px;"></td>
+                    <td style="border-bottom: 1px solid #1e293b; color: #cbd5e1; font-weight: 500; font-size: 10px; height: 30px;">&nbsp;</td>
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #cbd5e1; font-weight: 500; font-size: 10px;"></td>
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #cbd5e1; font-weight: 500; font-size: 10px;"></td>
+                    <td align="center" style="border-bottom: 1px solid #1e293b; color: #cbd5e1; font-weight: 500; font-size: 10px;"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Documentation & Footer -->
+          <tr>
+            <td style="padding-top: 10px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0B1120; border-radius: 12px; border: 1px solid #1e293b; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+                <tr>
+                  <td style="padding: 15px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td width="50" valign="top">
+                          <div style="font-size: 30px; padding-top: 2px;">🚀</div>
+                        </td>
+                        <td valign="top">
+                          <h4 style="margin: 0 0 8px 0; color: #f8fafc; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 800; letter-spacing: 0.5px;">Portal &amp; Documentation</h4>
+                          <p style="margin: 0 0 15px 0; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; color: #94a3b8; line-height: 1.6; font-weight: 500;">The Weekly Project Status Report, risk log, latest use-cases status, and issue log can be downloaded from the Cisco portal:</p>
+                          <a href="https://dcpcs.cloudapps.cisco.com/dcpcs/download.jsp?contentId=1977679&language=en-us" style="display: inline-block; background-color: #8b5cf6; color: #ffffff; font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 500; text-decoration: none; padding: 12px 20px; border-radius: 12px; word-break: break-all; max-width: 100%;">https://dcpcs.cloudapps.cisco.com/dcpcs/download.jsp?contentId=1977679&language=en-us</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              
+              <div style="margin-top: 35px; text-align: center; border-top: 1px solid #1e293b; padding-top: 20px;">
+                <p style="font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; color: #475569; margin: 0; line-height: 1.6; font-weight: 600;">
+                  &copy; 2026 Cisco and/or its affiliates. All rights reserved. <br/>
+                  Cisco and the Cisco logo are trademarks or registered trademarks of Cisco and/or its affiliates in the U.S. and other countries. To view a list of Cisco trademarks, see the Trademarks page on the Cisco website.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+<!--[if mso | IE]>
+</td>
+</tr>
+</table>
+<![endif]-->
+<!-- EMAIL CONTAINER END -->
+
+<script>
+function copyToClipboard() {
+  const container = document.getElementById('email-content');
+  
+  const range = document.createRange();
+  range.selectNode(container);
+  
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
+  
+  try {
+    document.execCommand('copy');
+    
+    const btn = document.querySelector('.copy-btn');
+    const originalText = btn.innerText;
+    btn.innerText = "✅ Copied! Ready for Email";
+    btn.style.background = "linear-gradient(135deg, #10b981, #059669)";
+    
+    setTimeout(() => {
+      btn.innerText = originalText;
+      btn.style.background = "linear-gradient(135deg, #00bceb, #8b5cf6)";
+    }, 4000);
+  } catch (err) {
+    alert('Failed to copy. Please manually select the table and copy it.');
+  }
+  
+  selection.removeAllRanges();
+}
+</script>
+
+</body>
+</html>
