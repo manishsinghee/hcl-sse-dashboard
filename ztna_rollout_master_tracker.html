@@ -138,16 +138,26 @@
       </div>
     </section>
 
-    <!-- Rollout Timelines -->
-    <div style="display: flex; gap: 12px; margin-bottom: 6px;">
-      <div style="flex: 1; background: rgba(0,0,0,0.3); border-radius: var(--clay-radius); border: 1px solid var(--glass-border); padding: 16px 24px; box-shadow: var(--glass-clay-shadow); position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center;">
+    <!-- Rollout Timelines & Testing Status -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 6px;">
+      
+      <!-- GTM Row -->
+      <div style="background: rgba(0,0,0,0.3); border-radius: var(--clay-radius); border: 1px solid var(--glass-border); padding: 16px 24px; box-shadow: var(--glass-clay-shadow); position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center;">
         <div style="position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: #e84393;"></div>
-        <div style="font-weight: 800; color: #e84393; font-size: 15px; text-transform: uppercase; letter-spacing: 1px;">GTM Rollout</div>
+        <div>
+          <div style="font-weight: 800; color: #e84393; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">GTM Rollout</div>
+          <div style="color: #a4bada; font-size: 12px; font-weight: 600;">Security Groups Testing: <span style="color: var(--white);">47 / 300 tested</span></div>
+        </div>
         <div style="color: var(--white); font-size: 15px; font-weight: bold; background: rgba(232, 67, 147, 0.15); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(232, 67, 147, 0.3);">27th Jul &mdash; 15th Oct</div>
       </div>
-      <div style="flex: 1; background: rgba(0,0,0,0.3); border-radius: var(--clay-radius); border: 1px solid var(--glass-border); padding: 16px 24px; box-shadow: var(--glass-clay-shadow); position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center;">
+      
+      <!-- EDS Row -->
+      <div style="background: rgba(0,0,0,0.3); border-radius: var(--clay-radius); border: 1px solid var(--glass-border); padding: 16px 24px; box-shadow: var(--glass-clay-shadow); position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center;">
         <div style="position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: #e67e22;"></div>
-        <div style="font-weight: 800; color: #e67e22; font-size: 15px; text-transform: uppercase; letter-spacing: 1px;">EDS Rollout</div>
+        <div>
+          <div style="font-weight: 800; color: #e67e22; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">EDS Rollout</div>
+          <div style="color: #a4bada; font-size: 12px; font-weight: 600;">Apps Testing: <span style="color: var(--white);">44 / 57 tested</span></div>
+        </div>
         <div style="color: var(--white); font-size: 15px; font-weight: bold; background: rgba(230, 126, 34, 0.15); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(230, 126, 34, 0.3);">24th Aug &mdash; 31st Oct</div>
       </div>
     </div>
