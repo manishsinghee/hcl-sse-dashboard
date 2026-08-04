@@ -87,16 +87,24 @@
       text-transform: uppercase; 
       letter-spacing: 1px; 
       border-bottom: 2px solid var(--glass-border-light);
+      border-right: 1px solid var(--glass-border);
       position: sticky;
       top: 0;
       z-index: 10;
     }
+    th:last-child {
+      border-right: none;
+    }
     td { 
       padding: 14px 16px; 
       border-bottom: 1px solid rgba(255,255,255,0.03); 
+      border-right: 1px solid rgba(255,255,255,0.03);
       font-size: 13px; 
       color: #e2e8f0;
       vertical-align: middle;
+    }
+    td:last-child {
+      border-right: none;
     }
     tr:hover td { background: rgba(255,255,255,0.05); }
     tr:last-child td { border-bottom: none; }
