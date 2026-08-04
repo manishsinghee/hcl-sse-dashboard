@@ -549,6 +549,65 @@
         </table>
       </div>
 
+      
+      <!-- Common Dependencies Table -->
+      <div class="table-container">
+        <table style="table-layout: fixed; white-space: normal; word-wrap: break-word;">
+          <thead>
+            <tr>
+              <th colspan="4" style="background: #3498db; color: #fff; font-size: 16px; text-align: left; padding: 12px 16px; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">Common Dependencies (GTM &amp; EDS)</th>
+            </tr>
+            <tr style="background: rgba(0,0,0,0.6);">
+              <th style="width: 50%; border-bottom: none; background: rgba(0,0,0,0.2);">Task / Dependency</th>
+              <th style="width: 10%; border-bottom: none; background: rgba(0,0,0,0.2);">Timeline</th>
+              <th style="width: 15%; border-bottom: none; background: rgba(0,0,0,0.2);">Owner</th>
+              <th style="width: 25%; border-bottom: none; background: rgba(0,0,0,0.2);">Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: rgba(255,255,255,0.1);"><td colspan="4" style="font-weight: 800; color: #fff; font-size: 14px; padding: 8px 16px;">Infra Changes</td></tr>
+            <tr>
+              <td>Global Firewall & Network Changes for Cisco URLs</td>
+              <td>24-Jul / <span style="color: var(--warning); font-weight: bold;">Ongoing</span></td>
+              <td>HCL: Ankit/Majid/Pankaj S</td>
+              <td>Awaiting confirmation of Network and Firewall change completion.</td>
+            </tr>
+            <tr>
+              <td>PAC file bypass for Cisco URLs</td>
+              <td>24-Jul</td>
+              <td>HCL: Ashish</td>
+              <td>Pending</td>
+            </tr>
+            <tr>
+              <td>Additional RCs (if required)</td>
+              <td style="color: var(--warning); font-weight: bold;">Ongoing</td>
+              <td>HCL: Jiten/Srini</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Network changes validation</td>
+              <td>TBD</td>
+              <td>HCL: Ankit | Cisco: Sadashiv</td>
+              <td>HCL to troubleshoot and validate connectivity of 707 failed subnets.</td>
+            </tr>
+            
+            <tr style="background: rgba(255,255,255,0.1);"><td colspan="4" style="font-weight: 800; color: #fff; font-size: 14px; padding: 8px 16px;">Specific Decisions</td></tr>
+            <tr>
+              <td>Pause button approach</td>
+              <td>TBD</td>
+              <td>HCL: Jiten/Srini</td>
+              <td>HCL decision: GTM & EDS to be rollout with Pause button.</td>
+            </tr>
+            <tr>
+              <td>Private DNS configuration</td>
+              <td>24-Jul</td>
+              <td>HCL: Jiten/Srini</td>
+              <td>Testing is done, decision taken; HCL to rollout Azure Private DNS.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <!-- GTM Table -->
       <div class="table-container">
         <table style="table-layout: fixed; white-space: normal; word-wrap: break-word;">
