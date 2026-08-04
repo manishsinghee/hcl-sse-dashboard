@@ -53,7 +53,7 @@
     .logos img.hcl { height: 22px; filter: brightness(0) invert(1); }
 
     /* KPIs */
-    .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 10px; }
+    .kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 10px; }
     .kpi { background: rgba(0,0,0,0.3); border-radius: var(--clay-radius); border: 1px solid var(--glass-border); padding: 20px; box-shadow: var(--glass-clay-shadow); position: relative; overflow: hidden; }
     .kpi::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
     .kpi.c1::before { background: var(--cyan); } 
@@ -61,8 +61,9 @@
     .kpi.c3::before { background: var(--warning); } 
     .kpi.c4::before { background: #a55eea; }
     .kpi.c5::before { background: #ff4757; }
-    .knum { font-size: 36px; font-weight: 800; color: var(--white); margin: 0 0 4px 0; }
-    .klbl { font-size: 12px; font-weight: 800; color: #a4bada; text-transform: uppercase; letter-spacing: 1px; }
+    .kpi.c6::before { background: #f368e0; }
+    .knum { font-size: 32px; font-weight: 800; color: var(--white); margin: 0 0 4px 0; }
+    .klbl { font-size: 11px; font-weight: 800; color: #a4bada; text-transform: uppercase; letter-spacing: 0.5px; }
 
     /* Table Container */
     .table-container {
@@ -140,6 +141,7 @@
     <!-- Metrics -->
     <section class="kpis">
       <div class="kpi c1"><div class="knum">300</div><div class="klbl">Total Security Groups</div></div>
+      <div class="kpi c6"><div class="knum">6000</div><div class="klbl">Total Users</div></div>
       <div class="kpi c2"><div class="knum">5</div><div class="klbl">Security Groups Migrated</div></div>
       <div class="kpi c3"><div class="knum">62</div><div class="klbl">Users Migrated</div></div>
       <div class="kpi c5"><div class="knum">25</div><div class="klbl">Security Groups Planned (05-07 Aug)</div></div>
