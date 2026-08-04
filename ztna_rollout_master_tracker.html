@@ -47,6 +47,10 @@
     .head { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 20px; border-bottom: 1px solid var(--glass-border-light); }
     .head .t { font-size: 32px; font-weight: 800; color: var(--white); text-shadow: 2px 4px 8px rgba(0,0,0,0.6); letter-spacing: -0.5px; }
     .head .s { font-size: 14px; color: var(--cyan); margin-top: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+    .head-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; text-align: right; font-size: 14px; font-weight: 600; }
+    .logos { display: flex; gap: 12px; align-items: center; background: rgba(0,0,0,0.2); padding: 10px 20px; border-radius: 30px; box-shadow: var(--glass-clay-inner); border: 1px solid var(--glass-border);}
+    .logos img.cisco { height: 32px; filter: brightness(0) invert(1); }
+    .logos img.hcl { height: 22px; filter: brightness(0) invert(1); }
 
     /* KPIs */
     .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 10px; }
@@ -123,6 +127,12 @@
       <div>
         <div class="t">HCL SSE - ZTNA Rollout Master Tracker</div>
         <div class="s">Active Migration & Configuration Status</div>
+      </div>
+      <div class="head-right">
+        <div class="logos">
+          <img class="hcl" src="https://upload.wikimedia.org/wikipedia/commons/e/e5/HCLTech-new-logo.svg" alt="HCLTech" />
+          <img class="cisco" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco" />
+        </div>
       </div>
     </section>
 
